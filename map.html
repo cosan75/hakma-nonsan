@@ -143,7 +143,7 @@ footer{margin-top:28px;font-size:12.5px;color:var(--text-secondary);line-height:
   <aside>
     <div class="card">
       <h3>학생 니즈</h3>
-      <p class="hint">지원 영역을 고르면 지도가 좁혀집니다 (복수 선택)</p>
+      <p class="hint">지원 영역을 고르면 지도가 좁혀집니다 (복수 선택). 읍·면·동 행정복지센터 19곳은 기본으로 숨겨져 있습니다.</p>
       <div class="fset"><label>지원 영역</label><div id="types"></div></div>
 
       <div class="anchor">
@@ -166,6 +166,13 @@ footer{margin-top:28px;font-size:12.5px;color:var(--text-secondary);line-height:
 
       <div class="fset"><label>기관명 검색</label>
         <input type="text" id="q" placeholder="예: 도서관, 지역아동센터"></div>
+
+      <div class="fset"><label>읍·면·동 행정복지센터</label>
+        <select id="admin">
+          <option value="hide">숨김 (기본)</option>
+          <option value="show">지원기관과 함께 표시</option>
+          <option value="only">행정복지센터만 보기</option>
+        </select></div>
 
       <div class="fset"><label>필터</label>
         <label class="mini"><input type="checkbox" id="kidOnly" checked> 초등학생 직접 지원 가능한 곳만</label>
@@ -406,7 +413,7 @@ function parseRaw(raw){
     const [city,cat,name,addr,tel,types,pub,kid,lat,lng,note,dong] = line.split('|');
     return { id:i, city, cat, name, addr, tel:tel||'', note:note||'', dong:dong||'',
              types: types.split(',').filter(Boolean),
-             pub: pub==='공', kid: kid==='1',
+             pub: pub==='공', kid: kid==='1', admin: cat==='행정복지센터',
              lat:+lat, lng:+lng };
   });
 }
@@ -422,9 +429,10 @@ function distanceKm(a, b){
 
 function search(rows, o){
   const {types=[], city='', q='', kidOnly=false, pubOnly=false, telOnly=false,
-         anchor=null, radius=null} = o;
+         anchor=null, radius=null, admin='hide'} = o;
   const qq = q.trim().toLowerCase();
   let r = rows
+    .filter(x => admin==='only' ? x.admin : admin==='show' ? true : !x.admin)
     .filter(x => (!city || x.city===city))
     .filter(x => (!kidOnly || x.kid))
     .filter(x => (!pubOnly || x.pub))
@@ -460,6 +468,7 @@ function opts(){
     kidOnly: document.getElementById('kidOnly').checked,
     pubOnly: document.getElementById('pubOnly').checked,
     telOnly: document.getElementById('telOnly').checked,
+    admin: document.getElementById('admin').value,
     anchor,
     radius: anchor ? +document.getElementById('radius').value : null,
   };
@@ -468,17 +477,18 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 
 function build(){
   document.getElementById('types').innerHTML = TYPES.map(t=>{
-    const n = ALL.filter(r=>r.types.includes(t.k)).length;
+    const n = ALL.filter(r=>!r.admin && r.types.includes(t.k)).length;
     return `<label class="chip"><input type="checkbox" value="${t.k}"><i style="background:${t.c}"></i>${t.k}<em>${n}</em></label>`;
   }).join('');
   document.getElementById('legend').innerHTML =
     TYPES.map(t=>`<span><i style="background:${t.c}"></i>${t.k}</span>`).join('') +
+    `<span><i style="background:#fff;border:2px solid #8A8680;box-sizing:border-box"></i>읍·면·동 행정복지센터</span>` +
     `<span style="margin-left:auto">마커 클릭 → 상세 · 지도 클릭 → 학교 위치 지정</span>`;
 
   document.querySelectorAll('#types input').forEach(cb=>cb.addEventListener('change',e=>{
     e.target.closest('.chip').classList.toggle('on', e.target.checked); render();
   }));
-  ['city','q','kidOnly','pubOnly','telOnly'].forEach(id=>
+  ['city','q','kidOnly','pubOnly','telOnly','admin'].forEach(id=>
     document.getElementById(id).addEventListener('input', render));
   document.getElementById('radius').addEventListener('input', e=>{
     document.getElementById('radiusVal').textContent = e.target.value + ' km';
@@ -549,10 +559,15 @@ function render(){
     layer.clearLayers();
     Object.keys(markerById).forEach(k=>delete markerById[k]);
     rows.forEach(r=>{
-      const m = L.circleMarker([r.lat, r.lng], {
-        radius: 8, weight: 2, color: '#fff',
-        fillColor: TC[r.types[0]] || '#8A8680', fillOpacity: .92
-      }).bindPopup(popupHtml(r));
+      const m = r.admin
+        ? L.circleMarker([r.lat, r.lng], {
+            radius: 6, weight: 2, color: '#8A8680', dashArray: '2,2',
+            fillColor: '#FFFFFF', fillOpacity: .95
+          }).bindPopup(popupHtml(r))
+        : L.circleMarker([r.lat, r.lng], {
+            radius: 8, weight: 2, color: '#fff',
+            fillColor: TC[r.types[0]] || '#8A8680', fillOpacity: .92
+          }).bindPopup(popupHtml(r));
       m.addTo(layer); markerById[r.id] = m;
     });
     if (anchorMarker) { map.removeLayer(anchorMarker); anchorMarker = null; }
@@ -573,7 +588,7 @@ function render(){
     <div class="lrow" onclick="focusOn(${r.id})" title="${esc(r.name)} — ${esc(r.addr)}">
       <input type="checkbox" ${picks.has(r.id)?'checked':''}
         onclick="event.stopPropagation()" onchange="togglePick(${r.id},this.checked)">
-      <i class="dot" style="background:${TC[r.types[0]]||'#8A8680'}"></i>
+      <i class="dot" style="${r.admin?'background:#fff;border:2px solid #8A8680;width:9px;height:9px':'background:'+(TC[r.types[0]]||'#8A8680')}"></i>
       <span class="tx">
         <span class="nm">${esc(r.name)}</span>
         <span class="meta">${r.note?'🕘 '+esc(r.note):esc(r.city)+(r.city==='충남'?' 광역':'시')+' · '+(r.pub?'공공':'민간')+' · '+esc(r.types.join('/'))}</span>
@@ -607,6 +622,7 @@ function clearPicks(){ picks.clear(); render(); }
 function resetAll(){
   document.querySelectorAll('#types input').forEach(cb=>{cb.checked=false;cb.closest('.chip').classList.remove('on')});
   document.getElementById('city').value=''; document.getElementById('q').value='';
+  document.getElementById('admin').value='hide';
   document.getElementById('kidOnly').checked=true;
   document.getElementById('pubOnly').checked=false;
   document.getElementById('telOnly').checked=false;
@@ -617,7 +633,7 @@ function resetAll(){
 function copyPicks(){
   if(!picks.size){ alert('선택된 기관이 없습니다. 목록이나 지도 팝업에서 체크하세요.'); return; }
   const o = opts();
-  const sel = search(ALL, {...o, kidOnly:false, pubOnly:false, telOnly:false, types:[], city:'', q:'', radius:null})
+  const sel = search(ALL, {...o, kidOnly:false, pubOnly:false, telOnly:false, types:[], city:'', q:'', radius:null, admin:'show'})
                 .filter(r=>picks.has(r.id));
   const t = [
     `[학생맞춤통합지원 지역자원 연계 후보]`,
@@ -677,7 +693,14 @@ function selfTest(){
   t('지역아동센터 운영시간 22곳',
      ALL.filter(r=>/학기 \d/.test(r.note)).length===22);
   t('읍면동 행정복지센터 19곳',
-     ALL.filter(r=>r.cat==='행정복지센터').length===19);
+     ALL.filter(r=>r.admin).length===19);
+  t('기본은 행정복지센터 숨김',
+     search(ALL,{kidOnly:false}).every(r=>!r.admin) &&
+     search(ALL,{kidOnly:false}).length===141);
+  t('함께 표시 모드', search(ALL,{kidOnly:false,admin:'show'}).length===160);
+  t('행정복지센터만 모드',
+     search(ALL,{kidOnly:false,admin:'only'}).length===19 &&
+     search(ALL,{kidOnly:false,admin:'only'}).every(r=>r.admin));
   t('다함께돌봄 4곳 · 학교돌봄터 2곳',
      ALL.filter(r=>/다함께돌봄센터/.test(r.name)).length===4 &&
      ALL.filter(r=>/학교돌봄터/.test(r.name)).length===2);

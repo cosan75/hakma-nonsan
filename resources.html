@@ -109,7 +109,7 @@ footer{margin-top:32px;font-size:13px;color:var(--text-secondary);line-height:1.
   <aside>
     <div class="card">
       <h3>학생 니즈 입력</h3>
-      <p class="hint">해당하는 지원 영역을 고르세요 (복수 선택)</p>
+      <p class="hint">해당하는 지원 영역을 고르세요 (복수 선택). 읍·면·동 행정복지센터 19곳은 기본으로 숨겨져 있습니다.</p>
 
       <div class="fset">
         <label>지원 영역</label>
@@ -134,6 +134,15 @@ footer{margin-top:32px;font-size:13px;color:var(--text-secondary);line-height:1.
       <div class="fset">
         <label>기관명 검색</label>
         <input type="text" id="q" placeholder="예: 도서관, 지역아동센터">
+      </div>
+
+      <div class="fset">
+        <label>읍·면·동 행정복지센터</label>
+        <select id="admin">
+          <option value="hide">숨김 (기본)</option>
+          <option value="show">지원기관과 함께 표시</option>
+          <option value="only">행정복지센터만 보기</option>
+        </select>
       </div>
 
       <div class="fset">
@@ -368,7 +377,7 @@ function parseRaw(raw){
     const [city,cat,name,addr,tel,types,pub,kid,lat,lng,note,dong] = line.split('|');
     return { id:i, city, cat, name, addr, tel:tel||'', note:note||'', dong:dong||'',
              types: types.split(',').filter(Boolean),
-             pub: pub==='공', kid: kid==='1', lat:+lat, lng:+lng };
+             pub: pub==='공', kid: kid==='1', admin: cat==='행정복지센터', lat:+lat, lng:+lng };
   });
 }
 
@@ -384,9 +393,10 @@ function matchScore(r, {types=[], dong=''}={}){
 }
 
 function search(rows, o){
-  const {types=[], city='', dong='', q='', kidOnly=false, pubOnly=false, telOnly=false} = o;
+  const {types=[], city='', dong='', q='', kidOnly=false, pubOnly=false, telOnly=false, admin='hide'} = o;
   const qq = q.trim().toLowerCase();
   return rows
+    .filter(r => admin==='only' ? r.admin : admin==='show' ? true : !r.admin)
     .filter(r => (!city || r.city===city))
     .filter(r => (!kidOnly || r.kid))
     .filter(r => (!pubOnly || r.pub))
@@ -409,6 +419,7 @@ function opts(){
     city:  document.getElementById('city').value,
     dong:  document.getElementById('dong').value,
     q:     document.getElementById('q').value,
+    admin: document.getElementById('admin').value,
     kidOnly: document.getElementById('kidOnly').checked,
     pubOnly: document.getElementById('pubOnly').checked,
     telOnly: document.getElementById('telOnly').checked,
@@ -423,13 +434,16 @@ function build(){
   document.querySelectorAll('#types input').forEach(cb=>cb.addEventListener('change',e=>{
     e.target.closest('.chip').classList.toggle('on', e.target.checked); render();
   }));
-  ['city','dong','q','kidOnly','pubOnly','telOnly'].forEach(id=>
+  ['city','dong','q','kidOnly','pubOnly','telOnly','admin'].forEach(id=>
     document.getElementById(id).addEventListener('input', ()=>{ if(id==='city') refreshDong(); render(); }));
 }
 
 function refreshDong(){
   const c = document.getElementById('city').value;
-  const list = [...new Set(ALL.filter(r=>!c||r.city===c).map(r=>r.dong).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ko'));
+  const am = document.getElementById('admin').value;
+  const list = [...new Set(ALL.filter(r=>(am==='only'?r.admin:am==='show'?true:!r.admin))
+                              .filter(r=>!c||r.city===c).map(r=>r.dong).filter(Boolean))]
+               .sort((a,b)=>a.localeCompare(b,'ko'));
   const cur = document.getElementById('dong').value;
   document.getElementById('dong').innerHTML = '<option value="">지정 안 함</option>' +
     list.map(d=>`<option${d===cur?' selected':''}>${d}</option>`).join('');
@@ -443,7 +457,7 @@ function render(){
     ? `${o.types.join(' · ')} 지원 · 적합도 높은 순` : '조건에 맞는 지역자원 · 적합도 높은 순';
 
   document.getElementById('grid').innerHTML = rows.length ? rows.map(r=>{
-    const bar = TC[r.types[0]] || '#E8E4DE';
+    const bar = r.admin ? '#C9C4BC' : (TC[r.types[0]] || '#E8E4DE');
     return `<article class="rc" style="--bar:${bar}">
       <div class="top">
         <h4>${esc(r.name)}</h4>
@@ -452,7 +466,8 @@ function render(){
       <div class="cat">${esc(r.city)}${r.city==='충남'?' 광역':'시'} · ${esc(r.cat)}</div>
       <div class="badges">
         <span class="bd ${r.pub?'bd-pub':'bd-pri'}">${r.pub?'공공':'민간'}</span>
-        ${r.kid?'<span class="bd bd-kid">초등 직접지원</span>':''}
+        ${r.kid&&!r.admin?'<span class="bd bd-kid">초등 직접지원</span>':''}
+        ${r.admin?'<span class="bd" style="background:#F1EFEA;color:#77736D">행정창구</span>':''}
       </div>
       <div class="types">${r.types.map(t=>
         `<span class="ty" style="background:${TC[t]}1a;color:${TC[t]}">${t}</span>`).join('')}</div>
@@ -474,6 +489,7 @@ function clearPicks(){ picks.clear(); render(); }
 function resetAll(){
   document.querySelectorAll('#types input').forEach(cb=>{cb.checked=false;cb.closest('.chip').classList.remove('on')});
   document.getElementById('city').value=''; document.getElementById('q').value='';
+  document.getElementById('admin').value='hide';
   document.getElementById('kidOnly').checked=true;
   document.getElementById('pubOnly').checked=false;
   document.getElementById('telOnly').checked=false;
@@ -528,7 +544,13 @@ function selfTest(){
      ALL.some(r=>r.name==='논산계룡교육지원청 Wee센터' && r.tel==='041-730-9321') &&
      !ALL.some(r=>r.tel==='041-730-7198'));
   t('지역아동센터 운영시간 22곳', ALL.filter(r=>/학기 \d/.test(r.note)).length===22);
-  t('읍면동 행정복지센터 19곳', ALL.filter(r=>r.cat==='행정복지센터').length===19);
+  t('읍면동 행정복지센터 19곳', ALL.filter(r=>r.admin).length===19);
+  t('기본은 행정복지센터 숨김',
+     search(ALL,{kidOnly:false}).every(r=>!r.admin) && search(ALL,{kidOnly:false}).length===141);
+  t('함께 표시 모드', search(ALL,{kidOnly:false,admin:'show'}).length===160);
+  t('행정복지센터만 모드',
+     search(ALL,{kidOnly:false,admin:'only'}).length===19 &&
+     search(ALL,{kidOnly:false,admin:'only'}).every(r=>r.admin));
   t('전 기관 읍면동 보유', ALL.every(r=>r.dong));
   t('읍면동 종류 25종↑', new Set(ALL.map(r=>r.dong)).size >= 25);
 
