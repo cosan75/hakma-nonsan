@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>학생맞춤통합지원 의뢰서 작성 · 초등 · 논산계룡</title>
+<style>
+:root{
+  --bg:#FDFBF8; --surface:#FFFFFF; --text:#2D2D2D; --text-secondary:#8A8680;
+  --accent-1:#2D9CDB; --accent-2:#EB5757; --border:#E8E4DE;
+  --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;min-width:0}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
+.wrap{max-width:1380px;margin:0 auto;padding:36px 24px 90px}
+@media(max-width:700px){.wrap{padding:26px 14px 70px}}
+
+.tag{display:inline-block;background:#EEF6FB;color:#1B6E9E;font-size:12.5px;font-weight:600;
+  padding:4px 11px;border-radius:20px;margin-bottom:11px}
+h1{font-size:clamp(25px,3.2vw,36px);font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+.lede{color:var(--text-secondary);margin:0 0 18px;max-width:78ch;font-size:15.5px}
+
+.homebtn{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;background:var(--surface);
+  border:1px solid var(--border);border-radius:20px;font-size:13.5px;font-weight:600;
+  color:var(--text-secondary);text-decoration:none;box-shadow:var(--shadow);transition:.15s;white-space:nowrap}
+.homebtn:hover{color:var(--accent-1);border-color:var(--accent-1);background:#F4FAFE}
+.titlerow{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:0 0 6px}
+.titlerow h1{margin:0;flex:1 1 auto}
+.titlerow .homebtn{flex:0 0 auto;align-self:center}
+@media(max-width:520px){.titlerow{gap:10px}.titlerow .homebtn{order:-1;font-size:12.5px;padding:6px 12px}}
+
+.warn{display:flex;gap:11px;align-items:flex-start;background:#FDECEC;border:1px solid #F6D6D6;
+  border-radius:var(--radius);padding:14px 17px;margin-bottom:22px;font-size:14px;color:#8E2F2F;line-height:1.6}
+.warn b{display:block;margin-bottom:3px}
+
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:1100px){.layout{grid-template-columns:1fr}}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;margin-bottom:16px}
+@media(max-width:700px){.card{padding:16px 15px}}
+.card h2{margin:0 0 3px;font-size:16.5px;font-weight:700;display:flex;align-items:center;gap:8px}
+.card h2 i{width:22px;height:22px;border-radius:50%;background:var(--accent-1);color:#fff;flex:none;
+  display:grid;place-items:center;font-size:12px;font-weight:700;font-style:normal}
+.card .hint{margin:0 0 14px;font-size:12.5px;color:var(--text-secondary);line-height:1.55}
+
+label.f{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:5px}
+input[type=text],input[type=date],select,textarea{width:100%;padding:9px 12px;border:1px solid var(--border);
+  border-radius:8px;background:var(--surface);font:inherit;font-size:14px;color:var(--text)}
+textarea{resize:vertical;line-height:1.6}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}}
+.fld{margin-bottom:11px}
+
+.opts{display:flex;flex-wrap:wrap;gap:7px}
+.opt{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border:1px solid var(--border);
+  border-radius:20px;font-size:13.5px;cursor:pointer;background:var(--surface);transition:.13s;line-height:1.4}
+.opt:hover{background:#F9F7F3}
+.opt input{accent-color:var(--accent-1);width:15px;height:15px;cursor:pointer;flex:none}
+.opt.on{border-color:var(--accent-1);background:#F4FAFE;color:#1B6E9E;font-weight:600}
+.opt.auto{border-color:#F2994A;background:#FFF7EF}
+.opt.auto::after{content:'자동';font-size:10px;font-weight:700;color:#A5661B;
+  background:#FBE3CB;border-radius:8px;padding:1px 5px;margin-left:2px}
+.sub-in{width:auto;flex:1;min-width:90px;padding:4px 8px;font-size:13px;border-radius:6px}
+
+.grp{margin-bottom:14px}
+.grp > .gl{font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:6px}
+
+button{padding:10px 16px;border:1px solid var(--border);border-radius:8px;background:var(--surface);
+  font:inherit;font-size:14px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s}
+button:hover{background:#F7F4F0}
+button.primary{background:var(--accent-1);border-color:var(--accent-1);color:#fff}
+button.primary:hover{background:#2589C2}
+button.wide{width:100%}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btnrow button{flex:1 1 auto}
+
+/* ---------- 미리보기 (A4 문서) ---------- */
+aside{position:sticky;top:20px}
+@media(max-width:1100px){aside{position:static}}
+.papers{max-height:calc(100vh - 130px);overflow-y:auto;padding-right:2px}
+@media(max-width:1100px){.papers{max-height:none;overflow:visible}}
+.paper{background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow);
+  padding:26px 24px;margin-bottom:14px;font-size:12.5px;line-height:1.55;color:#1a1a1a}
+.paper h3{text-align:center;font-size:18px;font-weight:700;margin:0 0 4px;letter-spacing:.06em}
+.paper .org{text-align:right;font-size:11px;color:#666;margin-bottom:12px}
+.paper table{width:100%;border-collapse:collapse;margin-bottom:10px;table-layout:fixed}
+.paper th,.paper td{border:1px solid #999;padding:5px 7px;vertical-align:top;font-size:11.5px;line-height:1.5}
+.paper th{background:#F2F0EC;font-weight:600;text-align:center;width:78px}
+.paper td.v{word-break:break-all}
+.paper .chk{display:inline-block;margin-right:9px;white-space:nowrap}
+.paper .on{font-weight:700}
+.paper .why{white-space:pre-wrap;min-height:96px}
+.paper .sign{text-align:center;margin-top:16px;line-height:2}
+.paper .agree li{margin-bottom:3px}
+.paper ol{padding-left:18px;margin:4px 0}
+.blank{color:#bbb}
+
+#selftest{margin-top:18px;font-size:12px;color:var(--text-secondary)}
+footer{margin-top:28px;font-size:12.5px;color:var(--text-secondary);line-height:1.75}
+
+@media print{
+  body{background:#fff}
+  .noprint{display:none !important}
+  .wrap{max-width:none;padding:0}
+  .layout{display:block}
+  aside{position:static}
+  .papers{max-height:none;overflow:visible;padding:0}
+  .paper{border:none;box-shadow:none;border-radius:0;padding:0;margin:0;page-break-after:always}
+  .paper:last-child{page-break-after:auto}
+  .paper.hide{display:none}
+  @page{size:A4;margin:14mm}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="noprint">
+  <span class="tag">초등학교용 · 논산·계룡 지역 특화</span>
+  <div class="titlerow">
+    <h1>학생맞춤통합지원 의뢰서 작성</h1>
+    <a class="homebtn" href="index.html">← 도구 모음</a>
+  </div>
+  <p class="lede">논산계룡교육지원청 공식 서식 그대로 채워 인쇄합니다.
+  <b>진단 체크리스트에서 복사한 결과를 붙여넣으면</b> 해당 영역이 자동 체크되고 「신청 사유 및 학교 의견」 초안이 만들어집니다.
+  「학생맞춤통합지원법」 절차 중 <b>진단 → 지원</b> 사이의 의뢰 단계용입니다.</p>
+
+  <div class="warn">
+    <span style="font-size:19px;line-height:1">🔒</span>
+    <span><b>이 도구는 실명·생년월일·주소를 다룹니다</b>
+    입력값은 이 브라우저 화면에서만 존재하며 저장·전송되지 않습니다. <b>새로고침하면 즉시 사라집니다.</b>
+    작성이 끝나면 바로 인쇄하시고, 자리를 비우실 때는 탭을 닫아 주세요.
+    출력물은 「개인정보 보호법」에 따라 학교 규정대로 보관·파기하셔야 합니다.</span>
+  </div>
+</div>
+
+<div class="layout">
+  <main class="noprint">
+
+    <section class="card">
+      <h2><i>1</i>진단 체크리스트 결과 이어받기</h2>
+      <p class="hint">체크리스트 페이지에서 <b>결과 복사</b>를 누른 뒤 여기에 붙여넣고 「불러오기」를 누르세요. 건너뛰고 직접 체크하셔도 됩니다.</p>
+      <textarea id="paste" rows="4" placeholder="[초등 학생맞춤통합지원 진단 결과] ... 붙여넣기"></textarea>
+      <div class="btnrow">
+        <button class="primary" onclick="importResult()">불러오기</button>
+        <button onclick="document.getElementById('paste').value='';document.getElementById('importMsg').textContent=''">지우기</button>
+      </div>
+      <p class="hint" id="importMsg" style="margin:10px 0 0;color:var(--accent-1);font-weight:600"></p>
+    </section>
+
+    <section class="card">
+      <h2><i>2</i>학교 · 대상 학생</h2>
+      <p class="hint">서식의 필수 항목입니다. 학생 실명이 들어가므로 작성 후 바로 인쇄하세요.</p>
+      <div class="grid2">
+        <div class="fld"><label class="f">학교명</label><input type="text" id="school" placeholder="○○초등학교"></div>
+        <div class="fld"><label class="f">학교 연락처</label><input type="text" id="schoolTel" placeholder="041-000-0000"></div>
+      </div>
+      <div class="grid3">
+        <div class="fld"><label class="f">학생 성명</label><input type="text" id="name"></div>
+        <div class="fld"><label class="f">학년 / 반</label><input type="text" id="grade" placeholder="4학년 2반"></div>
+        <div class="fld"><label class="f">성별</label>
+          <select id="sex"><option value="">선택</option><option>남</option><option>여</option></select></div>
+      </div>
+      <div class="grid2">
+        <div class="fld"><label class="f">생년월일</label><input type="date" id="birth"></div>
+        <div class="fld"><label class="f">학생 연락처</label><input type="text" id="stuTel"></div>
+      </div>
+      <div class="fld"><label class="f">주소</label><input type="text" id="addr"></div>
+      <div class="grid3">
+        <div class="fld"><label class="f">보호자 성명</label><input type="text" id="guard"></div>
+        <div class="fld"><label class="f">학생과의 관계</label><input type="text" id="rel" placeholder="모"></div>
+        <div class="fld"><label class="f">보호자 연락처</label><input type="text" id="guardTel"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><i>3</i>가족현황 · 경제여건</h2>
+      <div class="grp"><div class="gl">가족현황</div><div class="opts" id="famBox"></div></div>
+      <div class="grp"><div class="gl">경제여건</div><div class="opts" id="ecoBox"></div></div>
+    </section>
+
+    <section class="card">
+      <h2><i>4</i>학생의 어려움 <span style="font-size:12px;font-weight:500;color:var(--text-secondary)">(중복 체크)</span></h2>
+      <p class="hint">주황색 <b>자동</b> 표시는 체크리스트에서 옮겨온 항목입니다. 반드시 확인 후 수정하세요.</p>
+      <div id="diffBox"></div>
+      <div class="fld" style="margin-top:6px"><label class="f">기타사항</label>
+        <input type="text" id="diffEtc" placeholder="위 항목에 없는 사항"></div>
+    </section>
+
+    <section class="card">
+      <h2><i>5</i>학교에서 지원한 서비스</h2>
+      <div class="grp"><div class="opts" id="doneBox"></div></div>
+      <div class="fld"><label class="f">구체적 내용</label>
+        <textarea id="doneDetail" rows="2" placeholder="예: 3월부터 주 2회 담임 개별 보충지도, Wee클래스 상담 6회 실시"></textarea></div>
+    </section>
+
+    <section class="card">
+      <h2><i>6</i>교육지원청 지원 요청사항 <span style="font-size:12px;font-weight:500;color:var(--text-secondary)">(중복 체크)</span></h2>
+      <div id="reqBox"></div>
+      <div class="fld" style="margin-top:6px"><label class="f">기타사항</label>
+        <input type="text" id="reqEtc"></div>
+    </section>
+
+    <section class="card">
+      <h2><i>7</i>신청 사유 및 학교 의견</h2>
+      <p class="hint">서식에서 가장 손이 많이 가는 칸입니다. 체크한 항목을 바탕으로 초안을 만들어 드리니 <b>학생 상황에 맞게 반드시 고쳐 쓰세요.</b></p>
+      <textarea id="why" rows="12" placeholder="영역별로 작성 — (학 업) / (심리정서) / (건강안전) / (복 지) / (기 타)"></textarea>
+      <div class="btnrow">
+        <button class="primary" onclick="genDraft()">초안 만들기</button>
+        <button onclick="document.getElementById('why').value='';render()">비우기</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><i>8</i>인쇄</h2>
+      <p class="hint">미리보기를 확인한 뒤 인쇄하세요. 동의서는 보호자 서명을 받아 함께 보관합니다.</p>
+      <div class="grp"><div class="opts">
+        <label class="opt on" id="optAgreeLbl"><input type="checkbox" id="optAgree" checked>동의서도 함께 인쇄</label>
+      </div></div>
+      <div class="fld"><label class="f">제출일</label><input type="date" id="subDate"></div>
+      <div class="grid2">
+        <div class="fld"><label class="f">직위</label><input type="text" id="pos" value="교장"></div>
+        <div class="fld"><label class="f">성명</label><input type="text" id="principal"></div>
+      </div>
+      <div class="btnrow">
+        <button class="primary wide" onclick="doPrint()">🖨 인쇄 / PDF로 저장</button>
+      </div>
+      <div class="btnrow">
+        <button class="wide" onclick="resetAll()">전체 지우기</button>
+      </div>
+    </section>
+
+    <div id="selftest"></div>
+  </main>
+
+  <aside>
+    <div class="papers" id="papers"></div>
+  </aside>
+</div>
+
+<footer class="noprint">
+  ※ 서식 출처: <b>논산계룡교육지원청 「학생맞춤통합지원 지역자원안내」(2026-07 발간)</b>의 학생맞춤통합지원 의뢰서·동의서.
+  학교·교육지원청 지침이 개정되면 서식이 달라질 수 있으니 제출 전 최신 양식을 확인하세요.<br>
+  ※ 동의서의 <b>고유식별정보·민감정보 수집·이용 동의</b>와 <b>제3자 제공 동의</b>는 보호자가 직접 표시하고 서명해야 합니다.
+  보호자가 동의하지 않으면 외부기관 연계가 제한되지만, <b>아동학대 신고 의무는 동의와 무관하게 우선</b>합니다.<br>
+  ※ 문의: 논산계룡교육지원청 초등 학생맞춤통합지원 <b>041-730-7151</b> (총괄 041-730-7136)
+</footer>
+
+</div>
+
+<script>
+/* ============================================================
+   서식 항목 정의 — 논산계룡교육지원청 의뢰서 원본 기준
+   ============================================================ */
+const FAMILY = ['부모','한부모(부/모)','조부모(조부/조모)','소년소녀가장','친척','시설 또는 쉼터'];
+const ECON   = ['기초생활수급자','법정차상위가정','법정한부모가정','교육비지원대상자'];
+
+// 학생의 어려움 (서식 원문 그대로)
+const DIFF = [
+  {k:'학업',      items:['학업중단위기','기초학습부진']},
+  {k:'심리·정서', items:['우울','불안','ADHD','분노・폭력']},
+  {k:'건강·안전', items:['학대(방임)','자해·자살시도','결식','학교폭력','질병']},
+  {k:'복지',      items:['경제적 어려움']},
+];
+// 학교에서 지원한 서비스
+const DONE = ['학업 · 진로','심리・정서','건강・안전','복지'];
+// 교육지원청 지원 요청사항
+const REQ = [
+  {k:'학업',      items:['학업중단 관련','기초학습부진 관련']},
+  {k:'심리·정서', items:['심리상담·치료 관련']},
+  {k:'건강·안전', items:['아동학대 관련','건강 관련','학교폭력 관련']},
+  {k:'복지',      items:['생필품 등 지원','긴급 생계비']},
+];
+
+/* ============================================================
+   순수 함수 (테스트 대상)
+   ============================================================ */
+// 체크리스트 '결과 복사' 텍스트 → 의뢰서 자동 체크 항목
+function parseResult(text){
+  if(!text || !text.includes('학생맞춤통합지원 진단 결과')) return null;
+  const out = {grade:'', city:'', level:'', domains:{}, critical:[], diff:[], req:[]};
+
+  const g = text.match(/학생:\s*(\S+)\s*\/\s*(\S+)\s*\/\s*(\S+)/);
+  if (g){ out.grade = g[2]==='-' ? '' : g[2]; out.city = g[3]; }
+
+  // 판정값에 공백이 있음('통합지원팀 협의') → 줄 끝까지 캡처
+  const lv = text.match(/판정:\s*(.+)$/m);
+  if (lv) out.level = lv[1].trim();
+
+  // 영역별 위험도
+  const seg = text.split('[영역별]')[1] || '';
+  seg.split('\n').forEach(l=>{
+    const m = l.match(/^\s{2}(\S[^:]*):\s*(\d+)\/(\d+)\s*\((\d+)%\)/);
+    if (m) out.domains[m[1].trim()] = {got:+m[2], max:+m[3], pct:+m[4]};
+  });
+
+  // 즉시개입
+  if (text.includes('[즉시개입')){
+    (text.split(/\[즉시개입[^\]]*\]/)[1]||'').split('\n').forEach(l=>{
+      const m = l.match(/^\s*·\s*(.+)$/); if (m) out.critical.push(m[1].trim());
+    });
+  }
+
+  const has = k => (out.domains[k]?.got||0) > 0;
+  const crit = s => out.critical.some(c=>c.includes(s));
+
+  // --- 학생의 어려움 자동 체크 (근거가 분명한 것만) ---
+  if (has('학업'))   out.diff.push('기초학습부진');
+  if (crit('결석'))  out.diff.push('학업중단위기');
+  if (crit('학대'))  out.diff.push('학대(방임)');
+  if (crit('자해'))  out.diff.push('자해·자살시도');
+  if (has('경제'))   out.diff.push('경제적 어려움');
+
+  // --- 교육지원청 요청사항 자동 체크 ---
+  if (has('학업'))      out.req.push('기초학습부진 관련');
+  if (crit('결석'))     out.req.push('학업중단 관련');
+  if (has('심리·정서')) out.req.push('심리상담·치료 관련');
+  if (crit('학대'))     out.req.push('아동학대 관련');
+  if (has('건강'))      out.req.push('건강 관련');
+  if (has('경제'))      out.req.push('긴급 생계비');
+
+  out.diff = [...new Set(out.diff)];
+  out.req  = [...new Set(out.req)];
+  return out;
+}
+
+// 체크된 항목 → 「신청 사유 및 학교 의견」 초안
+function buildDraft(sel){
+  const {diff=[], req=[], done=[], critical=[]} = sel;
+  const L=[];
+  const any = (...xs)=>xs.some(x=>diff.includes(x)||req.includes(x));
+
+  if (any('기초학습부진','기초학습부진 관련','학업중단위기','학업중단 관련')){
+    let s='- (학 업) ';
+    s += diff.includes('학업중단위기')
+      ? '정당한 사유 없는 결석이 누적되어 출결 관리와 가정방문을 실시하였으나, '
+      : '기초학습 부진이 누적되어 학교 차원의 보충 지도를 실시하고 있으나, ';
+    s += '학교 자체 지원만으로는 한계가 있어 학습종합클리닉센터의 정밀 진단과 1:1 맞춤형 학습 지원이 필요함.';
+    L.push(s);
+  }
+  if (any('우울','불안','ADHD','분노・폭력','심리상담·치료 관련')){
+    L.push('- (심리정서) 정서·행동상의 어려움이 지속적으로 관찰되어 담임 상담과 Wee클래스 상담을 진행하였으나 '
+      + '학교 상담만으로는 한계가 있어, Wee센터와 연계한 심층 심리검사 및 전문기관의 지속적 치료 지원이 필요함.');
+  }
+  if (any('학대(방임)','자해·자살시도','아동학대 관련')){
+    L.push('- (안 전) 학대 또는 자해가 의심되는 정황이 확인되어 관련 기관에 신고하였으며, '
+      + '학생의 안전 확보와 회복을 위해 아동보호전문기관·전문 심리치료 기관과의 지속적 연계 지원이 필요함.');
+  }
+  if (any('결식','질병','건강 관련')){
+    L.push('- (건강안전) 기초적인 건강·위생 관리가 이루어지지 않고 있으며 치료 권고 사항이 조치되지 않고 있어, '
+      + '의료비 지원과 보건 인력의 밀착 건강 관리가 필요함.');
+  }
+  if (any('경제적 어려움','긴급 생계비','생필품 등 지원')){
+    L.push('- (복 지) 가정의 경제적 여건이 열악하여 기본적인 의식주 해결과 학습 준비에 어려움을 겪고 있어, '
+      + '긴급 생계비 및 생필품 지원 등 복지 지원이 필요함.');
+  }
+  if (any('학교폭력','학교폭력 관련')){
+    L.push('- (학교폭력) 학교폭력 사안과 관련하여 학생의 심리적 회복과 관계 회복을 위한 전문기관 연계 지원이 필요함.');
+  }
+  if (!L.length){
+    L.push('- (   ) 학생의 어려움과 학교의 조치, 교육지원청에 요청하는 지원을 영역별로 구체적으로 작성하세요.');
+  }
+  if (done.length){
+    L.push('- (학교 조치) 현재 학교에서는 ' + done.join(', ') + ' 영역의 지원을 실시하고 있음.');
+  }
+  L.push('- (기 타) 위 내용은 담임 관찰과 진단 결과를 바탕으로 작성하였으며, 지역사회 유관기관과 협력한 통합적 접근이 필요함.');
+  return L.join('\n');
+}
+
+// 필수 입력 누락 검사
+function missingFields(v){
+  const need = {school:'학교명', name:'학생 성명', grade:'학년/반'};
+  return Object.entries(need).filter(([k])=>!v[k] || !String(v[k]).trim()).map(([,label])=>label);
+}
+
+/* ============================================================
+   상태 · 렌더링
+   ============================================================ */
+const state = { fam:[], eco:[], ecoPct:'', famEtc:'', ecoEtc:'', diff:[], done:[], req:[], auto:{diff:[],req:[]} };
+const $ = id => document.getElementById(id);
+const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const val = id => ($(id)?.value||'').trim();
+
+function chip(group, item, extra){
+  const on = state[group].includes(item);
+  const auto = (state.auto[group]||[]).includes(item);
+  return `<label class="opt${on?' on':''}${auto&&on?' auto':''}">
+    <input type="checkbox" ${on?'checked':''} onchange="toggle('${group}','${item.replace(/'/g,"\\'")}',this.checked)">${item}${extra||''}</label>`;
+}
+
+function build(){
+  $('famBox').innerHTML = FAMILY.map(x=>chip('fam',x)).join('') +
+    `<label class="opt"><input type="checkbox" ${state.fam.includes('기타')?'checked':''}
+      onchange="toggle('fam','기타',this.checked)">기타
+      <input class="sub-in" type="text" id="famEtc" placeholder="내용" value="${esc(state.famEtc)}"
+        oninput="state.famEtc=this.value;render()" onclick="event.preventDefault()"></label>`;
+
+  $('ecoBox').innerHTML = ECON.map(x=> x==='교육비지원대상자'
+    ? `<label class="opt${state.eco.includes(x)?' on':''}"><input type="checkbox" ${state.eco.includes(x)?'checked':''}
+        onchange="toggle('eco','${x}',this.checked)">교육비지원대상자 (중위소득
+        <input class="sub-in" style="max-width:56px" type="text" value="${esc(state.ecoPct)}"
+          oninput="state.ecoPct=this.value;render()" onclick="event.preventDefault()">%)</label>`
+    : chip('eco',x)).join('') +
+    `<label class="opt"><input type="checkbox" ${state.eco.includes('기타')?'checked':''}
+      onchange="toggle('eco','기타',this.checked)">기타
+      <input class="sub-in" type="text" placeholder="내용" value="${esc(state.ecoEtc)}"
+        oninput="state.ecoEtc=this.value;render()" onclick="event.preventDefault()"></label>`;
+
+  $('diffBox').innerHTML = DIFF.map(g=>
+    `<div class="grp"><div class="gl">${g.k}</div><div class="opts">${g.items.map(x=>chip('diff',x)).join('')}</div></div>`).join('');
+  $('doneBox').innerHTML = DONE.map(x=>chip('done',x)).join('');
+  $('reqBox').innerHTML = REQ.map(g=>
+    `<div class="grp"><div class="gl">${g.k}</div><div class="opts">${g.items.map(x=>chip('req',x)).join('')}</div></div>`).join('');
+}
+
+function toggle(group, item, on){
+  const a = state[group];
+  if (on){ if(!a.includes(item)) a.push(item); } else { const i=a.indexOf(item); if(i>-1) a.splice(i,1); }
+  build(); render();
+}
+
+function mark(list, item){ return list.includes(item) ? `<span class="on">☑ ${item}</span>` : `☐ ${item}`; }
+function line(list, items, etc){
+  return items.map(x=>`<span class="chk">${mark(list,x)}</span>`).join('') +
+    (etc ? `<span class="chk">${mark(list,'기타')} (${esc(etc)})</span>`
+         : `<span class="chk">${mark(list,'기타')} (　　　)</span>`);
+}
+
+function render(){
+  const v = {}; ['school','schoolTel','name','grade','sex','birth','stuTel','addr','guard','rel','guardTel',
+    'diffEtc','doneDetail','reqEtc','why','subDate','pos','principal'].forEach(k=>v[k]=val(k));
+  const d = v.subDate ? new Date(v.subDate) : null;
+  const dateStr = d && !isNaN(d) ? `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일` : '2026년 　월 　일';
+  const B = s => s ? esc(s) : '<span class="blank">　</span>';
+
+  const 의뢰서 = `
+  <div class="paper" id="paperA">
+    <div class="org">논산계룡교육지원청 지원사업</div>
+    <h3>학 생 맞 춤 통 합 지 원 의 뢰 서</h3>
+    <table>
+      <tr><th>학교명</th><td class="v">${B(v.school)}</td><th>학교 연락처</th><td class="v">${B(v.schoolTel)}</td></tr>
+    </table>
+    <table>
+      <tr><th rowspan="6" style="width:44px">대상<br>학생</th>
+          <th>성명</th><td class="v">${B(v.name)}</td><th>학년/반</th><td class="v">${B(v.grade)}</td></tr>
+      <tr><th>생년월일</th><td class="v">${B(v.birth)}</td><th>성별</th>
+          <td class="v">${v.sex==='남'?'<span class="on">☑ 남</span>':'☐ 남'} ${v.sex==='여'?'<span class="on">☑ 여</span>':'☐ 여'}</td></tr>
+      <tr><th>주소</th><td class="v" colspan="3">${B(v.addr)}</td></tr>
+      <tr><th>보호자명</th><td class="v" colspan="3">${B(v.guard)} (관계: ${B(v.rel)})</td></tr>
+      <tr><th>연락처</th><td class="v" colspan="3">보호자 ${B(v.guardTel)} ／ 학생 ${B(v.stuTel)}</td></tr>
+      <tr><th>가족현황</th><td class="v" colspan="3">${line(state.fam, FAMILY, state.famEtc)}</td></tr>
+    </table>
+    <table>
+      <tr><th>경제여건</th><td class="v">
+        ${['기초생활수급자','법정차상위가정','법정한부모가정'].map(x=>`<span class="chk">${mark(state.eco,x)}</span>`).join('')}
+        <span class="chk">${mark(state.eco,'교육비지원대상자')} (중위소득 ${state.ecoPct?esc(state.ecoPct):'　'}%)</span>
+        <span class="chk">${mark(state.eco,'기타')} (${esc(state.ecoEtc)||'　　'})</span></td></tr>
+    </table>
+    <table>
+      <tr><th rowspan="5" style="width:44px">학생<br>어려움<br><span style="font-weight:400;font-size:10px">(중복 체크)</span></th>
+          <th>학업</th><td class="v">${line(state.diff, DIFF[0].items, '')}</td></tr>
+      <tr><th>심리·정서</th><td class="v">${line(state.diff, DIFF[1].items, '')}</td></tr>
+      <tr><th>건강·안전</th><td class="v">${line(state.diff, DIFF[2].items, '')}</td></tr>
+      <tr><th>복지</th><td class="v">${line(state.diff, DIFF[3].items, '')}</td></tr>
+      <tr><th>기타사항</th><td class="v">${B(v.diffEtc)}</td></tr>
+    </table>
+    <table>
+      <tr><th style="width:100px">학교에서<br>지원한 서비스</th><td class="v">
+        ${DONE.map(x=>`<span class="chk">${mark(state.done,x)}</span>`).join('')}<br>
+        (구체적 내용: ${B(v.doneDetail)})</td></tr>
+    </table>
+    <table>
+      <tr><th rowspan="5" style="width:44px">교육<br>지원청<br>요청<br><span style="font-weight:400;font-size:10px">(중복 체크)</span></th>
+          <th>학업</th><td class="v">${line(state.req, REQ[0].items, '')}</td></tr>
+      <tr><th>심리·정서</th><td class="v">${line(state.req, REQ[1].items, '')}</td></tr>
+      <tr><th>건강·안전</th><td class="v">${line(state.req, REQ[2].items, '')}</td></tr>
+      <tr><th>복지</th><td class="v">${line(state.req, REQ[3].items, '')}</td></tr>
+      <tr><th>기타사항</th><td class="v">${B(v.reqEtc)}</td></tr>
+    </table>
+    <table>
+      <tr><th style="width:88px">신청 사유 및<br>학교 의견</th><td class="v why">${esc(v.why)||'<span class="blank">　</span>'}</td></tr>
+    </table>
+    <table>
+      <tr><th style="width:110px">지원 필요 영역<br><span style="font-weight:400;font-size:10px">(교육지원청 작성)</span></th>
+          <td class="v">☐ 학업・진로　☐ 심리·정서　☐ 건강・안전　☐ 복지</td></tr>
+    </table>
+    <div class="sign">위와 같이 학생맞춤통합지원 신청서를 제출합니다.<br>
+      ${dateStr}<br>
+      ${B(v.school)}　${B(v.pos)}　${B(v.principal)} (서명)</div>
+  </div>`;
+
+  const 동의서 = `
+  <div class="paper${$('optAgree')?.checked?'':' hide'}" id="paperB">
+    <div class="org">논산계룡교육지원청 지원사업</div>
+    <h3>학 생 맞 춤 통 합 지 원 동 의 서</h3>
+    <table>
+      <tr><th>학생 이름</th><td class="v">${B(v.name)}</td><th>학년/반</th><td class="v">${B(v.grade)}</td>
+          <th>생년월일</th><td class="v">${B(v.birth)}</td></tr>
+      <tr><th>보호자 이름</th><td class="v" colspan="3">${B(v.guard)}</td><th>학생과의 관계</th><td class="v">${B(v.rel)}</td></tr>
+    </table>
+    <p style="text-align:center;font-weight:700;margin:12px 0 6px">고유식별정보 및 민감정보의 수집·이용 동의 / 개인정보의 제3자 제공 동의</p>
+    <table><tr><td class="v">
+      <b>[고유식별정보 및 민감정보의 수집·이용 동의]</b>
+      <ol>
+        <li>수집·이용목적: 학생맞춤통합지원 운영 및 사례관리 지원</li>
+        <li>수집·이용하는 항목: 학교명, 성명, 생년월일(주민번호 앞자리), 학년/반, 성별, 주소, 보호자·학생 연락처, 경제여건,
+            가족현황, 학교생활, 공공·민간기관 지원 서비스 현황 등 학생 본인 및 보호자(가족)의 경제·생활 관련 정보,
+            상담·심리검사·복지서비스 지원 여부, 신체 및 정신건강·병력 정보</li>
+        <li>개인정보 보유 및 이용기간: 동의서 작성일로부터 사례 종결 시</li>
+        <li>보호자께서는 고유식별정보의 수집·이용을 거부하실 수 있으며, 동의하지 않으실 경우 학생의 학생맞춤통합지원 참여 및 사례관리 지원이 제한될 수 있습니다.</li>
+      </ol>
+      <div style="text-align:right;margin-top:6px">수집·이용에　☐ 동의　　☐ 동의하지 않음</div>
+    </td></tr></table>
+    <table><tr><td class="v">
+      <b>[개인정보의 제3자 제공 동의]</b>
+      <ol>
+        <li>개인정보를 제공받는 자: 학생맞춤통합지원 참여 업체, 지역 유관기관 등</li>
+        <li>이용 목적: 학생맞춤통합지원 운영 및 사례관리 지원</li>
+        <li>제공하는 항목: 학생(이름, 학년/반, 성별, 주소, 연락처), 보호자(이름, 학생과의 관계, 주소, 연락처)</li>
+        <li>보유 및 이용기간: 동의서 작성일로부터 사례 종결 시</li>
+        <li>보호자께서는 제3자 제공 동의를 거부하실 수 있습니다. 동의하지 않으실 경우 참여 및 사례관리 지원에 제한을 받을 수 있습니다.</li>
+      </ol>
+      <div style="text-align:right;margin-top:6px">제3자 제공에　☐ 동의　　☐ 동의하지 않음</div>
+    </td></tr></table>
+    <table><tr><td class="v agree">
+      <div>☐ 본인은 학생맞춤통합지원 과정 및 내용에 대한 설명을 충분히 듣고 이해했습니다.</div>
+      <div>☐ 본인은 신상의 어려움이나 경제적인 변동이 있을 경우 학교에 알리고, 어려움을 해결하기 위하여 같이 노력하겠습니다.</div>
+      <div>☐ 학생맞춤통합지원 서비스를 위해 필요한 정보를 제공하고, 귀 교(지원청)에서 실시하는 다양한 활동에 함께 참여하겠습니다.</div>
+    </td></tr></table>
+    <div class="sign">${dateStr}<br>보호자 성명　${B(v.guard)}　(서명 또는 인)</div>
+  </div>`;
+
+  $('papers').innerHTML = 의뢰서 + 동의서;
+  const lbl=$('optAgreeLbl'); if(lbl) lbl.classList.toggle('on', $('optAgree').checked);
+}
+
+/* ============================================================
+   동작
+   ============================================================ */
+function importResult(){
+  const r = parseResult($('paste').value);
+  const msg = $('importMsg');
+  if (!r){ msg.style.color='var(--accent-2)';
+    msg.textContent='체크리스트에서 복사한 결과가 아닙니다. 「결과 복사」로 받은 텍스트를 그대로 붙여넣으세요.'; return; }
+  if (r.grade && !val('grade')) $('grade').value = r.grade;
+  state.diff = [...new Set([...state.diff, ...r.diff])];
+  state.req  = [...new Set([...state.req,  ...r.req])];
+  state.auto = {diff:r.diff, req:r.req};
+  build(); render();
+  msg.style.color='var(--accent-1)';
+  msg.textContent = `불러왔습니다 — 어려움 ${r.diff.length}개 · 요청사항 ${r.req.length}개 자동 체크`
+    + (r.critical.length ? ` · 즉시개입 ${r.critical.length}건` : '')
+    + '. 주황색 「자동」 표시를 확인하고 고쳐 주세요.';
+  genDraft();
+}
+
+function genDraft(){
+  const r = parseResult($('paste').value);
+  $('why').value = buildDraft({diff:state.diff, req:state.req, done:state.done,
+                               critical:r ? r.critical : []});
+  render();
+}
+
+function doPrint(){
+  const v={}; ['school','name','grade'].forEach(k=>v[k]=val(k));
+  const miss = missingFields(v);
+  if (miss.length && !confirm(`${miss.join(', ')}이(가) 비어 있습니다. 그대로 인쇄할까요?`)) return;
+  window.print();
+}
+
+function resetAll(){
+  if(!confirm('입력한 내용을 모두 지웁니다. 계속할까요?')) return;
+  document.querySelectorAll('input[type=text],input[type=date],textarea').forEach(e=>e.value='');
+  $('sex').value=''; $('pos').value='교장';
+  Object.assign(state,{fam:[],eco:[],ecoPct:'',famEtc:'',ecoEtc:'',diff:[],done:[],req:[],auto:{diff:[],req:[]}});
+  build(); render(); $('importMsg').textContent='';
+}
+
+/* ============================================================
+   내장 자체검증
+   ============================================================ */
+function selfTest(){
+  const T=[]; const t=(n,c)=>T.push({name:n,ok:!!c});
+
+  const SAMPLE = `[초등 학생맞춤통합지원 진단 결과]
+학생: 4-2-11 / 4학년 / 논산시
+작성: 4학년 2반 담임 / 2026. 7. 30.
+
+총 위험도: 18/62 (29%) — 판정: 통합지원팀 협의
+
+[영역별]
+  돌봄·안전: 6/16 (38%)
+  학업: 5/11 (45%)
+  건강: 0/10 (0%)
+  심리·정서: 4/12 (33%)
+  경제: 3/10 (30%)
+  기타 지원: 0/9 (0%)
+
+[우선 지원영역 및 논산시 연계처]
+  1. 학업 (45%)
+     → 논산계룡교육지원청 학습종합클리닉센터 041-730-7134
+
+[즉시개입 2건]
+  · 멍·상처 등 학대 의심 흔적이나 아동의 진술이 있다
+  · 정당한 사유 없이 결석이 누적된다 (의무교육 미취학·장기결석 관리 대상)
+
+※ 참고용 스크리닝 결과이며 최종 판단은 통합지원팀 협의를 따릅니다.`;
+
+  t('엉뚱한 텍스트는 거부', parseResult('안녕하세요')===null && parseResult('')===null);
+
+  const r = parseResult(SAMPLE);
+  t('결과 파싱 성공', !!r);
+  t('학년 추출', r.grade==='4학년');
+  t('지역 추출', r.city==='논산시');
+  t('판정 추출', r.level==='통합지원팀 협의');
+  t('영역 6개 파싱', Object.keys(r.domains).length===6 && r.domains['학업'].pct===45);
+  t('즉시개입 2건 파싱', r.critical.length===2);
+
+  t('학대 → 학대(방임) 자동 체크', r.diff.includes('학대(방임)'));
+  t('장기결석 → 학업중단위기 자동 체크', r.diff.includes('학업중단위기'));
+  t('학업 위험 → 기초학습부진 자동 체크', r.diff.includes('기초학습부진'));
+  t('경제 위험 → 경제적 어려움 자동 체크', r.diff.includes('경제적 어려움'));
+  t('건강 0% → 질병 체크 안 함', !r.diff.includes('질병'));
+  t('심리·정서 → 상담 요청 자동 체크', r.req.includes('심리상담·치료 관련'));
+  t('건강 0% → 건강 관련 요청 안 함', !r.req.includes('건강 관련'));
+  t('자동 체크 항목 중복 없음',
+     new Set(r.diff).size===r.diff.length && new Set(r.req).size===r.req.length);
+  t('자동 체크 항목은 모두 서식에 존재',
+     r.diff.every(x=>DIFF.some(g=>g.items.includes(x))) &&
+     r.req.every(x=>REQ.some(g=>g.items.includes(x))));
+
+  const draft = buildDraft({diff:r.diff, req:r.req, done:['학업 · 진로'], critical:r.critical});
+  t('초안 생성 — 학업 문단', draft.includes('(학 업)'));
+  t('초안 생성 — 안전 문단', draft.includes('(안 전)'));
+  t('초안 생성 — 복지 문단', draft.includes('(복 지)'));
+  t('초안 생성 — 학교 조치 반영', draft.includes('학교 조치') && draft.includes('학업 · 진로'));
+  t('빈 선택도 안내 문구 반환', buildDraft({}).includes('영역별로 구체적으로 작성'));
+
+  t('필수 누락 검사', missingFields({}).length===3 &&
+     missingFields({school:'가',name:'나',grade:'다'}).length===0);
+
+  t('서식 항목 수 일치 (어려움 12 · 요청 8)',
+     DIFF.reduce((s,g)=>s+g.items.length,0)===12 && REQ.reduce((s,g)=>s+g.items.length,0)===8);
+  t('가족현황 6 · 경제여건 4', FAMILY.length===6 && ECON.length===4);
+
+  const pass=T.filter(x=>x.ok).length;
+  $('selftest').innerHTML = pass===T.length
+    ? `✓ 결과 연동·초안 생성 자체검증 ${pass}/${T.length} 통과`
+    : `<span style="color:#EB5757">✗ 검증 실패: ${T.filter(x=>!x.ok).map(x=>x.name).join(', ')}</span>`;
+  console.table(T);
+}
+
+build();
+document.querySelectorAll('input,select,textarea').forEach(e=>e.addEventListener('input', render));
+$('optAgree').addEventListener('change', render);
+$('subDate').value = new Date().toISOString().slice(0,10);
+render(); selfTest();
+</script>
+</body>
+</html>
