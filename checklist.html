@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>초등 학생맞춤통합지원 진단 체크리스트 · 논산계룡</title>
+<style>
+:root{
+  --bg:#FDFBF8; --surface:#FFFFFF; --text:#2D2D2D; --text-secondary:#8A8680;
+  --accent-1:#2D9CDB; --accent-2:#EB5757; --border:#E8E4DE;
+  --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  font-size:16px;line-height:1.65}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 24px 96px}
+.tag{display:inline-block;background:#EEF6FB;color:#1B6E9E;font-size:12.5px;font-weight:600;
+  padding:4px 11px;border-radius:20px;margin-bottom:12px}
+h1{font-size:clamp(27px,4vw,40px);font-weight:700;letter-spacing:-.02em;margin:0 0 8px}
+header p{color:var(--text-secondary);margin:0;max-width:66ch}
+.note{margin:24px 0 30px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);
+  border-left:3px solid var(--accent-1);border-radius:var(--radius);font-size:14px;color:var(--text-secondary)}
+.layout{display:grid;grid-template-columns:1fr 350px;gap:28px;align-items:start}
+@media(max-width:940px){.layout{grid-template-columns:1fr}}
+.meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.meta input,.meta select{padding:10px 14px;border:1px solid var(--border);border-radius:8px;
+  background:var(--surface);font:inherit;font-size:14px;color:var(--text)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px 24px;margin-bottom:18px}
+.card > h2{display:flex;align-items:center;gap:10px;margin:0 0 4px;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.card .sub{margin:0 0 14px;font-size:13px;color:var(--text-secondary)}
+.item{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--border);cursor:pointer}
+.item:first-of-type{border-top:none}
+.item input{margin-top:5px;accent-color:var(--accent-1);width:16px;height:16px;flex:none;cursor:pointer}
+.item span{font-size:15px}
+.crit{color:var(--accent-2);font-size:12px;font-weight:600;margin-left:4px;white-space:nowrap}
+.local{margin-top:14px;padding:11px 13px;background:#FAF8F4;border-radius:8px;
+  font-size:12.5px;color:var(--text-secondary);line-height:1.6}
+.local b{color:var(--text);font-weight:600}
+aside{position:sticky;top:24px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.panel h3{margin:0 0 4px;font-size:17px;font-weight:600}
+.panel .sub{margin:0 0 18px;font-size:13px;color:var(--text-secondary)}
+.bar-row{margin-bottom:13px}
+.bar-label{display:flex;justify-content:space-between;font-size:13px;font-weight:500;margin-bottom:5px}
+.bar-label em{font-style:normal;color:var(--text-secondary);font-variant-numeric:tabular-nums}
+.bar{height:7px;background:var(--border);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:4px;transition:width .3s ease}
+.verdict{margin-top:20px;padding-top:18px;border-top:1px solid var(--border)}
+.badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:12px}
+.b-none{background:#F1EFEA;color:var(--text-secondary)}
+.b-watch{background:#E8F4FC;color:#1B6E9E}
+.b-act{background:#FDECEC;color:#B93B3B}
+.prio{font-size:14px;margin:0;padding-left:18px}
+.prio li{margin-bottom:7px}
+.prio small{display:block;color:var(--text-secondary);font-size:12px;line-height:1.5}
+.alert{margin-top:14px;padding:12px 14px;background:#FDECEC;border-radius:8px;font-size:13.5px;line-height:1.55;color:#8E2F2F}
+.alert b{display:block;margin-bottom:4px;color:#B93B3B}
+.actions{display:flex;gap:8px;margin-top:18px}
+button{flex:1;padding:11px;border:1px solid var(--border);border-radius:8px;background:var(--surface);
+  font:inherit;font-size:14px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s}
+button:hover{background:#F7F4F0}
+button.primary{background:var(--accent-1);border-color:var(--accent-1);color:#fff}
+button.primary:hover{background:#2589C2}
+#selftest{margin-top:14px;font-size:12px;color:var(--text-secondary);text-align:center}
+footer{margin-top:40px;font-size:13px;color:var(--text-secondary);line-height:1.75}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="tag">초등학교용 · 논산·계룡 지역 특화</span>
+  <h1>학생맞춤통합지원 6영역 진단 체크리스트</h1>
+  <p>초등 담임·상담교사가 관찰한 위기징후를 6개 지원영역별로 체크하면 우선 지원영역과 개입 수준, 그리고 <b>논산·계룡 지역 연계처</b>가 함께 제시됩니다.
+  「학생맞춤통합지원법」(2026.3.1. 시행) 절차 중 <b>발굴·진단</b> 단계 보조 도구입니다.</p>
+</header>
+
+<div class="note">
+  🔒 <b>개인정보 안내</b> — 입력값은 이 브라우저 화면에서만 계산되며 저장·전송되지 않습니다. 새로고침하면 사라집니다. 학생 실명 대신 <b>학년·반·번호</b> 사용을 권장합니다.
+</div>
+
+<div class="meta">
+  <input id="code" placeholder="학생 코드 (예: 4-2-11)" size="20">
+  <select id="grade">
+    <option value="">학년 선택</option>
+    <option>1학년</option><option>2학년</option><option>3학년</option>
+    <option>4학년</option><option>5학년</option><option>6학년</option>
+  </select>
+  <select id="city"><option>논산시</option><option>계룡시</option></select>
+  <input id="teacher" placeholder="작성자 (예: 4학년 2반 담임)" size="22">
+</div>
+
+<div class="layout">
+  <main id="domains"></main>
+  <aside>
+    <div class="panel">
+      <h3>진단 결과</h3>
+      <p class="sub">영역별 위험도 및 우선 지원순위</p>
+      <div id="bars"></div>
+      <div class="verdict">
+        <span class="badge b-none" id="badge">체크 항목 없음</span>
+        <div id="detail"></div>
+      </div>
+      <div class="actions">
+        <button onclick="reset()">초기화</button>
+        <button class="primary" onclick="copyReport()">결과 복사</button>
+      </div>
+      <div id="selftest"></div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  ※ 본 도구는 <b>참고용 스크리닝</b>이며 공식 진단·판정 도구가 아닙니다. 실제 지원 결정은 <b>학교 학생맞춤통합지원팀 협의</b>와 교육복지사·전문상담(교)사·전문기관 의견을 거쳐야 합니다.<br>
+  ※ 아동학대·자해 징후 의심 시 체크리스트 결과와 무관하게 <b>즉시 신고 및 관리자 보고</b> 의무가 우선합니다.
+  아동학대 신고 <b>112</b> / 청소년상담 <b>1388</b> / 충남남부아동보호전문기관 <b>041-734-6640</b> / 논산시학대신고대응센터 <b>041-736-1391</b><br>
+  ※ 지역자원 정보 출처: 학생맞춤통합지원 누리집(studentsupport.kr) 2026년 7월 수집분. 연락처는 이용 전 확인하세요.
+</footer>
+</div>
+
+<script>
+/* ============================================================
+   초등 문항 데이터
+   weight: 1(경미) / 2(주의) / 3(심각)  ·  critical: 즉시개입 플래그
+   local: 논산·계룡 1차 연계처
+   ============================================================ */
+const DOMAINS = [
+  { key:'care', name:'돌봄·안전', color:'#EB5757',
+    local:{
+      논산시:'논산시드림스타트 041-746-5381 · 아이꽃돌봄센터(내동 041-980-2255 / 대교 041-980-2266 / 강산 041-980-2277) · 지역아동센터 20여 곳',
+      계룡시:'계룡시다함께돌봄센터 042-840-7950 · [시립]드림지역아동센터 042-841-3631 · 엄사지역아동센터 042-841-3350'
+    },
+    items:[
+      ['방과후 보호자 부재로 혼자 지내는 시간이 길다 (늘봄·돌봄 미이용)', 2],
+      ['등교 시각·복장·세면·위생 관리가 지속적으로 부실하다', 2],
+      ['주거가 불안정하다 (잦은 전학·이사, 시설·친척집 거주)', 2],
+      ['멍·상처 등 학대 의심 흔적이나 아동의 진술이 있다', 3, true],
+      ['정당한 사유 없이 결석이 누적된다 (의무교육 미취학·장기결석 관리 대상)', 3, true],
+      ['학교폭력 피해 또는 가해 사안에 관련되어 있다', 2],
+    ]},
+  { key:'study', name:'학업', color:'#2D9CDB',
+    local:{
+      논산시:'논산계룡교육지원청 학습종합클리닉센터 041-730-7198 · 논산열린도서관 041-746-5990 · 논산시평생학습관 041-746-5994',
+      계룡시:'논산계룡교육지원청 학습종합클리닉센터 041-730-7198 · 엄사도서관 042-840-3667 · 계룡도서관 042-840-3607'
+    },
+    items:[
+      ['한글 해득이 되지 않았다 (읽기·쓰기 유창성 부족, 초1~2 특히 유의)', 3],
+      ['기초학력 진단에서 3R\'s(읽기·쓰기·셈하기) 미도달이다', 3],
+      ['난독·난산 등 학습장애가 의심된다 (전문 진단 필요)', 2],
+      ['수업 이해 속도가 또래보다 현저히 느리다 (경계선지능·느린학습자)', 2],
+      ['과제·준비물을 거의 챙겨오지 못하고 가정학습 지원이 없다', 1],
+    ]},
+  { key:'health', name:'건강', color:'#27AE60',
+    local:{
+      논산시:'논산시보건소 041-746-8011 · 논산 백제종합병원 041-730-8888 · 국민건강보험공단(논산)',
+      계룡시:'계룡복지센터 042-840-8950 · 향적산숲치유센터 042-840-2692 · 논산시보건소 041-746-8011'
+    },
+    items:[
+      ['치료가 필요한 만성질환·알레르기·장애가 있으나 관리되지 않는다', 3],
+      ['학생건강검진(초1·초4) 미수검 또는 사후조치 미이행이다', 2],
+      ['아침 결식이 잦거나 편식·저체중·비만 등 영양 문제가 보인다', 2],
+      ['시력·청력·구강(충치) 치료 권고를 받고도 조치되지 않았다', 2],
+      ['체력이 또래보다 크게 낮고 신체활동 기회가 거의 없다', 1],
+    ]},
+  { key:'psych', name:'심리·정서', color:'#9B51E0',
+    local:{
+      논산시:'논산계룡교육지원청 Wee센터 041-730-7198 · 논산시청소년상담복지센터 041-730-6041 · 논산시 정신건강보건센터 041-746-8121 · 청소년상담 1388',
+      계룡시:'논산계룡교육지원청 Wee센터 041-730-7198 · 계룡시청소년상담복지센터 042-551-1318 · 계룡시청소년별마루센터 042-840-7925 · 청소년상담 1388'
+    },
+    items:[
+      ['정서·행동특성검사(초1·초4) 관심군으로 분류되었다', 3],
+      ['자해 흔적이 있거나 죽음·사라짐을 언급한 적이 있다', 3, true],
+      ['또래관계에서 지속적으로 고립되어 있다 (모둠·놀이에서 배제)', 2],
+      ['분노조절 어려움·공격적 행동이 반복된다', 2],
+      ['등교거부·분리불안·교실 이탈 등 학교 부적응 징후를 보인다', 2],
+    ]},
+  { key:'econ', name:'경제', color:'#F2994A',
+    local:{
+      논산시:'논산시 교육복지 담당 · 논산사랑푸드뱅크 041-736-1004 · 논산지역자활센터 041-734-1377 · 긴급복지 129',
+      계룡시:'계룡시사랑나눔푸드뱅크 042-551-9191 · 계룡시종합사회복지관 042-840-8950 · 대한적십자사 계룡시지구협의회 042-551-7658 · 긴급복지 129'
+    },
+    items:[
+      ['교육급여·교육비 지원 대상이다 (또는 대상인데 미신청 상태)', 2],
+      ['한부모·조손·차상위 등 취약 가구다', 2],
+      ['현장체험학습비·방과후 수강료 납부에 어려움이 있다', 2],
+      ['학용품·체육복·디지털기기 등 학습 준비물이 부족하다', 1],
+      ['보호자 실직·질병·이혼 등으로 최근 형편이 급격히 나빠졌다', 3],
+    ]},
+  { key:'etc', name:'기타 지원', color:'#8A8680',
+    local:{
+      논산시:'논산시가족센터 041-733-7860 · 논산 YWCA 041-736-7393 · 논산시청소년문화센터 041-730-6021 · 논산문화원 041-732-2395',
+      계룡시:'계룡시가족센터 042-551-1133 · 계룡시청소년별마루센터 042-840-7925 · 계룡시감성체험장 042-840-5702'
+    },
+    items:[
+      ['다문화·중도입국 배경으로 한국어(KSL) 지원이 필요하다', 2],
+      ['특수교육대상자이거나 진단·배치 검토가 필요해 보인다', 2],
+      ['문화·체험·여행 경험이 거의 없다 (문화누리카드 미사용 포함)', 1],
+      ['보호자의 양육역량이 낮아 부모교육 연계가 필요하다', 2],
+      ['보호자와 학교 간 연락이 사실상 두절 상태다', 2],
+    ]},
+];
+
+const LEVEL = { NONE:'없음', WATCH:'관찰·모니터링', ACT:'통합지원팀 협의' };
+
+/* ============================================================
+   순수 계산 함수 (테스트 대상)
+   ============================================================ */
+function score(checked){
+  const per = DOMAINS.map(d => {
+    const max = d.items.reduce((s,i)=>s+i[1], 0);
+    const got = (checked[d.key]||[]).reduce((s,idx)=>s + d.items[idx][1], 0);
+    return { key:d.key, name:d.name, color:d.color, got, max, pct: Math.round(got/max*100) };
+  });
+  const critical = [];
+  DOMAINS.forEach(d => (checked[d.key]||[]).forEach(idx => {
+    if (d.items[idx][2]) critical.push(d.items[idx][0]);
+  }));
+  const totalGot = per.reduce((s,p)=>s+p.got,0);
+  const totalMax = per.reduce((s,p)=>s+p.max,0);
+  const totalPct = Math.round(totalGot/totalMax*100);
+  let level;
+  if (critical.length > 0)      level = LEVEL.ACT;
+  else if (totalGot === 0)      level = LEVEL.NONE;
+  else if (totalPct >= 25 || per.some(p=>p.pct>=50)) level = LEVEL.ACT;
+  else                          level = LEVEL.WATCH;
+  const priority = per.filter(p=>p.got>0).sort((a,b)=> b.pct-a.pct || b.got-a.got).slice(0,3);
+  return { per, critical, totalGot, totalMax, totalPct, level, priority };
+}
+
+/* ============================================================
+   렌더링
+   ============================================================ */
+const state = {};
+DOMAINS.forEach(d => state[d.key] = []);
+const city = () => document.getElementById('city').value;
+
+function buildForm(){
+  document.getElementById('domains').innerHTML = DOMAINS.map(d => `
+    <section class="card">
+      <h2><i class="dot" style="background:${d.color}"></i>${d.name}</h2>
+      <p class="sub">해당하는 항목을 모두 체크하세요 (${d.items.length}문항)</p>
+      ${d.items.map((it,i)=>`
+        <label class="item">
+          <input type="checkbox" data-d="${d.key}" data-i="${i}">
+          <span>${it[0]}${it[2] ? '<b class="crit">즉시개입</b>' : ''}</span>
+        </label>`).join('')}
+      <div class="local" data-local="${d.key}"></div>
+    </section>`).join('');
+
+  document.querySelectorAll('.item input').forEach(cb => cb.addEventListener('change', e => {
+    const {d, i} = e.target.dataset, idx = +i, arr = state[d];
+    e.target.checked ? arr.push(idx) : arr.splice(arr.indexOf(idx), 1);
+    render();
+  }));
+}
+
+function renderLocal(){
+  DOMAINS.forEach(d => {
+    const el = document.querySelector(`[data-local="${d.key}"]`);
+    if (el) el.innerHTML = `<b>📍 ${city()} 1차 연계처</b><br>${d.local[city()]}`;
+  });
+}
+
+function render(){
+  const r = score(state);
+  document.getElementById('bars').innerHTML = r.per.map(p=>`
+    <div class="bar-row">
+      <div class="bar-label"><span>${p.name}</span><em>${p.got}/${p.max}</em></div>
+      <div class="bar"><i style="width:${p.pct}%;background:${p.color}"></i></div>
+    </div>`).join('');
+
+  const badge = document.getElementById('badge');
+  badge.textContent = r.level === LEVEL.NONE ? '체크 항목 없음' : `${r.level} · 총 ${r.totalPct}%`;
+  badge.className = 'badge ' + (r.level===LEVEL.ACT ? 'b-act' : r.level===LEVEL.WATCH ? 'b-watch' : 'b-none');
+
+  let html = '';
+  if (r.priority.length){
+    html += '<ol class="prio">' + r.priority.map(p=>{
+      const d = DOMAINS.find(x=>x.key===p.key);
+      return `<li><b>${p.name}</b> — 위험도 ${p.pct}%<small>${d.local[city()]}</small></li>`;
+    }).join('') + '</ol>';
+  }
+  if (r.critical.length){
+    html += `<div class="alert"><b>⚠ 즉시개입 항목 ${r.critical.length}건</b>${
+      r.critical.map(c=>'· '+c).join('<br>')}<br><br>총점과 무관하게 관리자 보고 및 통합지원팀 즉시 소집 대상입니다.</div>`;
+  }
+  document.getElementById('detail').innerHTML = html;
+  renderLocal();
+}
+
+function reset(){
+  DOMAINS.forEach(d => state[d.key] = []);
+  document.querySelectorAll('.item input').forEach(cb => cb.checked = false);
+  ['code','teacher'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('grade').value='';
+  render();
+}
+
+function copyReport(){
+  const r = score(state);
+  const t = [
+    `[초등 학생맞춤통합지원 진단 결과]`,
+    `학생: ${document.getElementById('code').value||'(미입력)'} / ${document.getElementById('grade').value||'-'} / ${city()}`,
+    `작성: ${document.getElementById('teacher').value||'(미입력)'} / ${new Date().toLocaleDateString('ko-KR')}`,
+    ``,
+    `총 위험도: ${r.totalGot}/${r.totalMax} (${r.totalPct}%) — 판정: ${r.level}`,
+    ``, `[영역별]`,
+    ...r.per.map(p=>`  ${p.name}: ${p.got}/${p.max} (${p.pct}%)`),
+    ``, `[우선 지원영역 및 ${city()} 연계처]`,
+    ...(r.priority.length ? r.priority.flatMap((p,i)=>{
+      const d = DOMAINS.find(x=>x.key===p.key);
+      return [`  ${i+1}. ${p.name} (${p.pct}%)`, `     → ${d.local[city()]}`];
+    }) : ['  없음']),
+    ...(r.critical.length ? ['', `[즉시개입 ${r.critical.length}건]`, ...r.critical.map(c=>'  · '+c)] : []),
+    ``,
+    `※ 참고용 스크리닝 결과이며 최종 판단은 통합지원팀 협의를 따릅니다.`
+  ].join('\n');
+  navigator.clipboard.writeText(t).then(
+    ()=>alert('결과가 복사되었습니다. 상담일지나 협의록에 붙여넣으세요.'),
+    ()=>alert('복사 실패 — 브라우저 권한을 확인하세요.'));
+}
+
+/* ============================================================
+   내장 자체검증
+   ============================================================ */
+function selfTest(){
+  const T=[]; const t=(n,c)=>T.push({name:n,ok:!!c});
+  let r = score({});
+  t('빈 입력 → 0점/없음', r.totalGot===0 && r.level===LEVEL.NONE && r.priority.length===0);
+
+  const all={}; DOMAINS.forEach(d=>all[d.key]=d.items.map((_,i)=>i));
+  r = score(all);
+  t('전체 체크 → 100%', r.totalPct===100 && r.per.every(p=>p.got===p.max));
+
+  r = score({ study:[0,3] });   // 한글미해득 3 + 느린학습자 2 = 5
+  t('가중치 합산 정확', r.per.find(p=>p.key==='study').got===5);
+
+  r = score({ care:[3] });      // 학대 의심 단독 (critical)
+  t('긴급항목 → 총점 무관 ACT', r.level===LEVEL.ACT && r.critical.length===1 && r.totalPct<25);
+
+  r = score({ care:[4] });      // 장기결석 단독 (critical, 초등 의무교육)
+  t('장기결석 → 즉시개입 인식', r.critical.length===1 && r.level===LEVEL.ACT);
+
+  r = score({ etc:[2] });
+  t('저위험 비긴급 → 관찰', r.level===LEVEL.WATCH);
+
+  r = score({ health:[0,1,2] }); // 3+2+2=7 / 10 = 70%
+  t('단일영역 50%↑ → ACT', r.level===LEVEL.ACT && r.totalPct<25);
+
+  r = score({ health:[0,1,2], etc:[2], econ:[0] });
+  t('우선순위 내림차순 3개 이내',
+     r.priority.length<=3 && r.priority[0].key==='health' &&
+     r.priority.every((p,i,a)=> i===0 || a[i-1].pct>=p.pct));
+
+  t('문항 데이터 무결성',
+     DOMAINS.every(d=>d.items.length>0 && d.items.every(i=>typeof i[0]==='string' && [1,2,3].includes(i[1]))));
+
+  t('전 영역 논산·계룡 연계처 존재',
+     DOMAINS.every(d=>d.local && d.local['논산시'] && d.local['계룡시']));
+
+  const pass=T.filter(x=>x.ok).length;
+  document.getElementById('selftest').innerHTML = pass===T.length
+    ? `✓ 계산 로직 자체검증 ${pass}/${T.length} 통과`
+    : `<span style="color:#EB5757">✗ 검증 실패: ${T.filter(x=>!x.ok).map(x=>x.name).join(', ')}</span>`;
+  console.table(T);
+}
+
+buildForm();
+document.getElementById('city').addEventListener('change', render);
+render(); selfTest();
+</script>
+</body>
+</html>

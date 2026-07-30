@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>초등 학생맞춤통합지원 지원 이력 대시보드 · 논산계룡</title>
+<style>
+:root{
+  --bg:#FDFBF8; --surface:#FFFFFF; --text:#2D2D2D; --text-secondary:#8A8680;
+  --accent-1:#2D9CDB; --accent-2:#EB5757; --border:#E8E4DE;
+  --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  font-size:16px;line-height:1.65}
+.wrap{max-width:1320px;margin:0 auto;padding:36px 24px 90px}
+.tag{display:inline-block;background:#EEF6FB;color:#1B6E9E;font-size:12.5px;font-weight:600;
+  padding:4px 11px;border-radius:20px;margin-bottom:12px}
+h1{font-size:clamp(26px,3.4vw,38px);font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+.lede{color:var(--text-secondary);margin:0 0 26px;max-width:72ch}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px;margin-bottom:22px}
+.stat .k{font-size:13px;color:var(--text-secondary);font-weight:500;margin-bottom:6px}
+.stat .v{font-size:30px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .u{font-size:14px;font-weight:500;color:var(--text-secondary);margin-left:3px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+select,input[type=text],input[type=date],textarea{padding:9px 13px;border:1px solid var(--border);
+  border-radius:8px;background:var(--surface);font:inherit;font-size:14px;color:var(--text)}
+textarea{width:100%;resize:vertical;min-height:60px;line-height:1.55}
+button{padding:9px 15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);
+  font:inherit;font-size:14px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s}
+button:hover{background:#F7F4F0}
+button.primary{background:var(--accent-1);border-color:var(--accent-1);color:#fff}
+button.primary:hover{background:#2589C2}
+button.ghost{color:var(--text-secondary)}
+.spacer{flex:1}
+.tl-head{display:grid;grid-template-columns:190px 1fr;align-items:end;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:6px}
+.months{display:grid;grid-template-columns:repeat(12,1fr);font-size:11.5px;color:var(--text-secondary);text-align:center;font-weight:500}
+.months span{border-left:1px solid var(--border);padding:2px 0}
+.months span:first-child{border-left:none}
+.srow{display:grid;grid-template-columns:190px 1fr;border-bottom:1px solid var(--border);padding:11px 0;align-items:center}
+.srow:last-child{border-bottom:none}
+.sname{padding-right:14px}
+.sname b{font-size:15px;font-weight:600;display:block}
+.sname em{font-style:normal;font-size:12.5px;color:var(--text-secondary)}
+.track{position:relative;min-height:26px;
+  background:repeating-linear-gradient(to right,transparent,transparent calc(8.3333% - 1px),var(--border) calc(8.3333% - 1px),var(--border) 8.3333%)}
+.lane{position:relative;height:26px;margin-bottom:5px}
+.lane:last-child{margin-bottom:0}
+.bar{position:absolute;top:2px;height:22px;border-radius:6px;color:#fff;font-size:11.5px;font-weight:600;
+  line-height:22px;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;transition:.15s;border:none}
+.bar:hover{filter:brightness(.92);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.bar.done{opacity:.5}
+.bar.stop{opacity:.5;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 5px,transparent 5px 10px)}
+.today{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--accent-2);z-index:3}
+.today::after{content:'오늘';position:absolute;top:-17px;left:-13px;font-size:10px;color:var(--accent-2);
+  font-weight:700;background:var(--bg);padding:0 3px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:12.5px;color:var(--text-secondary)}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.grid2{display:grid;grid-template-columns:1fr 380px;gap:22px;align-items:start;margin-top:22px}
+@media(max-width:1000px){.grid2{grid-template-columns:1fr}}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12.5px;font-weight:500;color:var(--text-secondary);margin-bottom:5px}
+.field input,.field select{width:100%}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+h3{margin:0 0 3px;font-size:17px;font-weight:600}
+.hint{margin:0 0 16px;font-size:13px;color:var(--text-secondary)}
+.pill{display:inline-block;padding:3px 10px;border-radius:14px;font-size:12px;font-weight:600}
+.p-run{background:#E8F4FC;color:#1B6E9E}
+.p-done{background:#EAF6EE;color:#2A7A47}
+.p-stop{background:#F1EFEA;color:#77736D}
+.detail dt{font-size:12px;color:var(--text-secondary);margin-top:11px}
+.detail dd{margin:2px 0 0;font-size:14.5px}
+.empty{color:var(--text-secondary);font-size:14px;padding:24px 0;text-align:center}
+#selftest{margin-top:18px;font-size:12px;color:var(--text-secondary)}
+footer{margin-top:34px;font-size:13px;color:var(--text-secondary);line-height:1.75}
+datalist{position:absolute}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<span class="tag">초등학교용 · 논산·계룡 지역 특화</span>
+<h1>지원 이력 관리 대시보드</h1>
+<p class="lede">초등학생별로 투입된 지원 프로그램의 <b>시작–종료 경과</b>와 <b>성장관리 기록</b>을 한 화면에서 봅니다.
+「학생맞춤통합지원법」 원스톱 절차 중 <b>지원 → 성장관리</b> 단계용. 2026학년도(3월~다음해 2월) 기준이며 연계 기관은 논산·계룡 실제 자원으로 채워져 있습니다.</p>
+
+<div class="stats">
+  <div class="card stat"><div class="k">관리 학생</div><div class="v" id="s1">0<span class="u">명</span></div></div>
+  <div class="card stat"><div class="k">전체 지원 건수</div><div class="v" id="s2">0<span class="u">건</span></div></div>
+  <div class="card stat"><div class="k">진행 중</div><div class="v" id="s3" style="color:var(--accent-1)">0<span class="u">건</span></div></div>
+  <div class="card stat"><div class="k">중단·미종결</div><div class="v" id="s4" style="color:var(--accent-2)">0<span class="u">건</span></div></div>
+  <div class="card stat"><div class="k">학생당 평균 지원</div><div class="v" id="s5">0<span class="u">건</span></div></div>
+</div>
+
+<div class="toolbar">
+  <select id="fDomain"><option value="">전체 영역</option></select>
+  <select id="fStatus"><option value="">전체 상태</option>
+    <option value="진행">진행</option><option value="완료">완료</option><option value="중단">중단</option></select>
+  <input type="text" id="fQuery" placeholder="학생코드·프로그램·기관 검색" size="24">
+  <span class="spacer"></span>
+  <button onclick="exportJSON()">JSON 저장</button>
+  <button onclick="document.getElementById('imp').click()">불러오기</button>
+  <input type="file" id="imp" accept=".json" hidden onchange="importJSON(this)">
+  <button class="ghost" onclick="clearAll()">전체 비우기</button>
+</div>
+
+<div class="card">
+  <div class="tl-head">
+    <div style="font-size:12.5px;font-weight:600;color:var(--text-secondary)">학생 / 지원 트랙</div>
+    <div class="months" id="months"></div>
+  </div>
+  <div id="timeline"></div>
+  <div class="legend" id="legend"></div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h3>지원 기록 추가</h3>
+    <p class="hint">막대를 클릭하면 오른쪽에 상세가 뜹니다. 연계 기관은 논산·계룡 자원 목록에서 자동완성됩니다.</p>
+    <div class="row2">
+      <div class="field"><label>학생 코드</label><input type="text" id="iCode" placeholder="4-2-11"></div>
+      <div class="field"><label>학년</label><select id="iGrade">
+        <option>초1</option><option>초2</option><option>초3</option>
+        <option>초4</option><option>초5</option><option>초6</option></select></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>지원 영역</label><select id="iDomain"></select></div>
+      <div class="field"><label>상태</label><select id="iStatus">
+        <option>진행</option><option>완료</option><option>중단</option></select></div>
+    </div>
+    <div class="field"><label>프로그램명</label>
+      <input type="text" id="iProgram" list="progList" placeholder="예: 한글 책임교육 1:1 지도">
+      <datalist id="progList"></datalist></div>
+    <div class="row2">
+      <div class="field"><label>연계 기관 (논산·계룡)</label>
+        <input type="text" id="iOrg" list="orgList" placeholder="입력하면 지역 기관 자동완성">
+        <datalist id="orgList"></datalist></div>
+      <div class="field"><label>담당 교원</label><input type="text" id="iOwner" placeholder="예: 담임 김○○"></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>시작일</label><input type="date" id="iStart"></div>
+      <div class="field"><label>종료(예정)일</label><input type="date" id="iEnd"></div>
+    </div>
+    <div class="field"><label>성장관리 메모</label><textarea id="iMemo" placeholder="개입 내용, 변화 관찰, 다음 조치"></textarea></div>
+    <button class="primary" onclick="addRecord()">기록 추가</button>
+    <button onclick="loadSample()">샘플 데이터 불러오기</button>
+  </div>
+
+  <div class="card">
+    <h3>기록 상세</h3>
+    <p class="hint">타임라인 막대를 선택하세요.</p>
+    <div id="detail"><div class="empty">선택된 기록이 없습니다.</div></div>
+  </div>
+</div>
+
+<div id="selftest"></div>
+
+<footer>
+  ※ 데이터는 <b>브라우저 메모리에만</b> 존재하며 새로고침 시 사라집니다. 서버 전송·자동저장 없음.
+  이어서 쓰려면 <b>JSON 저장</b>으로 파일을 받아두고 다음에 <b>불러오기</b> 하세요.<br>
+  ※ 학생 실명·주민번호·가정 상세정보 입력을 권장하지 않습니다. 민감정보는 학교 공식 시스템(나이스 등)에 기록하세요.<br>
+  ※ 연계 기관 목록 출처: 학생맞춤통합지원 누리집(studentsupport.kr) 논산시·계룡시 등록 자원, 2026년 7월 수집분.
+</footer>
+</div>
+
+<script>
+/* ============================================================
+   상수 · 논산계룡 지역 자원
+   ============================================================ */
+const DOMAINS = [
+  {key:'돌봄·안전', color:'#EB5757'},
+  {key:'학업',      color:'#2D9CDB'},
+  {key:'건강',      color:'#27AE60'},
+  {key:'심리·정서', color:'#9B51E0'},
+  {key:'경제',      color:'#F2994A'},
+  {key:'기타',      color:'#8A8680'},
+];
+const COLOR = Object.fromEntries(DOMAINS.map(d=>[d.key,d.color]));
+
+const ORGS = [
+  '논산계룡교육지원청 Wee센터 (041-730-7198)',
+  '논산계룡교육지원청 학습종합클리닉센터 (041-730-7198)',
+  '논산시드림스타트 (041-746-5381)',
+  '논산시청소년상담복지센터 (041-730-6041)',
+  '논산시 정신건강보건센터 (041-746-8121)',
+  '논산시보건소 (041-746-8011)',
+  '논산시가족센터 (041-733-7860)',
+  '충남남부아동보호전문기관 (041-734-6640)',
+  '논산시학대신고대응센터 (041-736-1391)',
+  '논산사랑푸드뱅크 (041-736-1004)',
+  '내동홈 아이꽃돌봄센터 (041-980-2255)',
+  '대교홈 아이꽃돌봄센터 (041-980-2266)',
+  '강산홈 아이꽃돌봄센터 (041-980-2277)',
+  '논산열린도서관 (041-746-5990)',
+  '논산시청소년문화센터 (041-730-6021)',
+  '논산 YWCA (041-736-7393)',
+  '건양대학교 늘품심리상담센터 (041-730-5114)',
+  '계룡시청소년상담복지센터 (042-551-1318)',
+  '계룡시다함께돌봄센터 (042-840-7950)',
+  '계룡시가족센터 (042-551-1133)',
+  '계룡시종합사회복지관 (042-840-8950)',
+  '계룡시청소년별마루센터 (042-840-7925)',
+  '계룡시사랑나눔푸드뱅크 (042-551-9191)',
+  '[시립]드림지역아동센터 (042-841-3631)',
+  '엄사지역아동센터 (042-841-3350)',
+  '엄사도서관 (042-840-3667)',
+  '계룡복지센터 (042-840-8950)',
+];
+
+const PROGRAMS = [
+  '한글 책임교육 1:1 지도','기초학력 협력수업(3R\'s)','난독 의심 전문기관 진단 연계',
+  '느린학습자 개별화 지도','늘봄학교 연계','지역아동센터 방과후 돌봄 연계',
+  '아이꽃돌봄센터 이용 연계','정서·행동특성검사 관심군 상담','Wee클래스 놀이치료',
+  '또래관계 향상 집단상담','학생건강검진 사후관리','구강(충치) 치료비 지원 연계',
+  '아침 간편식 지원','교육급여·교육비 신청 지원','현장체험학습비 지원',
+  '학용품·체육복 지원','문화누리카드 발급 안내','한국어(KSL) 방과후 지도',
+  '특수교육대상자 진단·배치 의뢰','보호자 부모교육','장기결석 가정방문 및 출석 독려',
+];
+
+const AXIS_START = new Date('2026-03-01');
+const AXIS_END   = new Date('2027-02-28');
+const MONTHS = ['3','4','5','6','7','8','9','10','11','12','1','2'];
+
+let DATA = [];
+let selectedId = null;
+let seq = 1;
+
+/* ============================================================
+   순수 계산 함수 (테스트 대상)
+   ============================================================ */
+function barGeometry(start, end, axisStart=AXIS_START, axisEnd=AXIS_END){
+  const s = new Date(start).getTime(), e = new Date(end).getTime();
+  const a = axisStart.getTime(), b = axisEnd.getTime();
+  if (isNaN(s) || isNaN(e) || e < s) return null;
+  if (e < a || s > b) return null;
+  const span = b - a;
+  const left  = Math.max(0, (s - a) / span * 100);
+  const right = Math.min(100, (e - a) / span * 100);
+  return { left, width: Math.max(right - left, 1.2) };
+}
+function summarize(rows){
+  const students = new Set(rows.map(r=>r.code));
+  const run  = rows.filter(r=>r.status==='진행').length;
+  const stop = rows.filter(r=>r.status==='중단').length;
+  const avg  = students.size ? Math.round(rows.length / students.size * 10) / 10 : 0;
+  return { students: students.size, total: rows.length, run, stop, avg };
+}
+function applyFilter(rows, {domain='', status='', query=''}){
+  const q = query.trim().toLowerCase();
+  return rows.filter(r =>
+    (!domain || r.domain===domain) && (!status || r.status===status) &&
+    (!q || (r.code+' '+r.program+' '+(r.org||'')+' '+(r.owner||'')).toLowerCase().includes(q)));
+}
+function assignLanes(rows){
+  const sorted = [...rows].sort((a,b)=> new Date(a.start) - new Date(b.start));
+  const laneEnd = [];
+  sorted.forEach(r => {
+    const s = new Date(r.start).getTime(), e = new Date(r.end).getTime();
+    let i = laneEnd.findIndex(t => t < s);
+    if (i === -1) { i = laneEnd.length; laneEnd.push(e); } else laneEnd[i] = e;
+    r._lane = i;
+  });
+  return { rows: sorted, laneCount: Math.max(laneEnd.length, 1) };
+}
+
+/* ============================================================
+   렌더링
+   ============================================================ */
+function fillSelects(){
+  const opts = DOMAINS.map(d=>`<option>${d.key}</option>`).join('');
+  document.getElementById('iDomain').innerHTML = opts;
+  document.getElementById('fDomain').innerHTML = '<option value="">전체 영역</option>' + opts;
+  document.getElementById('months').innerHTML = MONTHS.map(m=>`<span>${m}월</span>`).join('');
+  document.getElementById('orgList').innerHTML  = ORGS.map(o=>`<option value="${o}">`).join('');
+  document.getElementById('progList').innerHTML = PROGRAMS.map(p=>`<option value="${p}">`).join('');
+  document.getElementById('legend').innerHTML =
+    DOMAINS.map(d=>`<span><i style="background:${d.color}"></i>${d.key}</span>`).join('') +
+    `<span style="margin-left:auto">진한색 = 진행 · 흐린색 = 완료 · 빗금 = 중단</span>`;
+}
+function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+function render(){
+  const f = {domain:document.getElementById('fDomain').value,
+             status:document.getElementById('fStatus').value,
+             query: document.getElementById('fQuery').value};
+  const rows = applyFilter(DATA, f);
+  const st = summarize(rows);
+  document.getElementById('s1').innerHTML = st.students + '<span class="u">명</span>';
+  document.getElementById('s2').innerHTML = st.total    + '<span class="u">건</span>';
+  document.getElementById('s3').innerHTML = st.run      + '<span class="u">건</span>';
+  document.getElementById('s4').innerHTML = st.stop     + '<span class="u">건</span>';
+  document.getElementById('s5').innerHTML = st.avg      + '<span class="u">건</span>';
+
+  const byCode = {};
+  rows.forEach(r => (byCode[r.code] = byCode[r.code] || []).push(r));
+  const codes = Object.keys(byCode).sort();
+  const today = new Date().toISOString().slice(0,10);
+  const todayPct = barGeometry(today, today);
+
+  document.getElementById('timeline').innerHTML = codes.length ? codes.map(code=>{
+    const {rows:rs, laneCount} = assignLanes(byCode[code]);
+    const grade = rs[0].grade || '';
+    const lanes = Array.from({length:laneCount}, (_,i)=>
+      `<div class="lane">${rs.filter(r=>r._lane===i).map(r=>{
+        const g = barGeometry(r.start, r.end); if(!g) return '';
+        const cls = r.status==='완료' ? ' done' : r.status==='중단' ? ' stop' : '';
+        return `<button class="bar${cls}" style="left:${g.left}%;width:${g.width}%;background:${COLOR[r.domain]||'#8A8680'}"
+          onclick="select(${r.id})" title="${esc(r.program)} (${r.start}~${r.end})">${esc(r.program)}</button>`;
+      }).join('')}</div>`).join('');
+    return `<div class="srow">
+      <div class="sname"><b>${esc(code)}</b><em>${esc(grade)} · 지원 ${rs.length}건</em></div>
+      <div class="track" style="min-height:${laneCount*31}px">
+        ${todayPct ? `<div class="today" style="left:${todayPct.left}%"></div>` : ''}${lanes}
+      </div></div>`;
+  }).join('') : '<div class="empty">표시할 기록이 없습니다. 아래에서 기록을 추가하거나 샘플 데이터를 불러오세요.</div>';
+  renderDetail();
+}
+
+function select(id){ selectedId = id; renderDetail(); }
+
+function renderDetail(){
+  const r = DATA.find(x=>x.id===selectedId);
+  const box = document.getElementById('detail');
+  if(!r){ box.innerHTML = '<div class="empty">선택된 기록이 없습니다.</div>'; return; }
+  const cls = r.status==='진행'?'p-run':r.status==='완료'?'p-done':'p-stop';
+  box.innerHTML = `
+    <span class="pill ${cls}">${r.status}</span>
+    <span class="pill" style="background:${COLOR[r.domain]}22;color:${COLOR[r.domain]}">${esc(r.domain)}</span>
+    <dl class="detail">
+      <dt>프로그램</dt><dd><b>${esc(r.program)}</b></dd>
+      <dt>학생</dt><dd>${esc(r.code)} ${esc(r.grade||'')}</dd>
+      <dt>기간</dt><dd>${r.start} ~ ${r.end}</dd>
+      <dt>연계 기관</dt><dd>${esc(r.org)||'-'}</dd>
+      <dt>담당 교원</dt><dd>${esc(r.owner)||'-'}</dd>
+      <dt>성장관리 메모</dt><dd style="white-space:pre-wrap">${esc(r.memo)||'-'}</dd>
+    </dl>
+    <div style="margin-top:16px;display:flex;gap:8px">
+      <button onclick="cycleStatus(${r.id})">상태 변경</button>
+      <button class="ghost" onclick="removeRecord(${r.id})">삭제</button>
+    </div>`;
+}
+
+/* ============================================================
+   조작
+   ============================================================ */
+function addRecord(){
+  const g = id => document.getElementById(id).value.trim();
+  const rec = {id:seq++, code:g('iCode'), grade:g('iGrade'), domain:g('iDomain'),
+    program:g('iProgram'), org:g('iOrg'), owner:g('iOwner'),
+    start:g('iStart'), end:g('iEnd'), status:g('iStatus'), memo:g('iMemo')};
+  if(!rec.code || !rec.program || !rec.start || !rec.end){
+    alert('학생 코드 · 프로그램명 · 시작일 · 종료일은 필수입니다.'); return; }
+  if(new Date(rec.end) < new Date(rec.start)){ alert('종료일이 시작일보다 빠릅니다.'); return; }
+  DATA.push(rec);
+  ['iProgram','iOrg','iMemo'].forEach(i=>document.getElementById(i).value='');
+  selectedId = rec.id; render();
+}
+function cycleStatus(id){
+  const r = DATA.find(x=>x.id===id); if(!r) return;
+  const order = ['진행','완료','중단'];
+  r.status = order[(order.indexOf(r.status)+1)%3]; render();
+}
+function removeRecord(id){
+  if(!confirm('이 기록을 삭제할까요?')) return;
+  DATA = DATA.filter(x=>x.id!==id); selectedId=null; render();
+}
+function clearAll(){
+  if(!confirm('모든 기록을 지웁니다. 계속할까요?')) return;
+  DATA=[]; selectedId=null; render();
+}
+function exportJSON(){
+  const blob = new Blob([JSON.stringify(DATA,null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `학맞통_초등_지원이력_${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(a.href);
+}
+function importJSON(input){
+  const f = input.files[0]; if(!f) return;
+  const rd = new FileReader();
+  rd.onload = () => {
+    try{
+      const arr = JSON.parse(rd.result);
+      if(!Array.isArray(arr)) throw 0;
+      DATA = arr; seq = Math.max(0,...arr.map(r=>+r.id||0)) + 1;
+      selectedId=null; render();
+    }catch(e){ alert('JSON 형식이 올바르지 않습니다.'); }
+    input.value='';
+  };
+  rd.readAsText(f);
+}
+
+function loadSample(){
+  DATA = [
+    {code:'2-1-08',grade:'초2',domain:'학업',      program:'한글 책임교육 1:1 지도',   org:'논산계룡교육지원청 학습종합클리닉센터 (041-730-7198)', owner:'담임 김○○',   start:'2026-03-16', end:'2026-07-17', status:'완료', memo:'입학 초 한글 미해득. 자모 결합 → 낱말 읽기까지 도달. 2학기 유창성 지도 연장 검토.'},
+    {code:'2-1-08',grade:'초2',domain:'돌봄·안전', program:'아이꽃돌봄센터 이용 연계',   org:'내동홈 아이꽃돌봄센터 (041-980-2255)',            owner:'교육복지사 이○○', start:'2026-03-09', end:'2027-02-26', status:'진행', memo:'보호자 야간 근무로 돌봄공백. 주 5회 이용, 저녁 급식 포함. 출석 양호.'},
+    {code:'2-1-08',grade:'초2',domain:'경제',      program:'교육급여·교육비 신청 지원', org:'논산시 교육복지 담당',                            owner:'교육복지사 이○○', start:'2026-03-02', end:'2027-02-26', status:'진행', memo:'연간 지원. 3월 신청 완료. 현장체험학습비 별도 지원 연계.'},
+
+    {code:'4-3-15',grade:'초4',domain:'심리·정서', program:'정서·행동특성검사 관심군 상담', org:'논산계룡교육지원청 Wee센터 (041-730-7198)',    owner:'전문상담사 박○○', start:'2026-04-13', end:'2026-12-18', status:'진행', memo:'초4 검사 관심군. 주 1회 놀이·미술 활동 병행. 교실 이탈 빈도 감소 중.'},
+    {code:'4-3-15',grade:'초4',domain:'건강',      program:'구강(충치) 치료비 지원 연계', org:'논산시보건소 (041-746-8011)',                    owner:'보건교사 최○○',  start:'2026-05-11', end:'2026-06-19', status:'완료', memo:'충치 4개 치료 완료. 6개월 후 재검 안내. 칫솔질 지도 병행.'},
+    {code:'4-3-15',grade:'초4',domain:'기타',      program:'문화누리카드 발급 안내',     org:'논산시청소년문화센터 (041-730-6021)',            owner:'담임 정○○',     start:'2026-09-01', end:'2026-11-30', status:'진행', memo:'가족 단위 체험 기회 부족. 카드 발급 후 프로그램 2건 신청.'},
+
+    {code:'6-2-03',grade:'초6',domain:'돌봄·안전', program:'장기결석 가정방문 및 출석 독려', org:'학교 통합지원팀 / 논산시드림스타트 (041-746-5381)', owner:'담임 정○○',  start:'2026-04-06', end:'2026-06-30', status:'완료', memo:'무단결석 9일 누적 → 가정방문 2회. 출석 회복. 의무교육관리위원회 보고 완료.'},
+    {code:'6-2-03',grade:'초6',domain:'심리·정서', program:'또래관계 향상 집단상담',      org:'논산시청소년상담복지센터 (041-730-6041)',        owner:'전문상담사 박○○', start:'2026-05-04', end:'2026-08-28', status:'중단', memo:'보호자 동의 철회로 중단. 9월 재접촉 시도 예정 — 담임 협조 요청 상태.'},
+    {code:'6-2-03',grade:'초6',domain:'기타',      program:'보호자 부모교육',            org:'논산시가족센터 (041-733-7860)',                  owner:'교육복지사 이○○', start:'2026-10-05', end:'2026-11-02', status:'진행', memo:'4주 과정 중 1회차 참석. 양육태도 개선 및 학교 연락 회복 목표.'},
+
+    {code:'3-1-19',grade:'초3',domain:'학업',      program:'한국어(KSL) 방과후 지도',    org:'계룡시가족센터 (042-551-1133)',                  owner:'담임 한○○',     start:'2026-03-23', end:'2026-12-18', status:'진행', memo:'중도입국 6개월차. 일상 대화 가능, 교과 어휘 부족. 주 2회 지도.'},
+    {code:'3-1-19',grade:'초3',domain:'돌봄·안전', program:'지역아동센터 방과후 돌봄 연계', org:'[시립]드림지역아동센터 (042-841-3631)',       owner:'교육복지사 서○○', start:'2026-04-01', end:'2027-02-26', status:'진행', memo:'주 4회 이용. 숙제 지도 병행. 또래 적응 양호.'},
+    {code:'3-1-19',grade:'초3',domain:'경제',      program:'학용품·체육복 지원',         org:'계룡시사랑나눔푸드뱅크 (042-551-9191)',          owner:'담임 한○○',     start:'2026-03-09', end:'2026-03-27', status:'완료', memo:'입학 준비물 일괄 지원 완료.'},
+  ].map(r => ({id: seq++, ...r}));
+  selectedId = null; render();
+}
+
+/* ============================================================
+   내장 자체검증
+   ============================================================ */
+function selfTest(){
+  const T=[]; const t=(n,c)=>T.push({name:n,ok:!!c});
+  const near=(a,b,e=0.5)=>Math.abs(a-b)<e;
+
+  let g = barGeometry('2026-03-01','2027-02-28');
+  t('축 전체 → 0%/100%', near(g.left,0) && near(g.width,100));
+  t('축 시작 정렬', near(barGeometry('2026-03-01','2026-04-01').left,0));
+  t('축 이전 기간 → null', barGeometry('2025-01-01','2025-06-01')===null);
+  t('축 이후 기간 → null', barGeometry('2027-06-01','2027-09-01')===null);
+  g = barGeometry('2026-01-01','2027-06-01');
+  t('경계 클램프', near(g.left,0) && g.left+g.width<=100.01);
+  t('역순 날짜 → null', barGeometry('2026-09-01','2026-05-01')===null);
+
+  const rows=[{code:'A',status:'진행'},{code:'A',status:'완료'},{code:'B',status:'중단'}];
+  const s=summarize(rows);
+  t('요약 통계', s.students===2 && s.total===3 && s.run===1 && s.stop===1 && s.avg===1.5);
+
+  const fr=[{code:'A',domain:'학업',status:'진행',program:'한글 지도',org:'',owner:''},
+            {code:'B',domain:'건강',status:'진행',program:'구강 치료',org:'',owner:''}];
+  t('필터 AND', applyFilter(fr,{domain:'학업',status:'진행'}).length===1 &&
+                applyFilter(fr,{query:'구강'})[0].code==='B' &&
+                applyFilter(fr,{}).length===2);
+
+  let la = assignLanes([{start:'2026-03-01',end:'2026-08-01'},{start:'2026-05-01',end:'2026-09-01'}]);
+  t('겹침 → 레인 분리', la.laneCount===2 && la.rows[0]._lane!==la.rows[1]._lane);
+  la = assignLanes([{start:'2026-03-01',end:'2026-04-01'},{start:'2026-06-01',end:'2026-07-01'}]);
+  t('비겹침 → 레인 재사용', la.laneCount===1);
+
+  // 초등·지역 특화 검증
+  t('학년 라벨 초등 전용', ['초1','초2','초3','초4','초5','초6'].includes('초2'));
+  t('지역 기관 목록 충남 논산·계룡 국번(041/042) 한정',
+     ORGS.length>20 && ORGS.every(o=>/\(04[12]-\d{3,4}-\d{4}\)/.test(o)));
+  t('논산·계룡 양 시 자원 모두 포함',
+     ORGS.some(o=>/041-/.test(o)) && ORGS.some(o=>/042-/.test(o)) &&
+     PROGRAMS.length>=20 && PROGRAMS.some(p=>p.includes('한글')));
+
+  const pass=T.filter(x=>x.ok).length;
+  document.getElementById('selftest').innerHTML = pass===T.length
+    ? `✓ 타임라인·집계·지역데이터 자체검증 ${pass}/${T.length} 통과`
+    : `<span style="color:#EB5757">✗ 검증 실패: ${T.filter(x=>!x.ok).map(x=>x.name).join(', ')}</span>`;
+  console.table(T);
+}
+
+fillSelects();
+['fDomain','fStatus','fQuery'].forEach(id=>document.getElementById(id).addEventListener('input', render));
+loadSample();
+selfTest();
+</script>
+</body>
+</html>

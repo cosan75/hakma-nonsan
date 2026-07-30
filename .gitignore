@@ -1,0 +1,15 @@
+# 이전 중등용 버전 (로컬 보관, 배포 제외)
+legacy/
+
+# OS · 편집기
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# 학생 데이터가 담길 수 있는 내보내기 파일 — 절대 커밋 금지
+*.json
+!package.json
+학맞통_*.json

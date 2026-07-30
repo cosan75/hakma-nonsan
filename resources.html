@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>논산·계룡 지역자원 매칭 카드 · 초등 학생맞춤통합지원</title>
+<style>
+:root{
+  --bg:#FDFBF8; --surface:#FFFFFF; --text:#2D2D2D; --text-secondary:#8A8680;
+  --accent-1:#2D9CDB; --accent-2:#EB5757; --border:#E8E4DE;
+  --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  font-size:16px;line-height:1.65}
+.wrap{max-width:1280px;margin:0 auto;padding:36px 24px 90px}
+.tag{display:inline-block;background:#EEF6FB;color:#1B6E9E;font-size:12.5px;font-weight:600;
+  padding:4px 11px;border-radius:20px;margin-bottom:12px}
+h1{font-size:clamp(26px,3.4vw,38px);font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+.lede{color:var(--text-secondary);margin:0 0 24px;max-width:72ch}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px}
+h3{margin:0 0 3px;font-size:17px;font-weight:600}
+.hint{margin:0 0 15px;font-size:13px;color:var(--text-secondary)}
+
+.sos{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.sos a{flex:1;min-width:210px;background:#FDECEC;border:1px solid #F6D6D6;border-radius:var(--radius);
+  padding:13px 16px;text-decoration:none;color:#8E2F2F;transition:.15s}
+.sos a:hover{background:#FBE0E0}
+.sos b{display:block;font-size:13px;font-weight:600;margin-bottom:2px}
+.sos span{font-size:19px;font-weight:700;letter-spacing:-.01em}
+
+.layout{display:grid;grid-template-columns:330px 1fr;gap:24px;align-items:start}
+@media(max-width:960px){.layout{grid-template-columns:1fr}}
+aside{position:sticky;top:20px}
+.fset{margin-bottom:20px}
+.fset > label{display:block;font-size:12.5px;font-weight:600;color:var(--text-secondary);margin-bottom:8px}
+.chip{display:flex;align-items:center;gap:9px;padding:8px 11px;border:1px solid var(--border);
+  border-radius:9px;margin-bottom:7px;cursor:pointer;font-size:14.5px;transition:.15s;background:var(--surface)}
+.chip:hover{background:#F9F7F3}
+.chip input{accent-color:var(--accent-1);width:16px;height:16px;cursor:pointer;flex:none}
+.chip i{width:9px;height:9px;border-radius:50%;flex:none}
+.chip.on{border-color:var(--accent-1);background:#F4FAFE}
+select,input[type=text]{width:100%;padding:9px 13px;border:1px solid var(--border);border-radius:8px;
+  background:var(--surface);font:inherit;font-size:14px;color:var(--text)}
+.toggles{display:flex;flex-direction:column;gap:7px}
+.mini{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--text-secondary);cursor:pointer}
+.mini input{accent-color:var(--accent-1);width:15px;height:15px;cursor:pointer}
+button{width:100%;padding:11px;border:1px solid var(--border);border-radius:8px;background:var(--surface);
+  font:inherit;font-size:14px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s}
+button:hover{background:#F7F4F0}
+button.primary{background:var(--accent-1);border-color:var(--accent-1);color:#fff}
+button.primary:hover{background:#2589C2}
+
+.resbar{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.resbar b{font-size:18px;font-weight:700}
+.resbar span{font-size:13.5px;color:var(--text-secondary)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.rc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:16px 18px;display:flex;flex-direction:column;gap:7px;position:relative;overflow:hidden}
+.rc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--bar,#E8E4DE)}
+.rc .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.rc h4{margin:0;font-size:15.5px;font-weight:600;letter-spacing:-.01em;line-height:1.4}
+.sc{font-size:11px;font-weight:700;color:var(--accent-1);background:#EEF6FB;border-radius:12px;
+  padding:2px 8px;white-space:nowrap;flex:none}
+.cat{font-size:11.5px;color:var(--text-secondary);font-weight:500}
+.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:1px}
+.bd{font-size:11px;font-weight:600;padding:2px 8px;border-radius:11px}
+.bd-pub{background:#EAF6EE;color:#2A7A47}
+.bd-pri{background:#F1EFEA;color:#77736D}
+.bd-kid{background:#FFF4E6;color:#A5661B}
+.rc .addr{font-size:13px;color:var(--text-secondary);line-height:1.5}
+.rc .tel{font-size:15px;font-weight:600;color:var(--accent-1);text-decoration:none}
+.rc .tel:hover{text-decoration:underline}
+.rc .notel{font-size:13px;color:var(--text-secondary);font-style:italic}
+.types{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}
+.ty{font-size:11px;padding:2px 7px;border-radius:10px;font-weight:600}
+.pick{margin-top:auto;padding-top:9px;border-top:1px solid var(--border);display:flex;align-items:center;
+  gap:7px;font-size:13px;color:var(--text-secondary);cursor:pointer}
+.pick input{accent-color:var(--accent-1);width:15px;height:15px;cursor:pointer}
+.empty{grid-column:1/-1;text-align:center;padding:48px 0;color:var(--text-secondary);font-size:14.5px}
+.tray{position:sticky;bottom:0;margin-top:20px;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:0 -3px 16px rgba(0,0,0,.07);padding:15px 18px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.tray b{font-size:14.5px}
+.tray button{width:auto;padding:9px 16px}
+#selftest{margin-top:20px;font-size:12px;color:var(--text-secondary)}
+footer{margin-top:32px;font-size:13px;color:var(--text-secondary);line-height:1.75}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<span class="tag">초등학교용 · 논산시 · 계룡시</span>
+<h1>지역자원 매칭 카드</h1>
+<p class="lede">학생의 지원 니즈를 체크하면 <b>논산·계룡 등록 지역자원 116곳</b> 중 적합한 기관을 점수순으로 추천합니다.
+「학생맞춤통합지원법」 절차 중 <b>지원(연계)</b> 단계용. 자료 출처는 학생맞춤통합지원 누리집(studentsupport.kr) 2026년 7월 수집분입니다.</p>
+
+<div class="sos">
+  <a href="tel:112"><b>아동학대 신고 (24시간)</b><span>112</span></a>
+  <a href="tel:1388"><b>청소년상담 · 위기지원</b><span>1388</span></a>
+  <a href="tel:129"><b>긴급복지 · 보건복지상담</b><span>129</span></a>
+  <a href="tel:041-734-6640"><b>충남남부아동보호전문기관</b><span>041-734-6640</span></a>
+</div>
+
+<div class="layout">
+  <aside>
+    <div class="card">
+      <h3>학생 니즈 입력</h3>
+      <p class="hint">해당하는 지원 영역을 고르세요 (복수 선택)</p>
+
+      <div class="fset">
+        <label>지원 영역</label>
+        <div id="types"></div>
+      </div>
+
+      <div class="fset">
+        <label>지역</label>
+        <select id="city">
+          <option value="">논산시 + 계룡시 전체</option>
+          <option value="논산">논산시만</option>
+          <option value="계룡">계룡시만</option>
+        </select>
+      </div>
+
+      <div class="fset">
+        <label>읍·면·동 (가까운 곳 우선)</label>
+        <select id="dong"><option value="">지정 안 함</option></select>
+      </div>
+
+      <div class="fset">
+        <label>기관명 검색</label>
+        <input type="text" id="q" placeholder="예: 도서관, 지역아동센터">
+      </div>
+
+      <div class="fset">
+        <label>필터</label>
+        <div class="toggles">
+          <label class="mini"><input type="checkbox" id="kidOnly" checked> 초등학생 직접 지원 가능한 곳만</label>
+          <label class="mini"><input type="checkbox" id="pubOnly"> 공공기관만</label>
+          <label class="mini"><input type="checkbox" id="telOnly"> 연락처 있는 곳만</label>
+        </div>
+      </div>
+
+      <button onclick="resetAll()">전체 초기화</button>
+    </div>
+  </aside>
+
+  <main>
+    <div class="resbar">
+      <b id="cnt">0곳</b>
+      <span id="desc">조건에 맞는 지역자원</span>
+    </div>
+    <div class="grid" id="grid"></div>
+
+    <div class="tray">
+      <b id="pickCnt">선택 0곳</b>
+      <span style="font-size:13px;color:var(--text-secondary);flex:1">체크한 기관을 연계 협의록용 텍스트로 복사합니다.</span>
+      <button onclick="clearPicks()" style="width:auto">선택 해제</button>
+      <button class="primary" onclick="copyPicks()" style="width:auto">연계 목록 복사</button>
+    </div>
+
+    <div id="selftest"></div>
+  </main>
+</div>
+
+<footer>
+  ※ 기관 정보는 <b>2026년 7월 수집분</b>입니다. 폐소·이전·연락처 변경이 있을 수 있으니 <b>연계 전 반드시 통화로 확인</b>하세요.<br>
+  ※ '초등학생 직접 지원 가능' 표시는 기관 성격을 바탕으로 한 <b>참고 분류</b>이며 공식 구분이 아닙니다. 체크를 해제하면 노인·성인 대상 기관을 포함한 전체 목록을 봅니다.<br>
+  ※ Wee센터·학습종합클리닉센터 연락처는 논산계룡교육지원청 대표번호입니다. 담당 부서 직통은 교육지원청에 확인하세요.<br>
+  ※ 자료 출처: <b>학생맞춤통합지원 누리집(studentsupport.kr) → 내 주변 서비스 찾기 → 지역 학생 지원 서비스 목록</b> (충청남도 논산시 76곳 / 계룡시 40곳, 2026-07-30 수집).<br>
+  ※ <b>원본 보정 2건</b> — ① 원본에 '논산시 자원봉사센터'와 '논산시지원봉사센터'가 같은 주소·번호로 중복 등록되어 1건으로 통합했습니다. ② '논산시청소년유해환경감시단' 전화가 원본에 <code>041-7336-1388</code>(자릿수 오류)로 등록되어 <code>041-733-1388</code>로 보정했습니다 — <b>이 번호는 사용 전 확인이 필요합니다.</b> 그 자리에 논산계룡교육지원청을 추가해 총 116곳입니다.
+</footer>
+</div>
+
+<script>
+/* ============================================================
+   지원유형 정의
+   ============================================================ */
+const TYPES = [
+  {k:'돌봄·안전', c:'#EB5757'},
+  {k:'학업',      c:'#2D9CDB'},
+  {k:'건강',      c:'#27AE60'},
+  {k:'심리·정서', c:'#9B51E0'},
+  {k:'경제',      c:'#F2994A'},
+  {k:'기타',      c:'#8A8680'},
+];
+const TC = Object.fromEntries(TYPES.map(t=>[t.k,t.c]));
+
+/* ============================================================
+   지역자원 원본 데이터
+   형식: 시|기관분류|기관명|주소|전화|지원유형(,)|공공여부(공/민)|초등적합(1/0)
+   출처: studentsupport.kr 지역 학생 지원 서비스 목록 (2026-07 수집)
+   ============================================================ */
+const RAW = `
+논산|교육지원청|논산계룡교육지원청 Wee센터·학습종합클리닉센터|논산시 관촉로 253|041-730-7198|심리·정서,학업|공|1
+논산|지역아동센터·드림스타트|논산시드림스타트|논산시 내동 824|041-746-5381|돌봄·안전|공|1
+논산|아동보호전문기관|논산시학대신고대응센터|논산시 내동 824|041-736-1391|심리·정서|공|1
+논산|아동보호전문기관|충남남부아동보호전문기관|논산시 취암동 1069-3|041-734-6640|심리·정서|공|1
+논산|아동보호전문기관|굿네이버스 충남남부아동보호전문기관|논산시 취암동 1069-3|041-734-6640|심리·정서|민|1
+논산|청소년상담복지센터|논산시청소년상담복지센터|논산시 지산동 459|041-730-6041|심리·정서|공|1
+논산|청소년문화센터|논산시청소년문화센터|논산시 지산동 459|041-730-6021|심리·정서|공|1
+논산|가족센터·다문화지원센터|논산시가족센터|논산시 취암동 1043-14|041-733-7860|심리·정서|공|1
+논산|가정폭력·성폭력상담소|논산가정 성통합상담센터|논산시 취암동 1059-2|041-736-8297|심리·정서|민|1
+논산|보건|논산시보건소|논산시 관촉동 327-2|041-746-8011|건강,경제|공|1
+논산|보건|논산시 정신건강보건센터|논산시 관촉동 327-2|041-746-8121|건강,심리·정서|공|1
+논산|의료|논산 백제종합병원|논산시 취암동 139-2|041-730-8888|건강,경제|민|1
+논산|돌봄|내동홈 아이꽃돌봄센터|논산시 내동 969|041-980-2255|돌봄·안전|공|1
+논산|돌봄|대교홈 아이꽃돌봄센터|논산시 대교동 336|041-980-2266|돌봄·안전|공|1
+논산|돌봄|강산홈 아이꽃돌봄센터|논산시 강산동 645|041-980-2277|돌봄·안전|공|1
+논산|지역아동센터·드림스타트|GLS지역아동센터|논산시 취암동 53-17|041-736-1456|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|LH행복꿈터두드림지역아동센터|논산시 내동 1109|041-733-1849|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|강경중앙지역아동센터|논산시 강경읍 중앙리 247-1|041-745-2898|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|강경지역아동센터|논산시 강경읍 황산리 36-28|041-745-1007|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|계룡학사|논산시 연산면 화악리 151-5|041-735-0703|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|꿈나무지역아동센터|논산시 벌곡면 도산리 97|041-733-9707|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|논산애육원|논산시 강산동 62-7|041-735-5309|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|다온지역아동센터|논산시 부적면 마구평리 471-5|041-733-4303|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|만복이네지역아동센터|논산시 연산면 연산리 352-17|070-7755-9467|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|사랑지역아동센터|논산시 연산면 신양리 187|041-734-2512|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|새뜸지역아동센터|논산시 양촌면 남산리 106-10|041-741-9190|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|새순지역아동센터|논산시 강산동 539|041-735-1298|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|상월지역아동센터|논산시 상월면 신충리 508-1|041-732-4084|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|성동지역아동센터|논산시 성동면 삼산리 219-10|041-732-6055|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|성남지역아동센터|논산시 내동 1056|041-734-6028|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|에덴지역아동센터|논산시 가야곡면 육곡리 359-1|041-742-5500|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|에덴보육원|논산시 연무읍 동산리 880|041-741-4183|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|연무대지역아동센터|논산시 연무읍 안심리 19-17|041-742-3927|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|연무이룸지역아동센터|논산시 연무읍 마산리 529-6|041-742-5252|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|영생지역아동센터|논산시 취암동 517-2|041-732-1419|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|장마루지역아동센터|논산시 노성면 호암리 375-14|041-733-0983|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|제일지역아동센터|논산시 양촌면 남산리 274|041-741-2630|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|하늘샘지역아동센터|논산시 화지동 39-1|041-735-8124|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|황화정지역아동센터|논산시 연무읍 황화정리 966-4|041-742-0863|돌봄·안전|민|1
+논산|지역아동센터·드림스타트|희망지역아동센터|논산시 연무읍 동산리 884|041-742-1061|돌봄·안전|민|1
+논산|심리상담|건양대학교 늘품심리상담센터|논산시 내동 26|041-730-5114|심리·정서|민|1
+논산|심리상담|결모래놀이심리상담센터|논산시 취암동 472-1|041-735-0314|심리·정서|민|1
+논산|심리상담|마음샘아동가족상담센터 논산점|논산시 내동 1262||심리·정서|민|1
+논산|심리상담|원아름언어심리치료센터|논산시 내동 628|041-735-2550|심리·정서|민|1
+논산|심리상담|쥬쥬아동발달센터|논산시 내동 627|041-735-2612|심리·정서|민|1
+논산|심리상담|조승희심리상담센터|논산시 내동 272-17||심리·정서|민|1
+논산|심리상담|충남미술치료연구소|논산시 취암동 445-19|041-733-1361|심리·정서|민|1
+논산|심리상담|히엘아트심리상담소|논산시 취암동 64-3||심리·정서|민|1
+논산|사회서비스|㈜이엠사회서비스교육개발원 논산사회서비스센터|논산시 내동 1061|041-735-9748|심리·정서|민|1
+논산|도서관·학습|논산열린도서관|논산시 지산동 112|041-746-5990|학업|공|1
+논산|도서관·학습|논산시평생학습관|논산시 지산동 112|041-746-5994|학업|공|1
+논산|도서관·학습|강경도서관|논산시 강경읍 남교리 81-3|041-746-8980|학업|공|1
+논산|도서관·학습|연무도서관|논산시 연무읍 안심리 76-10|041-746-8990|학업|공|1
+논산|도서관·학습|봄봄도서관|논산시 가야곡면 양촌리 520|070-4027-1425|학업|민|1
+논산|문화·체험|논산문화원|논산시 지산동 790|041-732-2395|학업,기타|공|1
+논산|문화·체험|논산시 아트센터|논산시 내동 279-4|041-746-5950|기타|공|1
+논산|문화·체험|김홍신문학관|논산시 내동 1214|041-733-2018|학업,기타|민|1
+논산|문화·체험|강경산 소금문학관|논산시 강경읍 북옥리 139-2|041-745-9800|학업,기타|민|1
+논산|문화·체험|백제군사박물관|논산시 부적면 신풍리 6|041-746-8431|학업,기타|민|1
+논산|문화·체험|연산문화창고|논산시 연산면 청동리 127-27|041-730-2960|심리·정서,기타|민|1
+논산|문화·체험|논산한옥마을|논산시 연산면 임리 51|041-435-7030|심리·정서,기타|민|1
+논산|문화·체험|논산 선샤인랜드|논산시 연무읍 황화정리 859-44|041-730-2955|심리·정서,기타|민|1
+논산|문화·체험|한국유교문화진흥원|논산시 노성면 병사리 98-6|041-980-3500|심리·정서,기타|민|1
+논산|건강·체육|논산시국민체육센터|논산시 관촉동 327-2|041-746-8407|건강,심리·정서|민|1
+논산|건강·체육|양촌자연휴양림|논산시 양촌면 남산리 산 12-4|041-746-6481|건강,기타|민|1
+논산|건강·체육|딸기향농촌테마공원|논산시 부적면 충곡리 276-21|041-746-6650|건강,기타|민|1
+논산|경제지원|논산사랑푸드뱅크|논산시 강산동 134-1|041-736-1004|경제|민|1
+논산|경제지원|논산 YWCA|논산시 취암동 1059-2|041-736-7393|기타,경제|민|1
+논산|자원봉사센터|논산시 자원봉사센터|논산시 내동 26|041-736-1365|기타|민|1
+논산|기타|논산시청소년유해환경감시단|논산시 강경읍 대흥리 50-6|041-733-1388|돌봄·안전,기타|민|1
+논산|기타|논산지역자활센터|논산시 취암동 372-98|041-734-1377|경제,기타|민|0
+논산|기타|논산고용복지+센터|논산시 내동 948|041-731-8600|경제,기타|공|0
+논산|기타|국민건강보험공단(논산)|논산시 취암동 1072-1||경제|공|0
+논산|기타|논산시사회적경제통합지원센터|논산시 화지동 137||기타|민|0
+논산|기타|충남남부노인보호전문기관·충남장애인권익옹호기관|논산시 내동 957|041-734-1389|기타|공|0
+논산|기타|커피의 전설 바리스타학원|논산시 연산면 덕암리 299||학업|민|0
+계룡|청소년상담복지센터|계룡시청소년상담복지센터|계룡시 신도안면 남선리 1281|042-551-1318|심리·정서|공|1
+계룡|청소년센터|계룡시청소년별마루센터|계룡시 신도안면 남선리 1281|042-840-7925|돌봄·안전,기타|공|1
+계룡|가족센터·다문화지원센터|계룡시가족센터|계룡시 엄사면 엄사리 182-3|042-551-1133|심리·정서|공|1
+계룡|가정폭력·성폭력상담소|계룡시성폭력상담소|계룡시 엄사면 엄사리 182-6|042-551-7795|심리·정서|민|1
+계룡|돌봄|계룡시다함께돌봄센터|계룡시 엄사면 엄사리 357-8|042-840-7950|돌봄·안전,건강|공|1
+계룡|지역아동센터·드림스타트|[시립]드림지역아동센터|계룡시 엄사면 엄사리 189-3|042-841-3631|돌봄·안전|공|1
+계룡|지역아동센터·드림스타트|엄사지역아동센터|계룡시 엄사면 엄사리 226-8|042-841-3350|돌봄·안전|공|1
+계룡|지역아동센터·드림스타트|계룡지역아동센터|계룡시 두마면 농소리 970|042-841-1091|돌봄·안전|민|1
+계룡|지역아동센터·드림스타트|도원울타리지역아동센터|계룡시 엄사면 엄사리 357-8|042-551-7950|돌봄·안전|민|1
+계룡|지역사회복지관|계룡시종합사회복지관|계룡시 엄사면 유동리 288|042-840-8950|경제,기타|공|1
+계룡|복지|계룡복지센터|계룡시 신도안면 남선리 1261|042-840-8950|심리·정서,기타|공|1
+계룡|심리상담|계룡아동발달센터|계룡시 엄사면 엄사리 239||심리·정서|민|1
+계룡|심리상담|마음나무심리상담센터|계룡시 금암동 162-3|042-551-1075|심리·정서|민|1
+계룡|심리상담|순 심리상담센터|계룡시 엄사면 엄사리 365-3|042-841-0600|심리·정서|민|1
+계룡|심리상담|행복한상담소|계룡시 엄사면 엄사리 267-6|070-4606-7004|심리·정서|민|1
+계룡|심리상담|휴고심리상담센터|계룡시 엄사면 엄사리 243-1||심리·정서|민|1
+계룡|심리상담|마음나눔 천선미심리상담카페|계룡시 엄사면 엄사리 277-5||심리·정서|민|1
+계룡|심리상담|두드림|계룡시 엄사면 엄사리 33-2|042-551-0086|심리·정서|민|1
+계룡|청소년교육|사단법인 페스청소년교육연구소|계룡시 엄사면 엄사리 251-2|042-841-2800|심리·정서,학업|민|1
+계룡|도서관·학습|엄사도서관|계룡시 엄사면 엄사리 327-1|042-840-3667|학업|공|1
+계룡|도서관·학습|계룡도서관|계룡시 금암동 7-1|042-840-3607|학업,심리·정서|공|1
+계룡|문화·체험|계룡시감성체험장|계룡시 엄사면 도곡리 110-1|042-840-5702|심리·정서,기타|민|1
+계룡|문화·체험|계룡시 소소마루|계룡시 금암동 156-1|042-840-2527|기타|민|1
+계룡|건강·체육|향적산숲치유센터|계룡시 엄사면 향한리 산 50-1|042-840-2692|건강,심리·정서|민|1
+계룡|경제지원|계룡시사랑나눔푸드뱅크|계룡시 금암동 14-7|042-551-9191|경제|민|1
+계룡|경제지원|대한적십자사 계룡시지구협의회|계룡시 두마면 두계리 78-7|042-551-7658|경제|민|1
+계룡|경제지원|계룡시사회복지협의회|계룡시 금암동 14-7|042-551-9191|경제,기타|민|1
+계룡|자원봉사센터|계룡시 자원봉사센터|계룡시 금암동 160-7|042-841-1365|기타|공|1
+계룡|장애인지원|계룡시장애인복지센터(충남지체장애인협회 계룡시지회)|계룡시 엄사면 유동리 86-3||심리·정서,기타|민|1
+계룡|장애인지원|장애인활동지원기관 미르|계룡시 엄사면 엄사리 239|042-551-9120|심리·정서,기타|민|1
+계룡|기타|글라라의집|계룡시 엄사면 엄사리 232-101|042-841-2800|기타|민|0
+계룡|기타|한국인지학습재활학회|계룡시 두마면 두계리 67||기타|민|0
+계룡|기타|계룡로타리클럽|계룡시 엄사면 엄사리 243-4||경제,기타|민|0
+계룡|기타|계룡시민참여연대|계룡시 엄사면 엄사리 357-1||기타|민|0
+계룡|기타|계룡시여성단체협의회|계룡시 엄사면 엄사리 283-4|042-841-2430|기타|민|0
+계룡|기타|계룡시 공공시설사업소|계룡시 엄사면 유동리 295-1|042-840-3701|기타|공|0
+계룡|기타|무공수훈자회 계룡시지회|계룡시 엄사면 엄사리 325|042-841-0778|기타|공|0
+계룡|기타|대한노인회 계룡시지회|계룡시 금암동 16-1|042-841-8923|건강|민|0
+계룡|기타|희망장애인보호작업장|계룡시 엄사면 광석리 17-2|042-716-4111|경제|민|0
+계룡|기타|세화주택|계룡시 두마면 입암리 29|042-841-0113|경제|민|0
+`.trim();
+
+/* ============================================================
+   순수 함수 (테스트 대상)
+   ============================================================ */
+function parseRaw(raw){
+  return raw.split('\n').map((line,i)=>{
+    const [city,cat,name,addr,tel,types,pub,kid] = line.split('|');
+    return { id:i, city, cat, name, addr, tel:tel||'',
+             types: types.split(',').filter(Boolean),
+             pub: pub==='공', kid: kid==='1',
+             dong: (addr.match(/시\s(\S+?[읍면동])/)||[])[1] || '' };
+  });
+}
+
+// 매칭 점수: 영역 일치 +4 / 읍면동 일치 +3 / 초등적합 +2 / 공공 +1 / 연락처 +1
+function matchScore(r, {types=[], dong=''}={}){
+  let s = 0;
+  types.forEach(t => { if (r.types.includes(t)) s += 4; });
+  if (dong && r.dong === dong) s += 3;
+  if (r.kid) s += 2;
+  if (r.pub) s += 1;
+  if (r.tel) s += 1;
+  return s;
+}
+
+function search(rows, o){
+  const {types=[], city='', dong='', q='', kidOnly=false, pubOnly=false, telOnly=false} = o;
+  const qq = q.trim().toLowerCase();
+  return rows
+    .filter(r => (!city || r.city===city))
+    .filter(r => (!kidOnly || r.kid))
+    .filter(r => (!pubOnly || r.pub))
+    .filter(r => (!telOnly || !!r.tel))
+    .filter(r => (!types.length || types.some(t=>r.types.includes(t))))
+    .filter(r => (!qq || (r.name+' '+r.cat+' '+r.addr).toLowerCase().includes(qq)))
+    .map(r => ({...r, score: matchScore(r, {types, dong})}))
+    .sort((a,b)=> b.score-a.score || a.name.localeCompare(b.name,'ko'));
+}
+
+/* ============================================================
+   렌더링
+   ============================================================ */
+const ALL = parseRaw(RAW);
+const picks = new Set();
+
+function opts(){
+  return {
+    types: [...document.querySelectorAll('#types input:checked')].map(i=>i.value),
+    city:  document.getElementById('city').value,
+    dong:  document.getElementById('dong').value,
+    q:     document.getElementById('q').value,
+    kidOnly: document.getElementById('kidOnly').checked,
+    pubOnly: document.getElementById('pubOnly').checked,
+    telOnly: document.getElementById('telOnly').checked,
+  };
+}
+function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+function build(){
+  document.getElementById('types').innerHTML = TYPES.map(t=>
+    `<label class="chip"><input type="checkbox" value="${t.k}"><i style="background:${t.c}"></i>${t.k}</label>`).join('');
+  refreshDong();
+  document.querySelectorAll('#types input').forEach(cb=>cb.addEventListener('change',e=>{
+    e.target.closest('.chip').classList.toggle('on', e.target.checked); render();
+  }));
+  ['city','dong','q','kidOnly','pubOnly','telOnly'].forEach(id=>
+    document.getElementById(id).addEventListener('input', ()=>{ if(id==='city') refreshDong(); render(); }));
+}
+
+function refreshDong(){
+  const c = document.getElementById('city').value;
+  const list = [...new Set(ALL.filter(r=>!c||r.city===c).map(r=>r.dong).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ko'));
+  const cur = document.getElementById('dong').value;
+  document.getElementById('dong').innerHTML = '<option value="">지정 안 함</option>' +
+    list.map(d=>`<option${d===cur?' selected':''}>${d}</option>`).join('');
+}
+
+function render(){
+  const o = opts();
+  const rows = search(ALL, o);
+  document.getElementById('cnt').textContent = rows.length + '곳';
+  document.getElementById('desc').textContent = o.types.length
+    ? `${o.types.join(' · ')} 지원 · 적합도 높은 순` : '조건에 맞는 지역자원 · 적합도 높은 순';
+
+  document.getElementById('grid').innerHTML = rows.length ? rows.map(r=>{
+    const bar = TC[r.types[0]] || '#E8E4DE';
+    return `<article class="rc" style="--bar:${bar}">
+      <div class="top">
+        <h4>${esc(r.name)}</h4>
+        <span class="sc">${r.score}점</span>
+      </div>
+      <div class="cat">${esc(r.city)}시 · ${esc(r.cat)}</div>
+      <div class="badges">
+        <span class="bd ${r.pub?'bd-pub':'bd-pri'}">${r.pub?'공공':'민간'}</span>
+        ${r.kid?'<span class="bd bd-kid">초등 직접지원</span>':''}
+      </div>
+      <div class="types">${r.types.map(t=>
+        `<span class="ty" style="background:${TC[t]}1a;color:${TC[t]}">${t}</span>`).join('')}</div>
+      <div class="addr">${esc(r.addr)}</div>
+      ${r.tel ? `<a class="tel" href="tel:${r.tel}">${r.tel}</a>`
+              : `<span class="notel">연락처 미등록 — 시청·교육지원청 문의</span>`}
+      <label class="pick"><input type="checkbox" data-id="${r.id}" ${picks.has(r.id)?'checked':''}
+        onchange="togglePick(${r.id},this.checked)"> 연계 목록에 담기</label>
+    </article>`;
+  }).join('') : '<div class="empty">조건에 맞는 기관이 없습니다. 필터를 완화해 보세요.<br>(‘초등학생 직접 지원 가능한 곳만’ 체크 해제 시 전체 116곳을 봅니다)</div>';
+
+  document.getElementById('pickCnt').textContent = `선택 ${picks.size}곳`;
+}
+
+function togglePick(id, on){ on ? picks.add(id) : picks.delete(id); render(); }
+function clearPicks(){ picks.clear(); render(); }
+
+function resetAll(){
+  document.querySelectorAll('#types input').forEach(cb=>{cb.checked=false;cb.closest('.chip').classList.remove('on')});
+  document.getElementById('city').value=''; document.getElementById('q').value='';
+  document.getElementById('kidOnly').checked=true;
+  document.getElementById('pubOnly').checked=false;
+  document.getElementById('telOnly').checked=false;
+  picks.clear(); refreshDong(); render();
+}
+
+function copyPicks(){
+  if(!picks.size){ alert('선택된 기관이 없습니다. 카드의 “연계 목록에 담기”를 체크하세요.'); return; }
+  const sel = ALL.filter(r=>picks.has(r.id));
+  const o = opts();
+  const t = [
+    `[학생맞춤통합지원 지역자원 연계 후보]`,
+    `작성일: ${new Date().toLocaleDateString('ko-KR')}`,
+    o.types.length ? `지원 니즈: ${o.types.join(', ')}` : `지원 니즈: (미지정)`,
+    ``,
+    ...sel.map((r,i)=>[
+      `${i+1}. ${r.name} [${r.city}시 · ${r.cat} · ${r.pub?'공공':'민간'}]`,
+      `   지원유형: ${r.types.join(', ')}`,
+      `   주소: ${r.addr}`,
+      `   연락처: ${r.tel || '미등록'}`
+    ].join('\n')),
+    ``,
+    `※ 연계 전 반드시 통화로 운영 여부·대상·정원을 확인하세요.`,
+    `※ 출처: 학생맞춤통합지원 누리집(studentsupport.kr), 2026년 7월 수집분.`
+  ].join('\n');
+  navigator.clipboard.writeText(t).then(
+    ()=>alert(`${sel.length}곳이 복사되었습니다. 통합지원팀 협의록에 붙여넣으세요.`),
+    ()=>alert('복사 실패 — 브라우저 권한을 확인하세요.'));
+}
+
+/* ============================================================
+   내장 자체검증
+   ============================================================ */
+function selfTest(){
+  const T=[]; const t=(n,c)=>T.push({name:n,ok:!!c});
+
+  t('데이터 파싱 116건', ALL.length===116);
+  t('논산 76 · 계룡 40',
+     ALL.filter(r=>r.city==='논산').length===76 && ALL.filter(r=>r.city==='계룡').length===40);
+  t('기관명 중복 없음', new Set(ALL.map(r=>r.name)).size===ALL.length);
+  t('모든 기관에 이름·주소 존재', ALL.every(r=>r.name && r.addr));
+  t('지원유형 6종 외 값 없음',
+     ALL.every(r=>r.types.length>0 && r.types.every(x=>TYPES.some(y=>y.k===x))));
+  t('전화번호 형식 정상',
+     ALL.filter(r=>r.tel).every(r=>/^0\d{1,2}-\d{3,4}-\d{4}$/.test(r.tel)));
+  t('읍면동 추출 성공률 90%↑',
+     ALL.filter(r=>r.dong).length / ALL.length > 0.9);
+
+  // 매칭 점수
+  const zzz = {city:'논산',cat:'x',name:'n',addr:'논산시 내동 1',tel:'041-000-0000',
+               types:['학업'],pub:true,kid:true,dong:'내동'};
+  t('영역 일치 +4', matchScore(zzz,{types:['학업']}) - matchScore(zzz,{types:[]}) === 4);
+  t('읍면동 일치 +3',
+     matchScore(zzz,{types:[],dong:'내동'}) - matchScore(zzz,{types:[]}) === 3);
+  t('불일치 영역은 가산 없음', matchScore(zzz,{types:['경제']}) === matchScore(zzz,{types:[]}));
+
+  // 검색 필터
+  t('공공기관 필터', search(ALL,{pubOnly:true}).every(r=>r.pub));
+  t('연락처 필터', search(ALL,{telOnly:true}).every(r=>r.tel));
+  t('도시 필터', search(ALL,{city:'계룡',kidOnly:false}).every(r=>r.city==='계룡'));
+  t('영역 OR 조건',
+     search(ALL,{types:['경제'],kidOnly:false}).every(r=>r.types.includes('경제')));
+  t('결과는 점수 내림차순',
+     search(ALL,{types:['돌봄·안전']}).every((r,i,a)=> i===0 || a[i-1].score>=r.score));
+  t('기관명 검색', search(ALL,{q:'도서관',kidOnly:false}).every(r=>/도서관/.test(r.name+r.cat)));
+
+  // 초등 특화
+  t('초등 적합 필터 작동',
+     search(ALL,{kidOnly:true}).every(r=>r.kid) &&
+     search(ALL,{kidOnly:true}).length < ALL.length);
+  t('6개 영역 모두 초등 적합 자원 보유',
+     TYPES.every(ty => search(ALL,{types:[ty.k],kidOnly:true}).length > 0));
+  t('지역아동센터 논산 24곳↑',
+     ALL.filter(r=>r.city==='논산' && /지역아동센터/.test(r.cat)).length >= 24);
+
+  const pass=T.filter(x=>x.ok).length;
+  document.getElementById('selftest').innerHTML = pass===T.length
+    ? `✓ 지역자원 데이터·매칭 로직 자체검증 ${pass}/${T.length} 통과`
+    : `<span style="color:#EB5757">✗ 검증 실패: ${T.filter(x=>!x.ok).map(x=>x.name).join(', ')}</span>`;
+  console.table(T);
+}
+
+build(); render(); selfTest();
+</script>
+</body>
+</html>

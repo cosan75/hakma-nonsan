@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>초등 학생맞춤통합지원 도구 모음 · 논산·계룡</title>
+<meta name="description" content="초등학교 학생맞춤통합지원 실무를 돕는 웹 도구 5종. 6영역 진단 체크리스트, 지원 이력 대시보드, 논산·계룡 지역자원 116곳 매칭 카드와 연계 지도, 교사·학부모 안내 페이지.">
+<meta property="og:title" content="초등 학생맞춤통합지원 도구 모음 · 논산·계룡">
+<meta property="og:description" content="발굴·진단부터 지역자원 연계·성장관리까지, 초등 담임이 바로 쓰는 웹 도구 5종.">
+<meta property="og:type" content="website">
+<style>
+:root{
+  --bg:#FDFBF8; --surface:#FFFFFF; --text:#2D2D2D; --text-secondary:#8A8680;
+  --accent-1:#2D9CDB; --accent-2:#EB5757; --border:#E8E4DE;
+  --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  font-size:16px;line-height:1.7}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+.tag{display:inline-block;background:#EEF6FB;color:#1B6E9E;font-size:12.5px;font-weight:600;
+  padding:4px 11px;border-radius:20px;margin-bottom:14px}
+header{padding:78px 0 54px}
+h1{font-size:clamp(31px,5vw,50px);font-weight:700;letter-spacing:-.03em;line-height:1.24;margin:0 0 18px}
+.lead{font-size:18.5px;line-height:1.72;max-width:60ch;margin:0 0 24px;color:var(--text)}
+.law{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px 17px;font-size:14px;box-shadow:var(--shadow)}
+.law b{color:var(--accent-1)}
+
+section{padding:0 0 60px}
+h2{font-size:clamp(21px,2.7vw,28px);font-weight:700;letter-spacing:-.02em;margin:0 0 8px}
+.sub{color:var(--text-secondary);font-size:16px;margin:0 0 26px;max-width:64ch}
+
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+a.tool{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 26px;text-decoration:none;color:inherit;
+  position:relative;overflow:hidden;transition:.16s}
+a.tool:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.10);border-color:var(--accent-1)}
+a.tool::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c)}
+.tool .step{font-size:11.5px;font-weight:700;color:var(--c);letter-spacing:.04em}
+.tool h3{margin:0;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.tool p{margin:0;font-size:14.5px;color:var(--text-secondary);line-height:1.62}
+.tool ul{margin:6px 0 0;padding-left:17px;font-size:13.5px;color:var(--text-secondary);line-height:1.6}
+.tool li{margin-bottom:3px}
+.tool .go{margin-top:auto;padding-top:12px;font-size:13.5px;font-weight:600;color:var(--accent-1)}
+
+.flow{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.flow div{flex:1;min-width:150px;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:15px 18px;box-shadow:var(--shadow)}
+.flow b{display:block;font-size:15px;font-weight:600;margin-bottom:3px}
+.flow span{font-size:13px;color:var(--text-secondary);line-height:1.55}
+
+.notes{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent-2);
+  border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow)}
+.notes h3{margin:0 0 10px;font-size:16.5px;font-weight:600}
+.notes ul{margin:0;padding-left:18px;font-size:14.5px;color:var(--text-secondary);line-height:1.7}
+.notes li{margin-bottom:6px}
+.notes b{color:var(--text)}
+
+footer{border-top:1px solid var(--border);padding:34px 0 68px;font-size:13.5px;
+  color:var(--text-secondary);line-height:1.8}
+footer a{color:var(--accent-1);text-decoration:none}
+footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <span class="tag">초등학교용 · 충남 논산시 · 계룡시</span>
+  <h1>학생맞춤통합지원,<br>담임이 바로 쓰는 도구 5종</h1>
+  <p class="lead">발굴·진단부터 지역자원 연계와 성장관리까지 —
+    「학생맞춤통합지원법」 절차를 초등 현장에 맞춰 도구로 옮겼습니다.
+    설치 없이 브라우저에서 바로 열리고, <b>학생 정보는 어디에도 저장·전송되지 않습니다.</b></p>
+  <div class="law">📘 <span><b>「학생맞춤통합지원법」</b> 2024년 1월 제정 · <b>2026년 3월 1일 시행</b></span></div>
+</header>
+
+<section>
+  <h2>지원 절차와 도구의 대응</h2>
+  <p class="sub">네 단계 각각에 대응하는 도구가 있습니다. 순서대로 쓰셔도 되고, 필요한 것만 골라 쓰셔도 됩니다.</p>
+  <div class="flow">
+    <div><b>1. 발굴 · 진단</b><span>체크리스트로 위기징후를 정리하고 우선 지원영역을 뽑습니다</span></div>
+    <div><b>2. 지원 (연계)</b><span>매칭 카드와 지도로 가까운 지역자원을 찾습니다</span></div>
+    <div><b>3. 성장관리</b><span>대시보드로 투입 경과와 중단 건을 놓치지 않고 관리합니다</span></div>
+    <div><b>4. 안내 · 소통</b><span>안내 페이지로 교사·학부모에게 제도를 설명합니다</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>도구 5종</h2>
+  <p class="sub">모두 단일 HTML 파일입니다. 다운로드해서 오프라인으로도 쓸 수 있습니다(지도 제외).</p>
+  <div class="tools">
+
+    <a class="tool" href="checklist.html" style="--c:#2D9CDB">
+      <span class="step">STEP 1 · 발굴 · 진단</span>
+      <h3>6영역 진단 체크리스트</h3>
+      <p>초등 발달단계에 맞춘 31개 문항으로 위기징후를 체크하면 우선 지원영역과 개입 수준이 자동 산출됩니다.</p>
+      <ul>
+        <li>한글 미해득 · 3R's 미도달 · 난독 의심</li>
+        <li>학대 의심 · 자해 · 장기결석은 총점과 무관하게 <b>즉시개입</b>으로 상향</li>
+        <li>논산/계룡 전환 시 영역별 1차 연계처 자동 표시</li>
+      </ul>
+      <span class="go">열기 →</span>
+    </a>
+
+    <a class="tool" href="map.html" style="--c:#27AE60">
+      <span class="step">STEP 2 · 지원 (연계)</span>
+      <h3>지역자원 연계 지도</h3>
+      <p>논산·계룡 등록 지역자원 116곳을 실좌표로 지도에 올렸습니다. 학교 위치를 찍으면 가까운 순으로 정렬됩니다.</p>
+      <ul>
+        <li>반경 1~20km 필터 · 거리순 정렬</li>
+        <li>카카오맵 · 네이버 지도 길찾기 연결</li>
+        <li>선택한 기관을 협의록용 텍스트로 복사</li>
+      </ul>
+      <span class="go">열기 →</span>
+    </a>
+
+    <a class="tool" href="resources.html" style="--c:#F2994A">
+      <span class="step">STEP 2 · 지원 (연계)</span>
+      <h3>지역자원 매칭 카드</h3>
+      <p>같은 116곳을 카드 목록으로 봅니다. 지도가 필요 없거나 인터넷이 불안정할 때 쓰세요.</p>
+      <ul>
+        <li>영역 일치 · 읍면동 근접 · 초등 적합도로 점수화</li>
+        <li>공공/민간, 연락처 유무 필터</li>
+        <li>전화번호 탭하면 바로 연결</li>
+      </ul>
+      <span class="go">열기 →</span>
+    </a>
+
+    <a class="tool" href="dashboard.html" style="--c:#9B51E0">
+      <span class="step">STEP 3 · 성장관리</span>
+      <h3>지원 이력 대시보드</h3>
+      <p>학생별 지원 프로그램의 시작–종료 경과를 2026학년도 타임라인으로 봅니다.</p>
+      <ul>
+        <li>동시 진행 지원은 자동으로 층을 나눠 표시</li>
+        <li><b>중단 건</b>을 빗금과 별도 통계로 부각</li>
+        <li>JSON 파일로 저장·불러오기 (브라우저에 잔류 없음)</li>
+      </ul>
+      <span class="go">열기 →</span>
+    </a>
+
+    <a class="tool" href="guide.html" style="--c:#EB5757">
+      <span class="step">STEP 4 · 안내 · 소통</span>
+      <h3>학맞통 안내 페이지</h3>
+      <p>제도 설명 원페이지. 우측 상단 토글로 교사용 / 학부모용 내용이 통째로 바뀝니다.</p>
+      <ul>
+        <li>교사용 — 팀 구성, 동의 거부 시 대응, 기록 원칙</li>
+        <li>학부모용 — 낙인 우려, 비용, 신청 방법</li>
+        <li>인쇄하면 가정통신문 형태로 출력</li>
+      </ul>
+      <span class="go">열기 →</span>
+    </a>
+
+  </div>
+</section>
+
+<section>
+  <div class="notes">
+    <h3>⚠ 쓰기 전에 꼭 읽어주세요</h3>
+    <ul>
+      <li>이 도구들은 <b>참고용 보조 도구</b>이며 공식 진단·판정 도구가 아닙니다. 지원 결정은 학교 <b>학생맞춤통합지원팀 협의</b>를 따릅니다.</li>
+      <li>아동학대·자해 징후가 의심되면 도구의 결과와 무관하게 <b>즉시 신고와 관리자 보고</b>가 우선입니다. (아동학대 <b>112</b> / 청소년상담 <b>1388</b> / 긴급복지 <b>129</b>)</li>
+      <li>입력값은 <b>브라우저 메모리에만</b> 존재하며 서버로 전송되거나 저장되지 않습니다. 새로고침하면 사라집니다. 그래도 학생 <b>실명 대신 학년·반·번호</b> 사용을 권합니다.</li>
+      <li>확정된 상담·지원 내용은 반드시 <b>학교 공식 시스템(나이스 등)</b>에 기록하세요.</li>
+      <li>기관 연락처는 2026년 7월 수집분입니다. <b>연계 전 통화로 확인</b>하세요.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>초등 학생맞춤통합지원 도구 모음 · 충남 논산·계룡 지역 특화<br>
+  기관 데이터 출처: <a href="https://studentsupport.kr/" target="_blank" rel="noopener">학생맞춤통합지원 누리집</a> (논산시 76곳 · 계룡시 40곳, 2026-07-30 수집) · 지도 타일 © OpenStreetMap contributors<br>
+  근거 법령: 「학생맞춤통합지원법」(2024. 1. 제정, 2026. 3. 1. 시행)</p>
+  <p>코드는 MIT 라이선스로 공개되어 있습니다. 다른 지역 자료로 바꿔 쓰셔도 됩니다.</p>
+</footer>
+
+</div>
+</body>
+</html>
