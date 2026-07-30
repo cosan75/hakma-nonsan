@@ -123,7 +123,6 @@ footer{padding:38px 0 70px;font-size:13px;color:var(--text-secondary);line-heigh
 @media print{nav,.seg,#selftest{display:none}section{page-break-inside:avoid;padding:26px 0}}
 
 /* ---------- 홈 버튼 · 반응형 공통 ---------- */
-.homebar{padding:16px 0 2px}
 .homebtn{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;
   background:var(--surface);border:1px solid var(--border);border-radius:20px;
   font-size:13.5px;font-weight:600;color:var(--text-secondary);text-decoration:none;
@@ -139,13 +138,22 @@ footer{padding:38px 0 70px;font-size:13px;color:var(--text-secondary);line-heigh
   .sos a{min-width:100%}
   .steps{grid-template-columns:1fr}
 }
+
+/* 큰제목 옆 홈 버튼 */
+.titlerow{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  flex-wrap:wrap;margin:0 0 6px}
+.titlerow h1{margin:0;flex:1 1 auto}
+.titlerow .homebtn{flex:0 0 auto;align-self:center}
+@media(max-width:520px){
+  .titlerow{gap:10px}
+  .titlerow .homebtn{order:-1;font-size:12.5px;padding:6px 12px}
+}
 </style>
 </head>
 <body class="view-t">
 
 <nav>
   <div class="nav-in">
-    <a class="homebtn" href="index.html">← 도구 모음</a>
     <span class="brand">학생맞춤통합지원</span>
     <a href="#what">제도란</a>
     <a href="#areas">6개 영역</a>
@@ -165,7 +173,10 @@ footer{padding:38px 0 70px;font-size:13px;color:var(--text-secondary);line-heigh
 
 <section class="hero">
   <span class="eyebrow">초등학교용 · 논산시 · 계룡시</span>
-  <h1>어려움을 겪는 학생을<br>학교가 먼저 찾아<br>끝까지 함께합니다.</h1>
+  <div class="titlerow">
+    <h1>어려움을 겪는 학생을<br>학교가 먼저 찾아<br>끝까지 함께합니다.</h1>
+    <a class="homebtn" href="index.html">← 도구 모음</a>
+  </div>
   <p class="lead only-t">학생맞춤통합지원은 학업·심리·경제·건강·돌봄 등 여러 어려움이 <b>한 학생에게 겹쳐 있을 때</b>,
     담당자가 따로따로 대응하는 대신 학교가 하나의 팀으로 묶어 지원하는 제도입니다.
     초등에서는 특히 <b>한글 해득·기초학력·돌봄공백·장기결석</b>이 조기에 잡히느냐가 이후 학교생활을 좌우합니다.</p>

@@ -133,7 +133,6 @@ input[type=range]{width:100%;accent-color:var(--accent-1);margin:2px 0 4px}
 footer{margin-top:28px;font-size:12.5px;color:var(--text-secondary);line-height:1.75}
 
 /* ---------- 홈 버튼 · 반응형 공통 ---------- */
-.homebar{padding:16px 0 2px}
 .homebtn{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;
   background:var(--surface);border:1px solid var(--border);border-radius:20px;
   font-size:13.5px;font-weight:600;color:var(--text-secondary);text-decoration:none;
@@ -148,15 +147,27 @@ footer{margin-top:28px;font-size:12.5px;color:var(--text-secondary);line-height:
   .ov.min{max-height:none}
   aside{position:static}
 }
+
+/* 큰제목 옆 홈 버튼 */
+.titlerow{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  flex-wrap:wrap;margin:0 0 6px}
+.titlerow h1{margin:0;flex:1 1 auto}
+.titlerow .homebtn{flex:0 0 auto;align-self:center}
+@media(max-width:520px){
+  .titlerow{gap:10px}
+  .titlerow .homebtn{order:-1;font-size:12.5px;padding:6px 12px}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<div class="homebar"><a class="homebtn" href="index.html">← 도구 모음</a></div>
 
 <span class="tag">초등학교용 · 논산시 · 계룡시</span>
-<h1>지역자원 연계 지도</h1>
+<div class="titlerow">
+  <h1>지역자원 연계 지도</h1>
+  <a class="homebtn" href="index.html">← 도구 모음</a>
+</div>
 <p class="lede">논산·계룡 등록 지역자원 <b>160곳</b>을 실제 좌표로 지도에 올렸습니다. 지원 영역을 고르고, <b>우리 학교 위치를 지도에서 클릭</b>하면 가까운 순으로 정렬됩니다.
 「학생맞춤통합지원법」 절차 중 <b>지원(연계)</b> 단계용.</p>
 

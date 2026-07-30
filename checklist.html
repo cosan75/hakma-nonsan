@@ -73,7 +73,6 @@ button.primary:hover{background:#2589C2}
 footer{margin-top:40px;font-size:13px;color:var(--text-secondary);line-height:1.75}
 
 /* ---------- 홈 버튼 · 반응형 공통 ---------- */
-.homebar{padding:16px 0 2px}
 .homebtn{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;
   background:var(--surface);border:1px solid var(--border);border-radius:20px;
   font-size:13.5px;font-weight:600;color:var(--text-secondary);text-decoration:none;
@@ -87,15 +86,27 @@ footer{margin-top:40px;font-size:13px;color:var(--text-secondary);line-height:1.
   .card{padding:18px 15px}
   aside{position:static}
 }
+
+/* 큰제목 옆 홈 버튼 */
+.titlerow{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  flex-wrap:wrap;margin:0 0 6px}
+.titlerow h1{margin:0;flex:1 1 auto}
+.titlerow .homebtn{flex:0 0 auto;align-self:center}
+@media(max-width:520px){
+  .titlerow{gap:10px}
+  .titlerow .homebtn{order:-1;font-size:12.5px;padding:6px 12px}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<div class="homebar"><a class="homebtn" href="index.html">← 도구 모음</a></div>
 <header>
   <span class="tag">초등학교용 · 논산·계룡 지역 특화</span>
-  <h1>학생맞춤통합지원 6영역 진단 체크리스트</h1>
+  <div class="titlerow">
+    <h1>학생맞춤통합지원 6영역 진단 체크리스트</h1>
+    <a class="homebtn" href="index.html">← 도구 모음</a>
+  </div>
   <p>초등 담임·상담교사가 관찰한 위기징후를 6개 지원영역별로 체크하면 우선 지원영역과 개입 수준, 그리고 <b>논산·계룡 지역 연계처</b>가 함께 제시됩니다.
   「학생맞춤통합지원법」(2026.3.1. 시행) 절차 중 <b>발굴·진단</b> 단계 보조 도구입니다.</p>
 </header>
