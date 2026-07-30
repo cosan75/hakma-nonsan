@@ -11,6 +11,11 @@
   --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.06);
 }
 *{box-sizing:border-box}
+*{min-width:0}
+html{-webkit-text-size-adjust:100%}
+body{word-break:keep-all;overflow-wrap:break-word}
+img,table{max-width:100%}
+
 body{margin:0;background:var(--bg);color:var(--text);
   font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
   font-size:16px;line-height:1.65}
@@ -88,10 +93,30 @@ button.primary:hover{background:#2589C2}
 .tray button{width:auto;padding:9px 16px}
 #selftest{margin-top:20px;font-size:12px;color:var(--text-secondary)}
 footer{margin-top:32px;font-size:13px;color:var(--text-secondary);line-height:1.75}
+
+/* ---------- 홈 버튼 · 반응형 공통 ---------- */
+.homebar{padding:16px 0 2px}
+.homebtn{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  font-size:13.5px;font-weight:600;color:var(--text-secondary);text-decoration:none;
+  box-shadow:var(--shadow);transition:.15s;white-space:nowrap}
+.homebtn:hover{color:var(--accent-1);border-color:var(--accent-1);background:#F4FAFE}
+
+@media(max-width:700px){
+  .wrap{padding:28px 14px 70px}
+  .card{padding:16px 15px}
+  aside{position:static}
+  .grid{grid-template-columns:1fr}
+  .sos a{min-width:100%}
+  .tray{flex-direction:column;align-items:stretch}
+  .tray button{width:100%}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
+
+<div class="homebar"><a class="homebtn" href="index.html">← 도구 모음</a></div>
 
 <span class="tag">초등학교용 · 논산시 · 계룡시</span>
 <h1>지역자원 매칭 카드</h1>
