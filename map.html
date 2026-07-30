@@ -243,7 +243,7 @@ footer{margin-top:28px;font-size:12.5px;color:var(--text-secondary);line-height:
         (로컬에서도 쓰려면 localhost 를 하나 더 등록)
      5. 발급된 키를 아래에 붙여넣기
    ============================================================ */
-const VWORLD_KEY = '';   // ← 예: 'A1B2C3D4-E5F6-7890-ABCD-EF1234567890'
+const VWORLD_KEY = '37CC1DC2-E17B-399B-B7AC-9870A6E2FE96';
 
 /* ============================================================
    지원유형
@@ -532,12 +532,13 @@ function build(){
     const vw = (layer, ext) => L.tileLayer(
       `https://api.vworld.kr/req/wmts/1.0.0/${VWORLD_KEY}/${layer}/{z}/{y}/{x}.${ext}`,
       { maxZoom: 19, attribution: '© <a href="https://www.vworld.kr" target="_blank" rel="noopener">브이월드</a> · 국토교통부' });
+    // 레이어명은 실제 응답을 확인해 확정 (gray 는 500 반환하여 white 사용)
     const base  = vw('Base', 'png');
-    const gray  = vw('gray', 'png');
+    const plain = vw('white', 'png');
     const sat   = vw('Satellite', 'jpeg');
     const hyb   = L.layerGroup([sat, vw('Hybrid', 'png')]);
     Object.assign(bases, {
-      '브이월드 일반': base, '브이월드 흑백': gray,
+      '브이월드 일반': base, '브이월드 담백(마커 강조)': plain,
       '브이월드 위성': sat,  '브이월드 위성+지명': hyb,
       'OpenStreetMap': osm
     });
@@ -760,9 +761,8 @@ function selfTest(){
      ALL.filter(r=>/다함께돌봄센터/.test(r.name)).length===4 &&
      ALL.filter(r=>/학교돌봄터/.test(r.name)).length===2);
   t('비고 보유 기관 존재', ALL.filter(r=>r.note).length>=39);
-  t('브이월드 키 설정값이 문자열', typeof VWORLD_KEY === 'string');
-  t('키 미설정 시에도 동작 (OSM 기본)',
-     VWORLD_KEY === '' || /^[A-Za-z0-9-]{10,}$/.test(VWORLD_KEY));
+  t('브이월드 키 형식 정상',
+     VWORLD_KEY === '' || /^[0-9A-F]{8}(-[0-9A-F]{4}){3}-[0-9A-F]{12}$/.test(VWORLD_KEY));
 
   // 거리 계산
   t('동일 지점 거리 0', distanceKm({lat:36.2,lng:127.1},{lat:36.2,lng:127.1})===0);
