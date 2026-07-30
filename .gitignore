@@ -13,3 +13,7 @@ desktop.ini
 *.json
 !package.json
 학맞통_*.json
+
+# 개인 배포 스크립트 (계정 정보 입력 흔적 방지)
+배포하기.ps1
+배포하기.bat
