@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>통합지원팀 사례회의록 · 초등 · 논산계룡</title>
+<style>
+:root{
+  --bg:#FDFBF8; --surface:#FFFFFF; --text:#2D2D2D; --text-secondary:#8A8680;
+  --accent-1:#2D9CDB; --accent-2:#EB5757; --border:#E8E4DE;
+  --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;min-width:0}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
+.wrap{max-width:1380px;margin:0 auto;padding:36px 24px 90px}
+@media(max-width:700px){.wrap{padding:26px 14px 70px}}
+
+.tag{display:inline-block;background:#EEF6FB;color:#1B6E9E;font-size:12.5px;font-weight:600;
+  padding:4px 11px;border-radius:20px;margin-bottom:11px}
+h1{font-size:clamp(25px,3.2vw,36px);font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+.lede{color:var(--text-secondary);margin:0 0 18px;max-width:78ch;font-size:15.5px}
+.homebtn{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;background:var(--surface);
+  border:1px solid var(--border);border-radius:20px;font-size:13.5px;font-weight:600;
+  color:var(--text-secondary);text-decoration:none;box-shadow:var(--shadow);transition:.15s;white-space:nowrap}
+.homebtn:hover{color:var(--accent-1);border-color:var(--accent-1);background:#F4FAFE}
+.titlerow{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:0 0 6px}
+.titlerow h1{margin:0;flex:1 1 auto}
+.titlerow .homebtn{flex:0 0 auto;align-self:center}
+@media(max-width:520px){.titlerow{gap:10px}.titlerow .homebtn{order:-1;font-size:12.5px;padding:6px 12px}}
+
+.warn{display:flex;gap:11px;align-items:flex-start;background:#FFF7EF;border:1px solid #F6E0C6;
+  border-radius:var(--radius);padding:13px 16px;margin-bottom:20px;font-size:13.5px;color:#8A5A1B;line-height:1.6}
+.warn b{display:block;margin-bottom:3px}
+
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:1100px){.layout{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;margin-bottom:16px}
+@media(max-width:700px){.card{padding:16px 15px}}
+.card h2{margin:0 0 3px;font-size:16.5px;font-weight:700;display:flex;align-items:center;gap:8px}
+.card h2 i{width:22px;height:22px;border-radius:50%;background:#5A6ACF;color:#fff;flex:none;
+  display:grid;place-items:center;font-size:12px;font-weight:700;font-style:normal}
+.card .hint{margin:0 0 14px;font-size:12.5px;color:var(--text-secondary);line-height:1.55}
+
+label.f{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:5px}
+input[type=text],input[type=date],input[type=time],select,textarea{width:100%;padding:9px 12px;
+  border:1px solid var(--border);border-radius:8px;background:var(--surface);font:inherit;font-size:14px;color:var(--text)}
+textarea{resize:vertical;line-height:1.6}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}}
+.fld{margin-bottom:11px}
+
+.opts{display:flex;flex-wrap:wrap;gap:7px}
+.opt{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border:1px solid var(--border);
+  border-radius:20px;font-size:13.5px;cursor:pointer;background:var(--surface);transition:.13s;line-height:1.4}
+.opt:hover{background:#F9F7F3}
+.opt input{accent-color:#5A6ACF;width:15px;height:15px;cursor:pointer;flex:none}
+.opt.on{border-color:#5A6ACF;background:#F1F2FC;color:#3A46A0;font-weight:600}
+
+button{padding:10px 16px;border:1px solid var(--border);border-radius:8px;background:var(--surface);
+  font:inherit;font-size:14px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s}
+button:hover{background:#F7F4F0}
+button.primary{background:#5A6ACF;border-color:#5A6ACF;color:#fff}
+button.primary:hover{background:#4A5ABF}
+button.sm{padding:6px 11px;font-size:12.5px}
+button.wide{width:100%}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btnrow button{flex:1 1 auto}
+
+/* 결정사항 · 역할분담 행 */
+.rows{display:flex;flex-direction:column;gap:10px}
+.row{border:1px solid var(--border);border-radius:10px;padding:12px;background:#FCFBF9;position:relative}
+.row .del{position:absolute;top:8px;right:8px}
+.row .rt{font-size:11.5px;font-weight:700;color:#5A6ACF;margin-bottom:8px}
+.empty{color:var(--text-secondary);font-size:13.5px;text-align:center;padding:18px 0}
+.pill{display:inline-block;padding:2px 9px;border-radius:12px;font-size:11.5px;font-weight:600;
+  background:#F1EFEA;color:#77736D;margin-left:6px}
+
+/* 미리보기 */
+aside{position:sticky;top:20px}
+@media(max-width:1100px){aside{position:static}}
+.papers{max-height:calc(100vh - 130px);overflow-y:auto;padding-right:2px}
+@media(max-width:1100px){.papers{max-height:none;overflow:visible}}
+.paper{background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow);
+  padding:26px 24px;font-size:12.5px;line-height:1.55;color:#1a1a1a}
+.paper h3{text-align:center;font-size:18px;font-weight:700;margin:0 0 4px;letter-spacing:.06em}
+.paper .org{text-align:right;font-size:11px;color:#666;margin-bottom:12px}
+.paper table{width:100%;border-collapse:collapse;margin-bottom:10px;table-layout:fixed}
+.paper th,.paper td{border:1px solid #999;padding:5px 7px;vertical-align:top;font-size:11.5px;line-height:1.5}
+.paper th{background:#F2F0EC;font-weight:600;text-align:center}
+.paper td.v{word-break:break-all}
+.paper .pre{white-space:pre-wrap}
+.paper .sign{text-align:center;margin-top:14px;line-height:1.9}
+.blank{color:#bbb}
+
+#selftest{margin-top:18px;font-size:12px;color:var(--text-secondary)}
+footer{margin-top:28px;font-size:12.5px;color:var(--text-secondary);line-height:1.75}
+
+@media print{
+  body{background:#fff}
+  .noprint{display:none !important}
+  .wrap{max-width:none;padding:0}
+  .layout{display:block}
+  aside{position:static}
+  .papers{max-height:none;overflow:visible;padding:0}
+  .paper{border:none;box-shadow:none;border-radius:0;padding:0;margin:0}
+  @page{size:A4;margin:14mm}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="noprint">
+  <span class="tag">초등학교용 · 논산·계룡 지역 특화</span>
+  <div class="titlerow">
+    <h1>통합지원팀 사례회의록</h1>
+    <a class="homebtn" href="index.html">← 도구 모음</a>
+  </div>
+  <p class="lede">협의 결과를 기록하고 A4로 인쇄합니다.
+  <b>진단 결과</b>와 <b>연계 후보 목록</b>을 붙여넣으면 논의 배경과 기관 정보가 자동으로 채워지고,
+  회의에서 결정한 지원은 <b>대시보드가 읽을 수 있는 JSON</b>으로 내보낼 수 있습니다.</p>
+  <div class="warn">
+    <span style="font-size:18px;line-height:1">📝</span>
+    <span><b>입력값은 저장·전송되지 않습니다 — 새로고침하면 사라집니다</b>
+    회의록은 학생 <b>실명 대신 학년·반·번호</b> 사용을 권합니다. 확정된 공식 기록은 학교 시스템(나이스 등)에 남기고,
+    출력물은 학교 규정대로 보관·파기하세요.</span>
+  </div>
+</div>
+
+<div class="layout">
+  <main class="noprint">
+
+    <section class="card">
+      <h2><i>1</i>회의 개요</h2>
+      <div class="grid3">
+        <div class="fld"><label class="f">회차</label><input type="text" id="round" placeholder="2026학년도 제3차"></div>
+        <div class="fld"><label class="f">일자</label><input type="date" id="mdate"></div>
+        <div class="fld"><label class="f">시각</label><input type="time" id="mtime"></div>
+      </div>
+      <div class="grid2">
+        <div class="fld"><label class="f">장소</label><input type="text" id="place" placeholder="교장실 / Wee클래스"></div>
+        <div class="fld"><label class="f">주재</label><input type="text" id="chair" placeholder="교감 ○○○"></div>
+      </div>
+      <div class="fld"><label class="f">학교명</label><input type="text" id="school" placeholder="○○초등학교"></div>
+    </section>
+
+    <section class="card">
+      <h2><i>2</i>참석자</h2>
+      <p class="hint">해당 직위를 고르고, 이름은 아래 칸에 함께 적으세요.</p>
+      <div class="grp"><div class="opts" id="memBox"></div></div>
+      <div class="fld" style="margin-top:10px"><label class="f">참석자 명단 (직위 이름, 쉼표로 구분)</label>
+        <input type="text" id="members" placeholder="교감 ○○○, 담임 ○○○, 전문상담교사 ○○○, 교육복지사 ○○○"></div>
+    </section>
+
+    <section class="card">
+      <h2><i>3</i>대상 학생 · 논의 배경</h2>
+      <p class="hint">체크리스트의 <b>결과 복사</b>를 붙여넣고 「불러오기」를 누르면 학년·판정·우선영역·즉시개입이 배경에 정리됩니다.</p>
+      <textarea id="pasteDx" rows="3" placeholder="[초등 학생맞춤통합지원 진단 결과] ... 붙여넣기"></textarea>
+      <div class="btnrow">
+        <button class="primary" onclick="importDx()">불러오기</button>
+        <button onclick="document.getElementById('pasteDx').value='';document.getElementById('dxMsg').textContent=''">지우기</button>
+      </div>
+      <p class="hint" id="dxMsg" style="margin:10px 0 0;color:#5A6ACF;font-weight:600"></p>
+      <div class="grid2" style="margin-top:12px">
+        <div class="fld"><label class="f">학생 (학년·반·번호 권장)</label><input type="text" id="code" placeholder="4-2-11"></div>
+        <div class="fld"><label class="f">학년</label><input type="text" id="grade" placeholder="4학년"></div>
+      </div>
+      <div class="fld"><label class="f">논의 배경 · 진단 요약</label>
+        <textarea id="bg" rows="6" placeholder="발굴 경위, 진단 결과, 현재까지 학교 조치"></textarea></div>
+    </section>
+
+    <section class="card">
+      <h2><i>4</i>연계 후보 불러오기</h2>
+      <p class="hint">지도나 매칭 카드에서 <b>연계 목록 복사</b>한 내용을 붙여넣으면, 아래 결정사항의 기관 선택지로 들어갑니다.</p>
+      <textarea id="pasteOrg" rows="3" placeholder="[학생맞춤통합지원 지역자원 연계 후보] ... 붙여넣기"></textarea>
+      <div class="btnrow">
+        <button class="primary" onclick="importOrgs()">불러오기</button>
+        <button onclick="ORGS.length=0;document.getElementById('orgMsg').textContent='';renderRows()">비우기</button>
+      </div>
+      <p class="hint" id="orgMsg" style="margin:10px 0 0;color:#5A6ACF;font-weight:600"></p>
+    </section>
+
+    <section class="card">
+      <h2><i>5</i>결정사항 — 투입할 지원</h2>
+      <p class="hint">여기 적은 내용이 그대로 대시보드로 넘어갑니다.</p>
+      <div class="rows" id="decRows"></div>
+      <div class="btnrow"><button class="primary wide" onclick="addDec()">+ 지원 항목 추가</button></div>
+    </section>
+
+    <section class="card">
+      <h2><i>6</i>역할 분담</h2>
+      <p class="hint">누가 · 무엇을 · 언제까지. 회의록에서 가장 자주 빠지는 칸입니다.</p>
+      <div class="rows" id="taskRows"></div>
+      <div class="btnrow"><button class="primary wide" onclick="addTask()">+ 역할 추가</button></div>
+    </section>
+
+    <section class="card">
+      <h2><i>7</i>다음 점검 · 특이사항</h2>
+      <div class="grid2">
+        <div class="fld"><label class="f">다음 점검일</label><input type="date" id="next"></div>
+        <div class="fld"><label class="f">차기 회의 예정</label><input type="text" id="nextMeet" placeholder="2026. 11. 첫째 주"></div>
+      </div>
+      <div class="fld"><label class="f">특이사항 · 보호자 동의 여부</label>
+        <textarea id="etc" rows="4" placeholder="보호자 동의 완료 여부, 미해결 쟁점, 교육지원청 의뢰 필요 여부 등"></textarea></div>
+    </section>
+
+    <section class="card">
+      <h2><i>8</i>인쇄 · 내보내기</h2>
+      <div class="btnrow">
+        <button class="primary wide" onclick="window.print()">🖨 회의록 인쇄 / PDF 저장</button>
+      </div>
+      <div class="btnrow">
+        <button class="wide" onclick="exportForDashboard()">📤 결정사항을 대시보드용 JSON으로 내보내기</button>
+      </div>
+      <p class="hint" style="margin:10px 0 0">내보낸 JSON은 <b>지원 이력 대시보드</b>의 「불러오기」로 그대로 올라갑니다.</p>
+      <div class="btnrow"><button class="wide" onclick="resetAll()">전체 지우기</button></div>
+    </section>
+
+    <div id="selftest"></div>
+  </main>
+
+  <aside><div class="papers" id="papers"></div></aside>
+</div>
+
+<footer class="noprint">
+  ※ 「학생맞춤통합지원법」상 지원 결정은 <b>학교 학생맞춤통합지원팀 협의</b>를 거치게 되어 있습니다. 이 도구는 그 협의 결과를 정리하는 보조 서식이며 공식 양식이 따로 있다면 그쪽을 따르세요.<br>
+  ※ 아동학대·자해 징후는 회의 결과와 무관하게 <b>즉시 신고·보고</b>가 우선입니다. (아동학대 112 / 청소년상담 1388)<br>
+  ※ 문의: 논산계룡교육지원청 초등 학생맞춤통합지원 <b>041-730-7151</b>
+</footer>
+
+</div>
+
+<script>
+/* ============================================================
+   상수
+   ============================================================ */
+const ROLES = ['교장','교감','담임','전문상담교사','보건교사','교육복지사','특수교사','영양교사','외부기관'];
+const DOMAINS = ['돌봄·안전','학업','건강','심리·정서','경제','기타'];
+const STATUS  = ['진행','완료','중단'];
+
+let ORGS = [];                 // 붙여넣은 연계 후보
+let DEC  = [];                 // 결정사항
+let TASK = [];                 // 역할분담
+const state = { roles: [] };
+
+const $ = id => document.getElementById(id);
+const val = id => ($(id)?.value||'').trim();
+const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ============================================================
+   순수 함수 (테스트 대상)
+   ============================================================ */
+// 체크리스트 '결과 복사' → 회의 배경 요약
+function parseDx(text){
+  if(!text || !text.includes('학생맞춤통합지원 진단 결과')) return null;
+  const o = {code:'', grade:'', city:'', level:'', total:'', priority:[], critical:[]};
+  const g = text.match(/학생:\s*(\S+)\s*\/\s*(\S+)\s*\/\s*(\S+)/);
+  if (g){ o.code = g[1]==='(미입력)'?'':g[1]; o.grade = g[2]==='-'?'':g[2]; o.city = g[3]; }
+  const lv = text.match(/판정:\s*(.+)$/m);  if (lv) o.level = lv[1].trim();
+  const tt = text.match(/총 위험도:\s*(\d+\/\d+\s*\(\d+%\))/); if (tt) o.total = tt[1];
+  const seg = text.split(/\[우선 지원영역[^\]]*\]/)[1] || '';
+  seg.split('\n').forEach(l=>{
+    const m = l.match(/^\s{2}\d+\.\s*(\S[^(]*)\((\d+)%\)/);
+    if (m) o.priority.push({name:m[1].trim(), pct:+m[2]});
+  });
+  if (text.includes('[즉시개입')){
+    (text.split(/\[즉시개입[^\]]*\]/)[1]||'').split('\n').forEach(l=>{
+      const m = l.match(/^\s*·\s*(.+)$/); if (m) o.critical.push(m[1].trim());
+    });
+  }
+  return o;
+}
+
+function buildBackground(dx){
+  if(!dx) return '';
+  const L=[];
+  L.push(`○ 진단 결과: 총 위험도 ${dx.total||'—'}, 판정 「${dx.level||'—'}」`);
+  if (dx.priority.length)
+    L.push('○ 우선 지원영역: ' + dx.priority.map(p=>`${p.name}(${p.pct}%)`).join(', '));
+  if (dx.critical.length){
+    L.push(`○ 즉시개입 항목 ${dx.critical.length}건`);
+    dx.critical.forEach(c=>L.push(`   - ${c}`));
+    L.push('   ※ 총점과 무관하게 관리자 보고 및 신고 의무를 우선 이행함.');
+  }
+  L.push('○ 현재까지 학교 조치: ');
+  return L.join('\n');
+}
+
+// 지도/카드 '연계 목록 복사' → 기관 목록
+function parseOrgs(text){
+  if(!text || !text.includes('지역자원 연계 후보')) return null;
+  const out=[]; let cur=null;
+  text.split('\n').forEach(l=>{
+    const h = l.match(/^\s*\d+\.\s*(.+?)\s*\[(.+?)\]\s*$/);
+    if (h){ if(cur) out.push(cur);
+      cur = {name:h[1].trim(), meta:h[2].trim(), types:'', addr:'', tel:'', km:''}; return; }
+    if (!cur) return;
+    let m;
+    if ((m = l.match(/^\s*지원유형:\s*(.+)$/))) cur.types = m[1].trim();
+    else if ((m = l.match(/^\s*주소:\s*(.+)$/)))   cur.addr  = m[1].trim();
+    else if ((m = l.match(/^\s*연락처:\s*(.+)$/))) cur.tel   = m[1].trim()==='미등록'?'':m[1].trim();
+    else if ((m = l.match(/^\s*학교에서 약\s*([\d.]+)\s*km/))) cur.km = m[1];
+  });
+  if (cur) out.push(cur);
+  return out;
+}
+
+// 결정사항 → 대시보드 JSON (dashboard.html 스키마와 동일)
+function toDashboard(dec, code, grade){
+  return dec.filter(d=>d.program && d.start && d.end).map((d,i)=>({
+    id: i+1,
+    code: code || '(미입력)',
+    grade: grade || '',
+    domain: DOMAINS.includes(d.domain) ? d.domain : '기타',
+    program: d.program,
+    org: d.org || '',
+    owner: d.owner || '',
+    start: d.start,
+    end: d.end,
+    status: STATUS.includes(d.status) ? d.status : '진행',
+    memo: d.memo || ''
+  }));
+}
+
+function decIssues(dec){
+  const bad=[];
+  dec.forEach((d,i)=>{
+    const n = `${i+1}번 항목`;
+    if (!d.program) bad.push(`${n}: 프로그램명 없음`);
+    if (!d.start || !d.end) bad.push(`${n}: 기간 없음`);
+    else if (new Date(d.end) < new Date(d.start)) bad.push(`${n}: 종료일이 시작일보다 빠름`);
+  });
+  return bad;
+}
+
+/* ============================================================
+   렌더링
+   ============================================================ */
+function buildRoles(){
+  $('memBox').innerHTML = ROLES.map(r=>{
+    const on = state.roles.includes(r);
+    return `<label class="opt${on?' on':''}"><input type="checkbox" ${on?'checked':''}
+      onchange="toggleRole('${r}',this.checked)">${r}</label>`;
+  }).join('');
+}
+function toggleRole(r,on){
+  const a=state.roles;
+  if(on){ if(!a.includes(r)) a.push(r); } else { const i=a.indexOf(r); if(i>-1)a.splice(i,1); }
+  buildRoles(); render();
+}
+
+function orgOptions(sel){
+  const list = ORGS.map(o=>o.name + (o.tel?` (${o.tel})`:''));
+  return '<option value="">직접 입력 또는 선택</option>' +
+    list.map(x=>`<option${x===sel?' selected':''}>${esc(x)}</option>`).join('');
+}
+
+function addDec(){
+  DEC.push({domain:'학업', program:'', org:'', owner:'', start:'', end:'', status:'진행', memo:''});
+  renderRows(); render();
+}
+function addTask(){ TASK.push({who:'', what:'', due:''}); renderRows(); render(); }
+function delDec(i){ DEC.splice(i,1); renderRows(); render(); }
+function delTask(i){ TASK.splice(i,1); renderRows(); render(); }
+function setDec(i,k,v){ DEC[i][k]=v; render(); if(k==='org') renderRows(); }
+function setTask(i,k,v){ TASK[i][k]=v; render(); }
+
+function renderRows(){
+  $('decRows').innerHTML = DEC.length ? DEC.map((d,i)=>`
+    <div class="row">
+      <button class="sm del" onclick="delDec(${i})">삭제</button>
+      <div class="rt">지원 ${i+1}</div>
+      <div class="grid2">
+        <div class="fld"><label class="f">지원 영역</label>
+          <select onchange="setDec(${i},'domain',this.value)">
+            ${DOMAINS.map(x=>`<option${x===d.domain?' selected':''}>${x}</option>`).join('')}
+          </select></div>
+        <div class="fld"><label class="f">상태</label>
+          <select onchange="setDec(${i},'status',this.value)">
+            ${STATUS.map(x=>`<option${x===d.status?' selected':''}>${x}</option>`).join('')}
+          </select></div>
+      </div>
+      <div class="fld"><label class="f">프로그램명</label>
+        <input type="text" value="${esc(d.program)}" oninput="setDec(${i},'program',this.value)"
+          placeholder="예: 한글 책임교육 1:1 지도"></div>
+      <div class="fld"><label class="f">연계 기관 ${ORGS.length?`<span class="pill">후보 ${ORGS.length}곳</span>`:''}</label>
+        ${ORGS.length ? `<select onchange="setDec(${i},'org',this.value)" style="margin-bottom:6px">${orgOptions(d.org)}</select>`:''}
+        <input type="text" value="${esc(d.org)}" oninput="setDec(${i},'org',this.value)" placeholder="기관명 (연락처)"></div>
+      <div class="grid3">
+        <div class="fld"><label class="f">담당</label>
+          <input type="text" value="${esc(d.owner)}" oninput="setDec(${i},'owner',this.value)" placeholder="담임 ○○○"></div>
+        <div class="fld"><label class="f">시작</label>
+          <input type="date" value="${d.start}" oninput="setDec(${i},'start',this.value)"></div>
+        <div class="fld"><label class="f">종료(예정)</label>
+          <input type="date" value="${d.end}" oninput="setDec(${i},'end',this.value)"></div>
+      </div>
+      <div class="fld" style="margin:0"><label class="f">비고</label>
+        <input type="text" value="${esc(d.memo)}" oninput="setDec(${i},'memo',this.value)"></div>
+    </div>`).join('') : '<div class="empty">아직 없습니다. 「+ 지원 항목 추가」를 누르세요.</div>';
+
+  $('taskRows').innerHTML = TASK.length ? TASK.map((t,i)=>`
+    <div class="row">
+      <button class="sm del" onclick="delTask(${i})">삭제</button>
+      <div class="rt">역할 ${i+1}</div>
+      <div class="grid3">
+        <div class="fld"><label class="f">담당자</label>
+          <input type="text" value="${esc(t.who)}" oninput="setTask(${i},'who',this.value)" placeholder="담임 ○○○"></div>
+        <div class="fld" style="grid-column:span 2"><label class="f">할 일</label>
+          <input type="text" value="${esc(t.what)}" oninput="setTask(${i},'what',this.value)"
+            placeholder="보호자 상담 및 동의서 수령"></div>
+      </div>
+      <div class="fld" style="margin:0"><label class="f">기한</label>
+        <input type="date" value="${t.due}" oninput="setTask(${i},'due',this.value)"></div>
+    </div>`).join('') : '<div class="empty">아직 없습니다. 「+ 역할 추가」를 누르세요.</div>';
+}
+
+function fmtDate(s){
+  if(!s) return '';
+  const d=new Date(s); return isNaN(d)?'':`${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}.`;
+}
+
+function render(){
+  const B = s => s ? esc(s) : '<span class="blank">　</span>';
+  const mem = val('members') || state.roles.join(', ');
+  const when = [fmtDate(val('mdate')), val('mtime')].filter(Boolean).join(' ') || '';
+
+  const decRows = DEC.length ? DEC.map((d,i)=>`
+    <tr><td style="text-align:center">${i+1}</td><td>${esc(d.domain)}</td><td class="v">${B(d.program)}</td>
+        <td class="v">${B(d.org)}</td><td class="v">${B(d.owner)}</td>
+        <td style="white-space:nowrap">${d.start||'—'}<br>~ ${d.end||'—'}</td>
+        <td style="text-align:center">${esc(d.status)}</td></tr>`).join('')
+    : `<tr><td colspan="7" style="text-align:center;color:#bbb">—</td></tr>`;
+
+  const taskRows = TASK.length ? TASK.map((t,i)=>`
+    <tr><td style="text-align:center">${i+1}</td><td class="v">${B(t.who)}</td>
+        <td class="v">${B(t.what)}</td><td style="white-space:nowrap;text-align:center">${t.due||'—'}</td></tr>`).join('')
+    : `<tr><td colspan="4" style="text-align:center;color:#bbb">—</td></tr>`;
+
+  $('papers').innerHTML = `
+  <div class="paper">
+    <div class="org">${B(val('school'))}　학생맞춤통합지원팀</div>
+    <h3>학 생 맞 춤 통 합 지 원 팀  사 례 회 의 록</h3>
+    <table>
+      <colgroup><col style="width:70px"><col><col style="width:70px"><col></colgroup>
+      <tr><th>회차</th><td class="v">${B(val('round'))}</td><th>일시</th><td class="v">${B(when)}</td></tr>
+      <tr><th>장소</th><td class="v">${B(val('place'))}</td><th>주재</th><td class="v">${B(val('chair'))}</td></tr>
+      <tr><th>참석자</th><td class="v" colspan="3">${B(mem)}</td></tr>
+    </table>
+    <table>
+      <colgroup><col style="width:70px"><col><col style="width:70px"><col></colgroup>
+      <tr><th>대상 학생</th><td class="v">${B(val('code'))}</td><th>학년</th><td class="v">${B(val('grade'))}</td></tr>
+    </table>
+    <table><tr><th style="width:70px">논의 배경</th><td class="v pre" style="min-height:80px">${esc(val('bg'))||'<span class="blank">　</span>'}</td></tr></table>
+
+    <table>
+      <colgroup><col style="width:26px"><col style="width:62px"><col><col><col style="width:70px"><col style="width:72px"><col style="width:42px"></colgroup>
+      <tr><th colspan="7" style="text-align:left;background:#E8EAF7">결정사항 — 투입할 지원</th></tr>
+      <tr><th>#</th><th>영역</th><th>프로그램</th><th>연계 기관</th><th>담당</th><th>기간</th><th>상태</th></tr>
+      ${decRows}
+    </table>
+
+    <table>
+      <colgroup><col style="width:26px"><col style="width:110px"><col><col style="width:86px"></colgroup>
+      <tr><th colspan="4" style="text-align:left;background:#E8EAF7">역할 분담</th></tr>
+      <tr><th>#</th><th>담당자</th><th>할 일</th><th>기한</th></tr>
+      ${taskRows}
+    </table>
+
+    <table>
+      <colgroup><col style="width:82px"><col><col style="width:82px"><col></colgroup>
+      <tr><th>다음 점검일</th><td class="v">${B(fmtDate(val('next')))}</td>
+          <th>차기 회의</th><td class="v">${B(val('nextMeet'))}</td></tr>
+    </table>
+    <table><tr><th style="width:82px">특이사항</th><td class="v pre" style="min-height:52px">${esc(val('etc'))||'<span class="blank">　</span>'}</td></tr></table>
+
+    <div class="sign">위와 같이 협의하였음.<br>${fmtDate(val('mdate'))||'2026. 　. 　.'}<br>
+      ${B(val('school'))}　학생맞춤통합지원팀　주재 ${B(val('chair'))} (서명)</div>
+  </div>`;
+}
+
+/* ============================================================
+   동작
+   ============================================================ */
+function importDx(){
+  const dx = parseDx($('pasteDx').value);
+  const msg = $('dxMsg');
+  if(!dx){ msg.style.color='var(--accent-2)';
+    msg.textContent='체크리스트에서 복사한 결과가 아닙니다.'; return; }
+  if (dx.code && !val('code'))  $('code').value  = dx.code;
+  if (dx.grade && !val('grade')) $('grade').value = dx.grade;
+  const bg = buildBackground(dx);
+  $('bg').value = val('bg') ? val('bg')+'\n'+bg : bg;
+  // 우선영역대로 결정사항 뼈대를 만들어 둠
+  dx.priority.forEach(p=>{
+    const dom = DOMAINS.find(d=>p.name.startsWith(d)) || '기타';
+    if(!DEC.some(x=>x.domain===dom))
+      DEC.push({domain:dom, program:'', org:'', owner:'', start:'', end:'', status:'진행', memo:`우선 지원영역 ${p.pct}%`});
+  });
+  renderRows(); render();
+  msg.style.color='#5A6ACF';
+  msg.textContent = `불러왔습니다 — 우선영역 ${dx.priority.length}개로 결정사항 뼈대 생성`
+    + (dx.critical.length?` · 즉시개입 ${dx.critical.length}건 배경에 기재`:'');
+}
+
+function importOrgs(){
+  const list = parseOrgs($('pasteOrg').value);
+  const msg = $('orgMsg');
+  if(!list || !list.length){ msg.style.color='var(--accent-2)';
+    msg.textContent='지도·매칭 카드의 「연계 목록 복사」 내용이 아닙니다.'; return; }
+  ORGS = list;
+  renderRows(); render();
+  msg.style.color='#5A6ACF';
+  msg.textContent = `${list.length}곳 불러왔습니다 — 결정사항의 「연계 기관」에서 고를 수 있습니다.`;
+}
+
+function exportForDashboard(){
+  const issues = decIssues(DEC);
+  if (!DEC.length){ alert('결정사항이 없습니다. 지원 항목을 먼저 추가하세요.'); return; }
+  if (issues.length && !confirm('아래 항목은 대시보드로 넘어가지 않습니다.\n\n'+issues.join('\n')+'\n\n계속할까요?')) return;
+  const data = toDashboard(DEC, val('code'), val('grade'));
+  if (!data.length){ alert('프로그램명과 기간이 모두 채워진 항목이 없습니다.'); return; }
+  const blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`학맞통_회의결정_${val('code')||'학생'}_${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(a.href);
+  alert(`${data.length}건을 내보냈습니다.\n지원 이력 대시보드에서 「불러오기」로 올리세요.`);
+}
+
+function resetAll(){
+  if(!confirm('입력한 내용을 모두 지웁니다. 계속할까요?')) return;
+  document.querySelectorAll('input[type=text],input[type=date],input[type=time],textarea').forEach(e=>e.value='');
+  state.roles=[]; ORGS=[]; DEC=[]; TASK=[];
+  buildRoles(); renderRows(); render();
+  $('dxMsg').textContent=''; $('orgMsg').textContent='';
+}
+
+/* ============================================================
+   내장 자체검증
+   ============================================================ */
+function selfTest(){
+  const T=[]; const t=(n,c)=>T.push({name:n,ok:!!c});
+
+  const DX = `[초등 학생맞춤통합지원 진단 결과]
+학생: 4-2-11 / 4학년 / 논산시
+작성: 4학년 2반 담임 / 2026. 7. 30.
+
+총 위험도: 18/62 (29%) — 판정: 통합지원팀 협의
+
+[영역별]
+  돌봄·안전: 6/16 (38%)
+  학업: 5/11 (45%)
+
+[우선 지원영역 및 논산시 연계처]
+  1. 학업 (45%)
+     → 논산계룡교육지원청 학습종합클리닉센터 041-730-7134
+  2. 돌봄·안전 (38%)
+     → 논산시드림스타트 041-746-5381
+
+[즉시개입 2건]
+  · 멍·상처 등 학대 의심 흔적이나 아동의 진술이 있다
+  · 정당한 사유 없이 결석이 누적된다`;
+
+  t('엉뚱한 텍스트 거부', parseDx('안녕')===null && parseOrgs('안녕')===null);
+  const dx = parseDx(DX);
+  t('진단 파싱', !!dx && dx.code==='4-2-11' && dx.grade==='4학년');
+  t('판정 공백 포함 파싱', dx.level==='통합지원팀 협의');
+  t('총 위험도 파싱', dx.total==='18/62 (29%)');
+  t('우선영역 2개', dx.priority.length===2 && dx.priority[0].name==='학업' && dx.priority[0].pct===45);
+  t('즉시개입 2건', dx.critical.length===2);
+
+  const bg = buildBackground(dx);
+  t('배경 요약 — 판정 포함', bg.includes('통합지원팀 협의'));
+  t('배경 요약 — 우선영역 포함', bg.includes('학업(45%)') && bg.includes('돌봄·안전(38%)'));
+  t('배경 요약 — 즉시개입 및 신고 안내', bg.includes('즉시개입 항목 2건') && bg.includes('신고 의무'));
+  t('빈 입력은 빈 문자열', buildBackground(null)==='');
+
+  const OG = `[학생맞춤통합지원 지역자원 연계 후보]
+작성일: 2026. 7. 30.
+지원 니즈: 학업, 심리·정서
+
+1. 논산계룡교육지원청 학습종합클리닉센터 [논산시 · 교육지원청 · 공공]
+   지원유형: 학업
+   주소: 논산시 관촉로 253
+   연락처: 041-730-7134
+   학교에서 약 1.2 km
+2. 내동홈 아이꽃돌봄센터 [논산시 · 돌봄 · 공공]
+   지원유형: 돌봄·안전
+   주소: 논산시 체육로 30
+   연락처: 041-980-2255
+3. 조승희심리상담센터 [논산시 · 심리상담 · 민간]
+   지원유형: 심리·정서
+   주소: 논산시 시민로258번길 8
+   연락처: 미등록
+
+※ 연계 전 반드시 통화로 운영 여부·대상·정원을 확인하세요.`;
+  const og = parseOrgs(OG);
+  t('연계 후보 3곳 파싱', og.length===3);
+  t('기관명·연락처 파싱', og[0].name==='논산계룡교육지원청 학습종합클리닉센터' && og[0].tel==='041-730-7134');
+  t('거리 파싱', og[0].km==='1.2');
+  t('미등록 연락처는 빈값', og[2].tel==='');
+  t('주소 파싱', og[1].addr==='논산시 체육로 30');
+
+  // 대시보드 스키마
+  const dec=[
+    {domain:'학업',program:'한글 지도',org:'클리닉센터',owner:'담임',start:'2026-09-01',end:'2026-12-18',status:'진행',memo:'주2회'},
+    {domain:'없는영역',program:'X',org:'',owner:'',start:'2026-09-01',end:'2026-10-01',status:'이상',memo:''},
+    {domain:'건강',program:'',org:'',owner:'',start:'',end:'',status:'진행',memo:''},
+  ];
+  const out = toDashboard(dec,'4-2-11','초4');
+  t('미완성 항목은 제외', out.length===2);
+  const keys=['id','code','grade','domain','program','org','owner','start','end','status','memo'];
+  t('대시보드 스키마 11개 필드 일치',
+     out.every(o=>keys.every(k=>k in o) && Object.keys(o).length===keys.length));
+  t('알 수 없는 영역은 기타로', out[1].domain==='기타');
+  t('알 수 없는 상태는 진행으로', out[1].status==='진행');
+  t('학생코드·학년 주입', out.every(o=>o.code==='4-2-11' && o.grade==='초4'));
+  t('id 1부터 순번', out[0].id===1 && out[1].id===2);
+
+  const bad = decIssues([{program:'',start:'',end:''},{program:'A',start:'2026-10-01',end:'2026-09-01'}]);
+  t('결함 검사 — 누락·역순 날짜', bad.length===3 && bad.some(x=>x.includes('역순')||x.includes('빠름')));
+  t('정상 항목은 결함 없음',
+     decIssues([{program:'A',start:'2026-09-01',end:'2026-10-01'}]).length===0);
+
+  const pass=T.filter(x=>x.ok).length;
+  $('selftest').innerHTML = pass===T.length
+    ? `✓ 결과 연동·대시보드 내보내기 자체검증 ${pass}/${T.length} 통과`
+    : `<span style="color:#EB5757">✗ 검증 실패: ${T.filter(x=>!x.ok).map(x=>x.name).join(', ')}</span>`;
+  console.table(T);
+}
+
+buildRoles(); renderRows();
+document.querySelectorAll('input,select,textarea').forEach(e=>e.addEventListener('input', render));
+$('mdate').value = new Date().toISOString().slice(0,10);
+render(); selfTest();
+</script>
+</body>
+</html>
