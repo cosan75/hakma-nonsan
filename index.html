@@ -10,15 +10,26 @@
 <meta property="og:type" content="website">
 <style>
 :root{
-  --bg:#FDFBF8; --surface:#FFFFFF; --text:#2D2D2D; --text-secondary:#8A8680;
-  --accent-1:#2D9CDB; --accent-2:#EB5757; --border:#E8E4DE;
-  --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.06);
+  /* KCBC 시그니처 팔레트 */
+  --blue:#2563eb; --blue-d:#1d4ed8; --blue-l:#dbeafe;
+  --purple:#7c3aed; --purple-d:#6d28d9; --purple-l:#ede9fe;
+  --green:#16a34a; --green-l:#dcfce7;
+  --amber:#d97706; --amber-l:#fef3c7;
+  --red:#dc2626;    --red-d:#991b1b;  --red-l:#fee2e2;
+  --navy:#1e3a8a;
+  --ink:#1e293b; --muted:#64748b; --line:#e2e8f0; --bg:#f1f5f9; --card:#fff;
+  --r:16px;
+  --shadow:0 1px 3px rgba(15,23,42,.08);
+  /* 하위 호환 별칭 — 기존 var() 사용처가 그대로 동작 */
+  --surface:var(--card); --text:var(--ink); --text-secondary:var(--muted);
+  --accent-1:var(--blue); --accent-2:var(--red); --border:var(--line);
+  --radius:var(--r);
 }
 *{box-sizing:border-box;min-width:0}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--text);
-  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  font-size:16px;line-height:1.7;
+  font-family:"Pretendard","Pretendard Variable","Malgun Gothic",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:17px;line-height:1.7;
   word-break:keep-all;overflow-wrap:break-word}
 
 .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
@@ -27,9 +38,9 @@ body{margin:0;background:var(--bg);color:var(--text);
 /* ---------- 헤더 ---------- */
 header{padding:70px 0 50px;text-align:center}
 @media(max-width:600px){header{padding:44px 0 34px}}
-.tag{display:inline-block;background:#EEF6FB;color:#1B6E9E;font-size:12.5px;font-weight:600;
+.tag{display:inline-block;background:#dbeafe;color:#1d4ed8;font-size:12.5px;font-weight:600;
   padding:4px 12px;border-radius:20px;margin-bottom:16px}
-h1{font-size:clamp(26px,5.4vw,48px);font-weight:700;letter-spacing:-.03em;
+h1{font-size:clamp(26px,5.4vw,48px);font-weight:800;letter-spacing:-.03em;
   line-height:1.28;margin:0 auto 18px;max-width:16ch}
 .lead{font-size:clamp(15.5px,2.2vw,18.5px);line-height:1.72;margin:0 auto 24px;
   max-width:56ch;color:var(--text)}
@@ -40,7 +51,7 @@ h1{font-size:clamp(26px,5.4vw,48px);font-weight:700;letter-spacing:-.03em;
 
 /* ---------- 섹션 ---------- */
 section{padding:0 0 56px;text-align:center}
-h2{font-size:clamp(20px,3.4vw,28px);font-weight:700;letter-spacing:-.02em;margin:0 0 8px}
+h2{font-size:clamp(20px,3.4vw,28px);font-weight:800;letter-spacing:-.02em;margin:0 0 8px}
 .sub{color:var(--text-secondary);font-size:clamp(14px,2vw,16px);
   margin:0 auto 26px;max-width:60ch}
 
@@ -97,6 +108,31 @@ footer{border-top:1px solid var(--border);padding:32px 0 64px;font-size:13px;
 footer p{margin:0 auto 10px;max-width:74ch}
 footer a{color:var(--accent-1);text-decoration:none}
 footer a:hover{text-decoration:underline}
+
+/* ===== KCBC 시그니처 컴포넌트 ===== */
+button,.homebtn{min-height:44px}
+button.sm{min-height:34px}
+.card{border-radius:var(--r)}
+.card-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:10px}
+.steppill{display:inline-flex;align-items:center;height:24px;padding:0 11px;border-radius:999px;
+  background:var(--blue-l);color:var(--blue-d);font-size:11.5px;font-weight:700;letter-spacing:.02em}
+.steppill.done{background:var(--green-l);color:#15803d}
+.state{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px;border-radius:999px;
+  font-size:11.5px;font-weight:700}
+.state.ok{background:var(--green-l);color:#15803d}
+.state.save{background:var(--blue-l);color:var(--blue-d)}
+.state.stale{background:var(--amber-l);color:#b45309}
+.generate{width:100%;min-height:52px;border:none;border-radius:var(--r);color:#fff;font-weight:700;
+  font-size:15.5px;cursor:pointer;background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+  box-shadow:0 2px 8px rgba(124,58,237,.28)}
+.generate:hover{background:linear-gradient(135deg,#7c3aed,#6d28d9)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media print{
+  /* 공문서 서식은 흑백 실선 유지 */
+  .paper,.paper *{color:#000 !important;background:#fff !important}
+  .paper th{background:#fff !important;font-weight:700}
+  .paper th,.paper td{border-color:#000 !important}
+}
 </style>
 </head>
 <body>
@@ -128,7 +164,7 @@ footer a:hover{text-decoration:underline}
   <p class="sub">모두 단일 HTML 파일입니다. 다운로드해서 오프라인으로도 쓸 수 있습니다(지도 제외).</p>
   <div class="tools">
 
-    <a class="tool" href="checklist.html" style="--c:#2D9CDB">
+    <a class="tool" href="checklist.html" style="--c:#2563eb">
       <span class="step">STEP 1 · 발굴 · 진단</span>
       <h3>6영역 진단 체크리스트</h3>
       <p>초등 발달단계에 맞춘 31개 문항으로 위기징후를 체크하면 우선 지원영역과 개입 수준이 자동 산출됩니다.</p>
@@ -140,7 +176,7 @@ footer a:hover{text-decoration:underline}
       <span class="go">열기 →</span>
     </a>
 
-    <a class="tool" href="map.html" style="--c:#27AE60">
+    <a class="tool" href="map.html" style="--c:#16a34a">
       <span class="step">STEP 2 · 지원 (연계)</span>
       <h3>지역자원 연계 지도</h3>
       <p>논산·계룡 지역자원 160곳을 실좌표로 지도에 올렸습니다. 학교 위치를 찍으면 가까운 순으로 정렬됩니다.</p>
@@ -153,7 +189,7 @@ footer a:hover{text-decoration:underline}
       <span class="go">열기 →</span>
     </a>
 
-    <a class="tool" href="resources.html" style="--c:#F2994A">
+    <a class="tool" href="resources.html" style="--c:#d97706">
       <span class="step">STEP 2 · 지원 (연계)</span>
       <h3>지역자원 매칭 카드</h3>
       <p>같은 160곳을 카드 목록으로 봅니다. 지도가 필요 없거나 인터넷이 불안정할 때 쓰세요.</p>
@@ -167,7 +203,7 @@ footer a:hover{text-decoration:underline}
     </a>
 
 
-    <a class="tool" href="referral.html" style="--c:#1B9AAA">
+    <a class="tool" href="referral.html" style="--c:#1d4ed8">
       <span class="step">STEP 2 · 의뢰</span>
       <h3>의뢰서 작성기</h3>
       <p>교육지원청 공식 서식 그대로. 체크리스트 결과를 붙여넣으면 해당 항목이 자동 체크되고 신청 사유 초안이 만들어집니다.</p>
@@ -181,7 +217,7 @@ footer a:hover{text-decoration:underline}
     </a>
 
 
-    <a class="tool" href="minutes.html" style="--c:#5A6ACF">
+    <a class="tool" href="minutes.html" style="--c:#7c3aed">
       <span class="step">STEP 3 · 협의 · 기록</span>
       <h3>통합지원팀 사례회의록</h3>
       <p>협의 결과를 A4 회의록으로 정리합니다. 진단 결과와 연계 후보를 붙여넣으면 배경과 기관이 자동으로 채워집니다.</p>
@@ -193,7 +229,7 @@ footer a:hover{text-decoration:underline}
       <span class="go">열기 →</span>
     </a>
 
-    <a class="tool" href="dashboard.html" style="--c:#9B51E0">
+    <a class="tool" href="dashboard.html" style="--c:#6d28d9">
       <span class="step">STEP 3 · 성장관리</span>
       <h3>지원 이력 대시보드</h3>
       <p>학생별 지원 프로그램의 시작–종료 경과를 2026학년도 타임라인으로 봅니다.</p>
@@ -205,7 +241,7 @@ footer a:hover{text-decoration:underline}
       <span class="go">열기 →</span>
     </a>
 
-    <a class="tool" href="guide.html" style="--c:#EB5757">
+    <a class="tool" href="guide.html" style="--c:#dc2626">
       <span class="step">STEP 4 · 안내 · 소통</span>
       <h3>학맞통 안내 페이지</h3>
       <p>제도 설명 원페이지. 우측 상단 토글로 교사용 / 학부모용 내용이 통째로 바뀝니다.</p>

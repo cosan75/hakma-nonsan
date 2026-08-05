@@ -6,9 +6,20 @@
 <title>논산·계룡 지역자원 매칭 카드 · 초등 학생맞춤통합지원</title>
 <style>
 :root{
-  --bg:#FDFBF8; --surface:#FFFFFF; --text:#2D2D2D; --text-secondary:#8A8680;
-  --accent-1:#2D9CDB; --accent-2:#EB5757; --border:#E8E4DE;
-  --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.06);
+  /* KCBC 시그니처 팔레트 */
+  --blue:#2563eb; --blue-d:#1d4ed8; --blue-l:#dbeafe;
+  --purple:#7c3aed; --purple-d:#6d28d9; --purple-l:#ede9fe;
+  --green:#16a34a; --green-l:#dcfce7;
+  --amber:#d97706; --amber-l:#fef3c7;
+  --red:#dc2626;    --red-d:#991b1b;  --red-l:#fee2e2;
+  --navy:#1e3a8a;
+  --ink:#1e293b; --muted:#64748b; --line:#e2e8f0; --bg:#f1f5f9; --card:#fff;
+  --r:16px;
+  --shadow:0 1px 3px rgba(15,23,42,.08);
+  /* 하위 호환 별칭 — 기존 var() 사용처가 그대로 동작 */
+  --surface:var(--card); --text:var(--ink); --text-secondary:var(--muted);
+  --accent-1:var(--blue); --accent-2:var(--red); --border:var(--line);
+  --radius:var(--r);
 }
 *{box-sizing:border-box}
 *{min-width:0}
@@ -17,12 +28,12 @@ body{word-break:keep-all;overflow-wrap:break-word}
 img,table{max-width:100%}
 
 body{margin:0;background:var(--bg);color:var(--text);
-  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  font-size:16px;line-height:1.65}
+  font-family:"Pretendard","Pretendard Variable","Malgun Gothic",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:17px;line-height:1.65}
 .wrap{max-width:1280px;margin:0 auto;padding:36px 24px 90px}
-.tag{display:inline-block;background:#EEF6FB;color:#1B6E9E;font-size:12.5px;font-weight:600;
+.tag{display:inline-block;background:#dbeafe;color:#1d4ed8;font-size:12.5px;font-weight:600;
   padding:4px 11px;border-radius:20px;margin-bottom:12px}
-h1{font-size:clamp(26px,3.4vw,38px);font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.02em;margin:0 0 6px}
 .lede{color:var(--text-secondary);margin:0 0 24px;max-width:72ch}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
   box-shadow:var(--shadow);padding:20px 22px}
@@ -30,9 +41,9 @@ h3{margin:0 0 3px;font-size:17px;font-weight:600}
 .hint{margin:0 0 15px;font-size:13px;color:var(--text-secondary)}
 
 .sos{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
-.sos a{flex:1;min-width:210px;background:#FDECEC;border:1px solid #F6D6D6;border-radius:var(--radius);
-  padding:13px 16px;text-decoration:none;color:#8E2F2F;transition:.15s}
-.sos a:hover{background:#FBE0E0}
+.sos a{flex:1;min-width:210px;background:#fee2e2;border:1px solid #fecaca;border-radius:var(--radius);
+  padding:13px 16px;text-decoration:none;color:#991b1b;transition:.15s}
+.sos a:hover{background:#fecaca}
 .sos b{display:block;font-size:13px;font-weight:600;margin-bottom:2px}
 .sos span{font-size:19px;font-weight:700;letter-spacing:-.01em}
 
@@ -43,10 +54,10 @@ aside{position:sticky;top:20px}
 .fset > label{display:block;font-size:12.5px;font-weight:600;color:var(--text-secondary);margin-bottom:8px}
 .chip{display:flex;align-items:center;gap:9px;padding:8px 11px;border:1px solid var(--border);
   border-radius:9px;margin-bottom:7px;cursor:pointer;font-size:14.5px;transition:.15s;background:var(--surface)}
-.chip:hover{background:#F9F7F3}
+.chip:hover{background:#f8fafc}
 .chip input{accent-color:var(--accent-1);width:16px;height:16px;cursor:pointer;flex:none}
 .chip i{width:9px;height:9px;border-radius:50%;flex:none}
-.chip.on{border-color:var(--accent-1);background:#F4FAFE}
+.chip.on{border-color:var(--accent-1);background:#dbeafe}
 select,input[type=text]{width:100%;padding:9px 13px;border:1px solid var(--border);border-radius:8px;
   background:var(--surface);font:inherit;font-size:14px;color:var(--text)}
 .toggles{display:flex;flex-direction:column;gap:7px}
@@ -54,9 +65,9 @@ select,input[type=text]{width:100%;padding:9px 13px;border:1px solid var(--borde
 .mini input{accent-color:var(--accent-1);width:15px;height:15px;cursor:pointer}
 button{width:100%;padding:11px;border:1px solid var(--border);border-radius:8px;background:var(--surface);
   font:inherit;font-size:14px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s}
-button:hover{background:#F7F4F0}
+button:hover{background:#f1f5f9}
 button.primary{background:var(--accent-1);border-color:var(--accent-1);color:#fff}
-button.primary:hover{background:#2589C2}
+button.primary:hover{background:#1d4ed8}
 
 .resbar{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
 .resbar b{font-size:18px;font-weight:700}
@@ -64,19 +75,19 @@ button.primary:hover{background:#2589C2}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
 .rc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
   box-shadow:var(--shadow);padding:16px 18px;display:flex;flex-direction:column;gap:7px;position:relative;overflow:hidden}
-.rc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--bar,#E8E4DE)}
+.rc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--bar,#e2e8f0)}
 .rc .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .rc h4{margin:0;font-size:15.5px;font-weight:600;letter-spacing:-.01em;line-height:1.4}
-.sc{font-size:11px;font-weight:700;color:var(--accent-1);background:#EEF6FB;border-radius:12px;
+.sc{font-size:11px;font-weight:700;color:var(--accent-1);background:#dbeafe;border-radius:12px;
   padding:2px 8px;white-space:nowrap;flex:none}
 .cat{font-size:11.5px;color:var(--text-secondary);font-weight:500}
 .badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:1px}
 .bd{font-size:11px;font-weight:600;padding:2px 8px;border-radius:11px}
-.bd-pub{background:#EAF6EE;color:#2A7A47}
-.bd-pri{background:#F1EFEA;color:#77736D}
-.bd-kid{background:#FFF4E6;color:#A5661B}
+.bd-pub{background:#dcfce7;color:#15803d}
+.bd-pri{background:#f1f5f9;color:#64748b}
+.bd-kid{background:#fef3c7;color:#b45309}
 .rc .addr{font-size:13px;color:var(--text-secondary);line-height:1.5}
-.rc .note{font-size:12px;color:#2A7A47;background:#EAF6EE;border-radius:6px;padding:6px 9px;line-height:1.5}
+.rc .note{font-size:12px;color:#15803d;background:#dcfce7;border-radius:6px;padding:6px 9px;line-height:1.5}
 .rc .tel{font-size:15px;font-weight:600;color:var(--accent-1);text-decoration:none}
 .rc .tel:hover{text-decoration:underline}
 .rc .notel{font-size:13px;color:var(--text-secondary);font-style:italic}
@@ -99,7 +110,7 @@ footer{margin-top:32px;font-size:13px;color:var(--text-secondary);line-height:1.
   background:var(--surface);border:1px solid var(--border);border-radius:20px;
   font-size:13.5px;font-weight:600;color:var(--text-secondary);text-decoration:none;
   box-shadow:var(--shadow);transition:.15s;white-space:nowrap}
-.homebtn:hover{color:var(--accent-1);border-color:var(--accent-1);background:#F4FAFE}
+.homebtn:hover{color:var(--accent-1);border-color:var(--accent-1);background:#dbeafe}
 
 @media(max-width:700px){
   .wrap{padding:28px 14px 70px}
@@ -119,6 +130,31 @@ footer{margin-top:32px;font-size:13px;color:var(--text-secondary);line-height:1.
 @media(max-width:520px){
   .titlerow{gap:10px}
   .titlerow .homebtn{order:-1;font-size:12.5px;padding:6px 12px}
+}
+
+/* ===== KCBC 시그니처 컴포넌트 ===== */
+button,.homebtn{min-height:44px}
+button.sm{min-height:34px}
+.card{border-radius:var(--r)}
+.card-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:10px}
+.steppill{display:inline-flex;align-items:center;height:24px;padding:0 11px;border-radius:999px;
+  background:var(--blue-l);color:var(--blue-d);font-size:11.5px;font-weight:700;letter-spacing:.02em}
+.steppill.done{background:var(--green-l);color:#15803d}
+.state{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px;border-radius:999px;
+  font-size:11.5px;font-weight:700}
+.state.ok{background:var(--green-l);color:#15803d}
+.state.save{background:var(--blue-l);color:var(--blue-d)}
+.state.stale{background:var(--amber-l);color:#b45309}
+.generate{width:100%;min-height:52px;border:none;border-radius:var(--r);color:#fff;font-weight:700;
+  font-size:15.5px;cursor:pointer;background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+  box-shadow:0 2px 8px rgba(124,58,237,.28)}
+.generate:hover{background:linear-gradient(135deg,#7c3aed,#6d28d9)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media print{
+  /* 공문서 서식은 흑백 실선 유지 */
+  .paper,.paper *{color:#000 !important;background:#fff !important}
+  .paper th{background:#fff !important;font-weight:700}
+  .paper th,.paper td{border-color:#000 !important}
 }
 </style>
 </head>
@@ -228,12 +264,12 @@ footer{margin-top:32px;font-size:13px;color:var(--text-secondary);line-height:1.
    지원유형 정의
    ============================================================ */
 const TYPES = [
-  {k:'돌봄·안전', c:'#EB5757'},
-  {k:'학업',      c:'#2D9CDB'},
-  {k:'건강',      c:'#27AE60'},
-  {k:'심리·정서', c:'#9B51E0'},
-  {k:'경제',      c:'#F2994A'},
-  {k:'기타',      c:'#8A8680'},
+  {k:'돌봄·안전', c:'#dc2626'},
+  {k:'학업',      c:'#2563eb'},
+  {k:'건강',      c:'#16a34a'},
+  {k:'심리·정서', c:'#7c3aed'},
+  {k:'경제',      c:'#d97706'},
+  {k:'기타',      c:'#64748b'},
 ];
 const TC = Object.fromEntries(TYPES.map(t=>[t.k,t.c]));
 
@@ -493,7 +529,7 @@ function render(){
     ? `${o.types.join(' · ')} 지원 · 적합도 높은 순` : '조건에 맞는 지역자원 · 적합도 높은 순';
 
   document.getElementById('grid').innerHTML = rows.length ? rows.map(r=>{
-    const bar = r.admin ? '#C9C4BC' : (TC[r.types[0]] || '#E8E4DE');
+    const bar = r.admin ? '#cbd5e1' : (TC[r.types[0]] || '#e2e8f0');
     return `<article class="rc" style="--bar:${bar}">
       <div class="top">
         <h4>${esc(r.name)}</h4>
@@ -503,7 +539,7 @@ function render(){
       <div class="badges">
         <span class="bd ${r.pub?'bd-pub':'bd-pri'}">${r.pub?'공공':'민간'}</span>
         ${r.kid&&!r.admin?'<span class="bd bd-kid">초등 직접지원</span>':''}
-        ${r.admin?'<span class="bd" style="background:#F1EFEA;color:#77736D">행정창구</span>':''}
+        ${r.admin?'<span class="bd" style="background:#f1f5f9;color:#64748b">행정창구</span>':''}
       </div>
       <div class="types">${r.types.map(t=>
         `<span class="ty" style="background:${TC[t]}1a;color:${TC[t]}">${t}</span>`).join('')}</div>
@@ -621,7 +657,7 @@ function selfTest(){
   const pass=T.filter(x=>x.ok).length;
   document.getElementById('selftest').innerHTML = pass===T.length
     ? `✓ 지역자원 데이터·매칭 로직 자체검증 ${pass}/${T.length} 통과`
-    : `<span style="color:#EB5757">✗ 검증 실패: ${T.filter(x=>!x.ok).map(x=>x.name).join(', ')}</span>`;
+    : `<span style="color:#dc2626">✗ 검증 실패: ${T.filter(x=>!x.ok).map(x=>x.name).join(', ')}</span>`;
   console.table(T);
 }
 

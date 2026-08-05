@@ -6,9 +6,20 @@
 <title>학생맞춤통합지원 안내 · 초등 · 논산계룡</title>
 <style>
 :root{
-  --bg:#FDFBF8; --surface:#FFFFFF; --text:#2D2D2D; --text-secondary:#8A8680;
-  --accent-1:#2D9CDB; --accent-2:#EB5757; --border:#E8E4DE;
-  --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.06);
+  /* KCBC 시그니처 팔레트 */
+  --blue:#2563eb; --blue-d:#1d4ed8; --blue-l:#dbeafe;
+  --purple:#7c3aed; --purple-d:#6d28d9; --purple-l:#ede9fe;
+  --green:#16a34a; --green-l:#dcfce7;
+  --amber:#d97706; --amber-l:#fef3c7;
+  --red:#dc2626;    --red-d:#991b1b;  --red-l:#fee2e2;
+  --navy:#1e3a8a;
+  --ink:#1e293b; --muted:#64748b; --line:#e2e8f0; --bg:#f1f5f9; --card:#fff;
+  --r:16px;
+  --shadow:0 1px 3px rgba(15,23,42,.08);
+  /* 하위 호환 별칭 — 기존 var() 사용처가 그대로 동작 */
+  --surface:var(--card); --text:var(--ink); --text-secondary:var(--muted);
+  --accent-1:var(--blue); --accent-2:var(--red); --border:var(--line);
+  --radius:var(--r);
 }
 *{box-sizing:border-box}
 *{min-width:0}
@@ -18,8 +29,8 @@ img,table{max-width:100%}
 
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);
-  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  font-size:16px;line-height:1.7}
+  font-family:"Pretendard","Pretendard Variable","Malgun Gothic",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:17px;line-height:1.7}
 
 /* ---- 상단 내비 ---- */
 nav{position:sticky;top:0;z-index:20;background:rgba(253,251,248,.94);
@@ -37,10 +48,10 @@ nav{position:sticky;top:0;z-index:20;background:rgba(253,251,248,.94);
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 section{padding:64px 0;border-bottom:1px solid var(--border)}
 section:last-of-type{border-bottom:none}
-.eyebrow{display:inline-block;background:#EEF6FB;color:#1B6E9E;font-size:12.5px;font-weight:600;
+.eyebrow{display:inline-block;background:#dbeafe;color:#1d4ed8;font-size:12.5px;font-weight:600;
   padding:4px 11px;border-radius:20px;margin-bottom:14px}
-h1{font-size:clamp(32px,5.2vw,54px);font-weight:700;letter-spacing:-.03em;line-height:1.22;margin:0 0 18px}
-h2{font-size:clamp(23px,3vw,31px);font-weight:700;letter-spacing:-.02em;margin:0 0 10px}
+h1{font-size:clamp(32px,5.2vw,54px);font-weight:800;letter-spacing:-.03em;line-height:1.22;margin:0 0 18px}
+h2{font-size:clamp(23px,3vw,31px);font-weight:800;letter-spacing:-.02em;margin:0 0 10px}
 h3{font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-.01em}
 .sub{color:var(--text-secondary);font-size:17px;margin:0 0 8px;max-width:62ch}
 .lead{font-size:19px;line-height:1.72;max-width:62ch;margin:0 0 26px}
@@ -63,7 +74,7 @@ h3{font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-.01em}
 .card .head i{width:10px;height:10px;border-radius:50%;flex:none}
 .tips{margin:12px 0 0;padding-left:17px;font-size:13.5px;color:var(--text-secondary);line-height:1.62}
 .tips li{margin-bottom:4px}
-.local{margin-top:13px;padding:11px 13px;background:#FAF8F4;border-radius:8px;font-size:12.5px;
+.local{margin-top:13px;padding:11px 13px;background:#f8fafc;border-radius:8px;font-size:12.5px;
   color:var(--text-secondary);line-height:1.6}
 .local b{color:var(--text);font-weight:600;display:block;margin-bottom:3px}
 
@@ -87,18 +98,18 @@ h3{font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-.01em}
 table{width:100%;border-collapse:collapse;margin-top:22px;background:var(--surface);
   border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
 th,td{padding:13px 16px;text-align:left;font-size:14.5px;border-bottom:1px solid var(--border);vertical-align:top}
-th{background:#FAF8F4;font-size:12.5px;font-weight:600;color:var(--text-secondary);letter-spacing:.01em}
+th{background:#f8fafc;font-size:12.5px;font-weight:600;color:var(--text-secondary);letter-spacing:.01em}
 tr:last-child td{border-bottom:none}
 td a{color:var(--accent-1);text-decoration:none;font-weight:600;white-space:nowrap}
 td a:hover{text-decoration:underline}
 .city-tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:11px;
-  background:#F1EFEA;color:#77736D;margin-right:6px}
+  background:#f1f5f9;color:#64748b;margin-right:6px}
 
 /* ---- 긴급 ---- */
 .sos{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:11px;margin-top:24px}
-.sos a{background:#FDECEC;border:1px solid #F6D6D6;border-radius:var(--radius);padding:15px 18px;
-  text-decoration:none;color:#8E2F2F;transition:.15s}
-.sos a:hover{background:#FBE0E0}
+.sos a{background:#fee2e2;border:1px solid #fecaca;border-radius:var(--radius);padding:15px 18px;
+  text-decoration:none;color:#991b1b;transition:.15s}
+.sos a:hover{background:#fecaca}
 .sos b{display:block;font-size:13px;font-weight:600;margin-bottom:3px}
 .sos span{font-size:21px;font-weight:700;letter-spacing:-.01em}
 
@@ -127,7 +138,7 @@ footer{padding:38px 0 70px;font-size:13px;color:var(--text-secondary);line-heigh
   background:var(--surface);border:1px solid var(--border);border-radius:20px;
   font-size:13.5px;font-weight:600;color:var(--text-secondary);text-decoration:none;
   box-shadow:var(--shadow);transition:.15s;white-space:nowrap}
-.homebtn:hover{color:var(--accent-1);border-color:var(--accent-1);background:#F4FAFE}
+.homebtn:hover{color:var(--accent-1);border-color:var(--accent-1);background:#dbeafe}
 
 .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius)}
 .tablewrap table{min-width:560px;margin-top:0}
@@ -147,6 +158,31 @@ footer{padding:38px 0 70px;font-size:13px;color:var(--text-secondary);line-heigh
 @media(max-width:520px){
   .titlerow{gap:10px}
   .titlerow .homebtn{order:-1;font-size:12.5px;padding:6px 12px}
+}
+
+/* ===== KCBC 시그니처 컴포넌트 ===== */
+button,.homebtn{min-height:44px}
+button.sm{min-height:34px}
+.card{border-radius:var(--r)}
+.card-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:10px}
+.steppill{display:inline-flex;align-items:center;height:24px;padding:0 11px;border-radius:999px;
+  background:var(--blue-l);color:var(--blue-d);font-size:11.5px;font-weight:700;letter-spacing:.02em}
+.steppill.done{background:var(--green-l);color:#15803d}
+.state{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px;border-radius:999px;
+  font-size:11.5px;font-weight:700}
+.state.ok{background:var(--green-l);color:#15803d}
+.state.save{background:var(--blue-l);color:var(--blue-d)}
+.state.stale{background:var(--amber-l);color:#b45309}
+.generate{width:100%;min-height:52px;border:none;border-radius:var(--r);color:#fff;font-weight:700;
+  font-size:15.5px;cursor:pointer;background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+  box-shadow:0 2px 8px rgba(124,58,237,.28)}
+.generate:hover{background:linear-gradient(135deg,#7c3aed,#6d28d9)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media print{
+  /* 공문서 서식은 흑백 실선 유지 */
+  .paper,.paper *{color:#000 !important;background:#fff !important}
+  .paper th{background:#fff !important;font-weight:700}
+  .paper th,.paper td{border-color:#000 !important}
 }
 </style>
 </head>
@@ -275,27 +311,27 @@ footer{padding:38px 0 70px;font-size:13px;color:var(--text-secondary);line-heigh
    콘텐츠 데이터
    ============================================================ */
 const AREAS = [
-  {k:'돌봄·안전', c:'#EB5757',
+  {k:'돌봄·안전', c:'#dc2626',
    t:'방과후 돌봄공백, 학대·방임, 학교폭력, 주거 불안정, 장기결석',
    p:'아이를 돌봐 줄 사람이 없는 시간, 안전이 걱정되는 상황',
    tips:['늘봄학교·지역아동센터·아이꽃돌봄센터 연계','가정방문 및 출결 관리','아동보호전문기관 신고 연계']},
-  {k:'학업', c:'#2D9CDB',
+  {k:'학업', c:'#2563eb',
    t:'한글 미해득, 3R\'s 미도달, 난독·난산 의심, 느린학습자',
    p:'글을 잘 못 읽거나, 수업을 따라가기 어려워할 때',
    tips:['한글 책임교육 1:1 지도','기초학력 협력수업','학습종합클리닉센터 진단 의뢰']},
-  {k:'건강', c:'#27AE60',
+  {k:'건강', c:'#16a34a',
    t:'만성질환 미관리, 건강검진 미수검, 결식·영양, 시력·청력·구강 미치료',
    p:'치료가 필요한데 병원에 가기 어려울 때, 아침을 못 먹고 올 때',
    tips:['보건소·병원 치료비 지원 연계','학생건강검진 사후관리','아침 간편식 지원']},
-  {k:'심리·정서', c:'#9B51E0',
+  {k:'심리·정서', c:'#7c3aed',
    t:'정서·행동특성검사 관심군, 또래 고립, 분노조절, 등교거부·분리불안',
    p:'친구 관계가 힘들거나, 학교 가기를 싫어할 때',
    tips:['Wee클래스 놀이·미술 상담','또래관계 집단상담','전문기관 연계 및 치료비 지원']},
-  {k:'경제', c:'#F2994A',
+  {k:'경제', c:'#d97706',
    t:'교육급여·교육비 대상, 한부모·조손·차상위, 체험학습비·준비물 부담',
    p:'현장체험학습비, 학용품, 급식비가 부담될 때',
    tips:['교육급여·교육비 신청 지원','현장체험학습비·방과후 수강료 지원','푸드뱅크·긴급복지 연계']},
-  {k:'기타', c:'#8A8680',
+  {k:'기타', c:'#64748b',
    t:'다문화·중도입국 한국어(KSL), 특수교육 진단·배치, 문화체험 결핍, 부모교육',
    p:'한국어가 서툴 때, 문화·체험 기회가 부족할 때',
    tips:['한국어(KSL) 방과후 지도','특수교육지원센터 진단 의뢰','문화누리카드·부모교육 안내']},
@@ -455,7 +491,7 @@ function selfTest(){
   const pass=T.filter(x=>x.ok).length;
   document.getElementById('selftest').innerHTML = pass===T.length
     ? `✓ 콘텐츠 무결성 자체검증 ${pass}/${T.length} 통과`
-    : `<span style="color:#EB5757">✗ 검증 실패: ${T.filter(x=>!x.ok).map(x=>x.name).join(', ')}</span>`;
+    : `<span style="color:#dc2626">✗ 검증 실패: ${T.filter(x=>!x.ok).map(x=>x.name).join(', ')}</span>`;
   console.table(T);
 }
 

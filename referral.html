@@ -6,34 +6,45 @@
 <title>학생맞춤통합지원 의뢰서 작성 · 초등 · 논산계룡</title>
 <style>
 :root{
-  --bg:#FDFBF8; --surface:#FFFFFF; --text:#2D2D2D; --text-secondary:#8A8680;
-  --accent-1:#2D9CDB; --accent-2:#EB5757; --border:#E8E4DE;
-  --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.06);
+  /* KCBC 시그니처 팔레트 */
+  --blue:#2563eb; --blue-d:#1d4ed8; --blue-l:#dbeafe;
+  --purple:#7c3aed; --purple-d:#6d28d9; --purple-l:#ede9fe;
+  --green:#16a34a; --green-l:#dcfce7;
+  --amber:#d97706; --amber-l:#fef3c7;
+  --red:#dc2626;    --red-d:#991b1b;  --red-l:#fee2e2;
+  --navy:#1e3a8a;
+  --ink:#1e293b; --muted:#64748b; --line:#e2e8f0; --bg:#f1f5f9; --card:#fff;
+  --r:16px;
+  --shadow:0 1px 3px rgba(15,23,42,.08);
+  /* 하위 호환 별칭 — 기존 var() 사용처가 그대로 동작 */
+  --surface:var(--card); --text:var(--ink); --text-secondary:var(--muted);
+  --accent-1:var(--blue); --accent-2:var(--red); --border:var(--line);
+  --radius:var(--r);
 }
 *{box-sizing:border-box;min-width:0}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--text);
-  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
+  font-family:"Pretendard","Pretendard Variable","Malgun Gothic",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:17px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
 .wrap{max-width:1380px;margin:0 auto;padding:36px 24px 90px}
 @media(max-width:700px){.wrap{padding:26px 14px 70px}}
 
-.tag{display:inline-block;background:#EEF6FB;color:#1B6E9E;font-size:12.5px;font-weight:600;
+.tag{display:inline-block;background:#dbeafe;color:#1d4ed8;font-size:12.5px;font-weight:600;
   padding:4px 11px;border-radius:20px;margin-bottom:11px}
-h1{font-size:clamp(25px,3.2vw,36px);font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+h1{font-size:clamp(25px,3.2vw,36px);font-weight:800;letter-spacing:-.02em;margin:0 0 6px}
 .lede{color:var(--text-secondary);margin:0 0 18px;max-width:78ch;font-size:15.5px}
 
 .homebtn{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;background:var(--surface);
   border:1px solid var(--border);border-radius:20px;font-size:13.5px;font-weight:600;
   color:var(--text-secondary);text-decoration:none;box-shadow:var(--shadow);transition:.15s;white-space:nowrap}
-.homebtn:hover{color:var(--accent-1);border-color:var(--accent-1);background:#F4FAFE}
+.homebtn:hover{color:var(--accent-1);border-color:var(--accent-1);background:#dbeafe}
 .titlerow{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:0 0 6px}
 .titlerow h1{margin:0;flex:1 1 auto}
 .titlerow .homebtn{flex:0 0 auto;align-self:center}
 @media(max-width:520px){.titlerow{gap:10px}.titlerow .homebtn{order:-1;font-size:12.5px;padding:6px 12px}}
 
-.warn{display:flex;gap:11px;align-items:flex-start;background:#FDECEC;border:1px solid #F6D6D6;
-  border-radius:var(--radius);padding:14px 17px;margin-bottom:22px;font-size:14px;color:#8E2F2F;line-height:1.6}
+.warn{display:flex;gap:11px;align-items:flex-start;background:#fee2e2;border:1px solid #fecaca;
+  border-radius:var(--radius);padding:14px 17px;margin-bottom:22px;font-size:14px;color:#991b1b;line-height:1.6}
 .warn b{display:block;margin-bottom:3px}
 
 .layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
@@ -42,7 +53,7 @@ h1{font-size:clamp(25px,3.2vw,36px);font-weight:700;letter-spacing:-.02em;margin
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
   box-shadow:var(--shadow);padding:20px 22px;margin-bottom:16px}
 @media(max-width:700px){.card{padding:16px 15px}}
-.card h2{margin:0 0 3px;font-size:16.5px;font-weight:700;display:flex;align-items:center;gap:8px}
+.card h2{margin:0 0 3px;font-size:16.5px;font-weight:800;display:flex;align-items:center;gap:8px}
 .card h2 i{width:22px;height:22px;border-radius:50%;background:var(--accent-1);color:#fff;flex:none;
   display:grid;place-items:center;font-size:12px;font-weight:700;font-style:normal}
 .card .hint{margin:0 0 14px;font-size:12.5px;color:var(--text-secondary);line-height:1.55}
@@ -59,12 +70,12 @@ textarea{resize:vertical;line-height:1.6}
 .opts{display:flex;flex-wrap:wrap;gap:7px}
 .opt{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border:1px solid var(--border);
   border-radius:20px;font-size:13.5px;cursor:pointer;background:var(--surface);transition:.13s;line-height:1.4}
-.opt:hover{background:#F9F7F3}
+.opt:hover{background:#f8fafc}
 .opt input{accent-color:var(--accent-1);width:15px;height:15px;cursor:pointer;flex:none}
-.opt.on{border-color:var(--accent-1);background:#F4FAFE;color:#1B6E9E;font-weight:600}
-.opt.auto{border-color:#F2994A;background:#FFF7EF}
-.opt.auto::after{content:'자동';font-size:10px;font-weight:700;color:#A5661B;
-  background:#FBE3CB;border-radius:8px;padding:1px 5px;margin-left:2px}
+.opt.on{border-color:var(--accent-1);background:#dbeafe;color:#1d4ed8;font-weight:600}
+.opt.auto{border-color:#d97706;background:#fef3c7}
+.opt.auto::after{content:'자동';font-size:10px;font-weight:700;color:#b45309;
+  background:#fde68a;border-radius:8px;padding:1px 5px;margin-left:2px}
 .sub-in{width:auto;flex:1;min-width:90px;padding:4px 8px;font-size:13px;border-radius:6px}
 
 .grp{margin-bottom:14px}
@@ -72,9 +83,9 @@ textarea{resize:vertical;line-height:1.6}
 
 button{padding:10px 16px;border:1px solid var(--border);border-radius:8px;background:var(--surface);
   font:inherit;font-size:14px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s}
-button:hover{background:#F7F4F0}
+button:hover{background:#f1f5f9}
 button.primary{background:var(--accent-1);border-color:var(--accent-1);color:#fff}
-button.primary:hover{background:#2589C2}
+button.primary:hover{background:#1d4ed8}
 button.wide{width:100%}
 .btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .btnrow button{flex:1 1 auto}
@@ -90,7 +101,7 @@ aside{position:sticky;top:20px}
 .paper .org{text-align:right;font-size:11px;color:#666;margin-bottom:12px}
 .paper table{width:100%;border-collapse:collapse;margin-bottom:10px;table-layout:fixed}
 .paper th,.paper td{border:1px solid #999;padding:5px 7px;vertical-align:top;font-size:11.5px;line-height:1.5}
-.paper th{background:#F2F0EC;font-weight:600;text-align:center;width:78px}
+.paper th{background:#f1f5f9;font-weight:600;text-align:center;width:78px}
 .paper td.v{word-break:break-all}
 .paper .chk{display:inline-block;margin-right:9px;white-space:nowrap}
 .paper .on{font-weight:700}
@@ -114,6 +125,31 @@ footer{margin-top:28px;font-size:12.5px;color:var(--text-secondary);line-height:
   .paper:last-child{page-break-after:auto}
   .paper.hide{display:none}
   @page{size:A4;margin:14mm}
+}
+
+/* ===== KCBC 시그니처 컴포넌트 ===== */
+button,.homebtn{min-height:44px}
+button.sm{min-height:34px}
+.card{border-radius:var(--r)}
+.card-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:10px}
+.steppill{display:inline-flex;align-items:center;height:24px;padding:0 11px;border-radius:999px;
+  background:var(--blue-l);color:var(--blue-d);font-size:11.5px;font-weight:700;letter-spacing:.02em}
+.steppill.done{background:var(--green-l);color:#15803d}
+.state{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px;border-radius:999px;
+  font-size:11.5px;font-weight:700}
+.state.ok{background:var(--green-l);color:#15803d}
+.state.save{background:var(--blue-l);color:var(--blue-d)}
+.state.stale{background:var(--amber-l);color:#b45309}
+.generate{width:100%;min-height:52px;border:none;border-radius:var(--r);color:#fff;font-weight:700;
+  font-size:15.5px;cursor:pointer;background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+  box-shadow:0 2px 8px rgba(124,58,237,.28)}
+.generate:hover{background:linear-gradient(135deg,#7c3aed,#6d28d9)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media print{
+  /* 공문서 서식은 흑백 실선 유지 */
+  .paper,.paper *{color:#000 !important;background:#fff !important}
+  .paper th{background:#fff !important;font-weight:700}
+  .paper th,.paper td{border-color:#000 !important}
 }
 </style>
 </head>
@@ -651,7 +687,7 @@ function selfTest(){
   const pass=T.filter(x=>x.ok).length;
   $('selftest').innerHTML = pass===T.length
     ? `✓ 결과 연동·초안 생성 자체검증 ${pass}/${T.length} 통과`
-    : `<span style="color:#EB5757">✗ 검증 실패: ${T.filter(x=>!x.ok).map(x=>x.name).join(', ')}</span>`;
+    : `<span style="color:#dc2626">✗ 검증 실패: ${T.filter(x=>!x.ok).map(x=>x.name).join(', ')}</span>`;
   console.table(T);
 }
 
